@@ -1,7 +1,8 @@
-import { EndRoundDto } from "./dto/EndRoundDto.js";
+import {EndRoundDto} from "./dto/EndRoundDto.js";
 import {GameStartDto} from "./dto/GameStartDto.js";
-import { PlayerEndRoundDto } from "./dto/PlayerEndRoundDto.js";
-import { RequestCardDto } from "./dto/RequestCardDto.js";
+import {PlayerEndRoundDto} from "./dto/PlayerEndRoundDto.js";
+import {RequestCardDto} from "./dto/RequestCardDto.js";
+import {Dealer} from "./Dealer.js";
 
 export class Room
 {
@@ -9,6 +10,7 @@ export class Room
     roomId;
     dtoService;
     cardsService;
+    dealer;
 
     ready = 0;
     currentMaskCardId = 0;
@@ -18,6 +20,7 @@ export class Room
         this.roomId = roomId;
         this.dtoService = dtoService;
         this.cardsService = cardsService;
+        this.dealer = new Dealer(cardsService);
     }
 
     SetPlayerReady(player) {
@@ -58,14 +61,12 @@ export class Room
 
     GetRandomMaskCard()
     {
-        //TODO: get a random mask card id
-        return 0;
+        return this.dealer.GetRandomMaskCard();
     }
 
     GetRandomPlayerCard()
     {
-        //TODO: get a random player card id
-        return 0;
+        return this.dealer.GetRandomPlayerCard();
     }
 
     AddPlayer(player)
