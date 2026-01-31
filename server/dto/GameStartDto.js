@@ -1,4 +1,4 @@
-export class MatchStartDto
+export class GameStartDto
 {
     player;
     opponent;

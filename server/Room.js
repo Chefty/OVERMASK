@@ -1,4 +1,4 @@
-import {MatchStartDto} from "./dto/MatchStartDto.js";
+import {GameStartDto} from "./dto/MatchStartDto.js";
 import {RoundStartDto} from "./dto/RoundStartDto.js";
 
 export class Room
@@ -57,8 +57,8 @@ export class Room
         {
             console.log(`[Room ${this.roomId}] Room is full. Starting a new match.`);
             
-            this.dtoService.Send("OpponentFound", this.connections[0].ws, new MatchStartDto(this.connections[0], this.connections[1]));
-            this.dtoService.Send("OpponentFound", this.connections[1].ws, new MatchStartDto(this.connections[1], this.connections[0]));
+            this.dtoService.Send("OpponentFound", this.connections[0].ws, new GameStartDto(this.connections[0], this.connections[1]));
+            this.dtoService.Send("OpponentFound", this.connections[1].ws, new GameStartDto(this.connections[1], this.connections[0]));
         }
     }
 

@@ -1,18 +1,18 @@
 #if UNITY_EDITOR
-using UnityEditor;
-using UnityEngine;
 using System.Diagnostics;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public class ServerLauncher : EditorWindow
 {
     [MenuItem("Tools/Start Server")]
     public static void StartServer()
     {
-        string serverPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../server"));
+        var serverPath = Path.GetFullPath(Path.Combine(Application.dataPath, "../server"));
 
-        ProcessStartInfo startInfo = new ProcessStartInfo();
-        
+        var startInfo = new ProcessStartInfo();
+
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             startInfo.FileName = "cmd.exe";

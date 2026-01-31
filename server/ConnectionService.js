@@ -1,4 +1,4 @@
-import { Connection } from "./Connection.js";
+import { Player } from "./Connection.js";
 
 export class ConnectionService
 {
@@ -6,7 +6,7 @@ export class ConnectionService
 
     CreateConnection(ws, connectionDto)
     {
-        let connection =  new Connection(connectionDto.connectionId,  connectionDto.userName, ws);
+        let connection =  new Player(connectionDto.connectionId,  connectionDto.userName, ws);
         this.connectionMap.set(ws, connection);
         console.log("[ConnectionService] Add connection > " + connection);
         return connection;

@@ -1,4 +1,4 @@
-export class Connection
+export class Player
 {
     connectionId;
     userName;
