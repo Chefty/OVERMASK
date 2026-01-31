@@ -8,14 +8,16 @@ export class Room
     players = [];
     roomId;
     dtoService;
+    cardsService;
 
     ready = 0;
     currentMaskCardId = 0;
     
-    constructor(roomId, dtoService)
+    constructor(roomId, dtoService, cardsService)
     {
         this.roomId = roomId;
         this.dtoService = dtoService;
+        this.cardsService = cardsService;
     }
 
     SetPlayerReady(player) {

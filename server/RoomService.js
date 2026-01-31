@@ -6,6 +6,11 @@ export class RoomService
     playerToRoom = new Map();
     roomId = 0;
     dtoService;
+    cardsService;
+
+    constructor (cardsService) {
+        this.cardsService = cardsService;
+    }
     
     InjectDtoService(dtoService)
     {
@@ -19,7 +24,7 @@ export class RoomService
 
     CreateRoom(roomId)
     {
-        let room = new Room(roomId, this.dtoService);
+        let room = new Room(roomId, this.dtoService, this.cardsService);
         this.rooms.push(room);
         console.log(`[RoomService] Create room > id: ${roomId}`);
         return room;

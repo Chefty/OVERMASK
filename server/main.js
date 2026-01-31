@@ -16,9 +16,9 @@ import { CardsService } from "./CardsService.js";
   });
 
   const ws = new WebSocketServer({ server });
-  let playerService = new PlayerService();
-  let roomService = new RoomService();
   let cardsService = CardsService.fromFiles();
+  let playerService = new PlayerService();
+  let roomService = new RoomService(cardsService);
   let dtoService = new DtoService(playerService, roomService, cardsService);
 
   ws.on("connection", (ws) => {

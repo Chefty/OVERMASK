@@ -8,8 +8,6 @@ export class DtoService {
         this.roomService = roomService;
         this.cardsService = cardsService;
 
-        //todo: create the dealer with the cards service here
-
         this.roomService.InjectDtoService(this);
     }
 
