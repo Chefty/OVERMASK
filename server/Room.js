@@ -37,7 +37,7 @@ export class Room
     PlayerChoseCard(player, chooseCardDto)
     {
         player.currentCardId = chooseCardDto.cardId;
-        if(this.players[0].currentCardId != -1 && this.players[1].currentCardId != -1)
+        if(this.players[0].currentCardId !== -1 && this.players[1].currentCardId !== -1)
             this.EndRound();
     }
 
