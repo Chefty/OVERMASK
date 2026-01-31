@@ -1,14 +1,16 @@
-import {GameStartDto} from "./dto/MatchStartDto.js";
-import {RoundStartDto} from "./dto/RoundStartDto.js";
+import { EndRoundDto } from "./dto/EndRoundDto.js";
+import {GameStartDto} from "./dto/GameStartDto.js";
+import { PlayerEndRoundDto } from "./dto/PlayerEndRoundDto.js";
+import { RequestCardDto } from "./dto/RequestCardDto.js";
 
 export class Room
 {
-    connections = [];
+    players = [];
     roomId;
     dtoService;
 
     ready = 0;
-    currentPlayer = 0;
+    currentMaskCardId = 0;
     
     constructor(roomId, dtoService)
     {
@@ -16,70 +18,87 @@ export class Room
         this.dtoService = dtoService;
     }
 
-    SetConnectionReady(connection) {
-        console.log(`[Room ${this.roomId}] Use ${connection.userName} is ready.`);
+    SetPlayerReady(player) {
+        console.log(`[Room ${this.roomId}] Use ${player.userName} is ready.`);
 
         if (++this.ready === 2)
             this.ChangeRound();
     }
     
-    EndRound()
-    {
-        console.log(`[Room ${this.roomId}] End round.`);
-        this.currentPlayer++;
-        this.ChangeRound();
-    }
-    
     ChangeRound()
     {
+        this.ready = 0;
         this.moved = false;
-        this.BroadcastDto("StartRound", new RoundStartDto(this.GetCurrentConnection()));
+        this.ResetPlayersCards();
+        this.currentMaskCardId = this.GetRandomMaskCard();
+        this.BroadcastDto("RequestCard", new RequestCardDto(currentMaskCardId));
     }
     
-    MovePiece(connection, dto)
+    PlayerChoseCard(player, chooseCardDto)
     {
-        if(this.GetCurrentConnection().connectionId !== connection.connectionId)
-        {
-            console.log(`[Room ${this.roomId}] User ${connection.userName} is trying to make a move on opponents turn. Ignoring.`);
-            return;
-        }
-        
-        this.moved = true;
-        this.BroadcastDto("MovePiece", dto);
+        player.currentCardId = chooseCardDto.cardId;
+        if(this.players[0].currentCardId != -1 && this.players[1].currentCardId != -1)
+            this.EndRound();
+    }
+
+    EndRound()
+    {
+        var playerOnBottom = this.players[0].score > this.players[1].score ? this.players[1].playerId : this.players[0].playerId;
+        var player1NewCard = this.GetRandomPlayerCard();
+        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.players[0].currentCardId, this.players[0].score, player1NewCard, playerOnBottom);
+
+        var player2NewCard = this.GetRandomPlayerCard();
+        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.players[1].currentCardId, this.players[1].score, player2NewCard, playerOnBottom);
+
+        var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound);
+        this.BroadcastDto("EndRound", endRoundDto);
+    }
+
+    GetRandomMaskCard()
+    {
+        //TODO: get a random mask card id
+        return 0;
+    }
+
+    GetRandomPlayerCard()
+    {
+        //TODO: get a random player card id
+        return 0;
     }
     
-    AddConnection(connection)
+    AddPlayer(player)
     {
-        this.connections.push(connection);
-        console.log(`[Room ${this.roomId}] Add user > roomId: ${this.roomId}, connection: ${connection}`);
+        this.players.push(player);
+        console.log(`[Room ${this.roomId}] Add user > roomId: ${this.roomId}, player: ${player}`);
         
-        if(this.connections.length === 2)
+        if(this.players.length === 2)
         {
             console.log(`[Room ${this.roomId}] Room is full. Starting a new match.`);
             
-            this.dtoService.Send("OpponentFound", this.connections[0].ws, new GameStartDto(this.connections[0], this.connections[1]));
-            this.dtoService.Send("OpponentFound", this.connections[1].ws, new GameStartDto(this.connections[1], this.connections[0]));
+            this.dtoService.Send("OpponentFound", this.players[0].ws, new GameStartDto(this.players[0], this.players[1]));
+            this.dtoService.Send("OpponentFound", this.players[1].ws, new GameStartDto(this.players[1], this.players[0]));
         }
     }
 
-    RemoveConnection(connection)
+    RemovePlayer(player)
     {
-        console.log(`[Room ${this.roomId}] Remove user > roomId: ${this.roomId}, connection: ${connection}`);
-        this.connections.splice(this.connections.indexOf(connection), 1);
-        if(this.connections.length > 0)
-            this.dtoService.Send("OpponentDisconnected", this.connections[0].ws, null);
+        console.log(`[Room ${this.roomId}] Remove user > roomId: ${this.roomId}, player: ${player}`);
+        this.players.splice(this.players.indexOf(player), 1);
+        if(this.players.length > 0)
+            this.dtoService.Send("OpponentDisconnected", this.players[0].ws, null);
     }
     
     BroadcastDto(type, dto)
     {
-        this.dtoService.Send(type, this.connections[0].ws, dto);
-        this.dtoService.Send(type, this.connections[1].ws, dto);
+        this.dtoService.Send(type, this.players[0].ws, dto);
+        this.dtoService.Send(type, this.players[1].ws, dto);
 
         console.log(`[Room ${this.roomId}] Broadcast > ${dto.toString()}.`);
     }
-    
-    GetCurrentConnection()
+
+    ResetPlayersCards()
     {
-        return this.connections[this.currentPlayer % 2];
+        this.players[0].currentCardId = -1;
+        this.players[1].currentCardId = -1;
     }
 }

@@ -1,21 +1,24 @@
 export class Player
 {
-    connectionId;
+    playerId;
     userName;
     ws;
 
-    constructor(connectionId, userName, ws)
+    score;
+    currentCardId;
+
+    constructor(playerId, userName, ws)
     {
-        this.connectionId = connectionId;
+        this.playerId = playerId;
         this.userName = userName;
         this.ws = ws;
     }
 
     writeToBuffer(buffer)
     {
-        let length = this.connectionId.length;
+        let length = this.playerId.length;
         buffer.writeUInt8(length);
-        buffer.writeString(this.connectionId);
+        buffer.writeString(this.playerId);
 
         length = this.userName.length;
         buffer.writeUInt8(length);
@@ -23,6 +26,6 @@ export class Player
     }
 
     toString = function() {
-        return `[Connection] id: ${this.connectionId}, userName: ${this.userName}`;
+        return `[Player] id: ${this.playerId}, userName: ${this.userName}`;
     }
 }

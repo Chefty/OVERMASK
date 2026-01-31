@@ -2,10 +2,11 @@
 {
     public class PlayerEndRoundDto : IDto
     {
-        public string ConnectionId { get; private set; }
+        public string PlayerId { get; private set; }
         public byte PlayerCardId { get; private set; }
         public byte PlayerScore { get; private set; }
         public byte NewCardId { get; private set; }
+        public string PlayerIdOnBottom { get; private set; }
         
         public PlayerEndRoundDto(CustomMemoryStream ms)
         {
@@ -18,10 +19,11 @@
 
         public void ReadFromStream(CustomMemoryStream ms)
         {
-            ConnectionId = ms.ReadString();
+            PlayerId = ms.ReadString();
             PlayerCardId = ms.ReadByte();
             PlayerScore = ms.ReadByte();
             NewCardId = ms.ReadByte();
+            PlayerIdOnBottom = ms.ReadString();
         }
     }
 }

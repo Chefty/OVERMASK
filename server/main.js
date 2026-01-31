@@ -1,7 +1,7 @@
 import { WebSocketServer } from "ws";
 import * as http from "http";
 import { DtoService } from "./dto/DtoService.js";
-import { ConnectionService } from "./ConnectionService.js";
+import { PlayerService } from "./PlayerService.js";
 import { RoomService } from "./RoomService.js";
 import StreamBuffer from "streambuf";
 import getPort from "get-port";
@@ -15,9 +15,9 @@ import getPort from "get-port";
   });
 
   const ws = new WebSocketServer({ server });
-  let connectionService = new ConnectionService();
+  let playerService = new PlayerService();
   let roomService = new RoomService();
-  let dtoService = new DtoService(connectionService, roomService);
+  let dtoService = new DtoService(playerService, roomService);
 
   ws.on("connection", (ws) => {
     ws.on("message", (message) => {
@@ -26,8 +26,8 @@ import getPort from "get-port";
     });
 
     ws.on("close", () => {
-      let connection = connectionService.DeleteConnection(ws);
-      roomService.RemoveConnection(connection);
+      let player = playerService.DeletePlayer(ws);
+      roomService.RemovePlayer(player);
     });
   });
 

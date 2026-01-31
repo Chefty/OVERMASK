@@ -1,9 +1,10 @@
 import {ConnectDto} from "./ConnectDto.js";
+import {ChooseCardDto} from "./ChooseCardDto.js";
 import StreamBuffer from 'streambuf';
 
 export class DtoService {
-    constructor(connectionService, roomService) {
-        this.connectionService = connectionService;
+    constructor(playerService, roomService) {
+        this.playerService = playerService;
         this.roomService = roomService;
 
         this.roomService.InjectDtoService(this);
@@ -23,6 +24,10 @@ export class DtoService {
             case "ReadyToPlay":
                 this.ReadyToPlay(ws);
                 break;
+            case "ChooseCard":
+                var ccdto = new ChooseCardDto(buffer);
+                this.ChooseCard(ws, ccdto);
+                break;
             case "EndRound":
                 this.EndRound(ws);
                 break;
@@ -30,23 +35,29 @@ export class DtoService {
     }
 
     Connect(ws, dto) {
-        this.connectionService.CreateConnection(ws, dto);
+        this.playerService.CreatePlayer(ws, dto);
     }
 
     CreateOrJoinRoom(ws) {
-        let connection = this.connectionService.GetConnection(ws);
-        this.roomService.AddConnection(connection);
+        let player = this.playerService.GetPlayer(ws);
+        this.roomService.AddPlayer(player);
     }
 
     ReadyToPlay(ws) {
-        let connection = this.connectionService.GetConnection(ws);
-        let room = this.roomService.GetRoom(connection);
-        room.SetConnectionReady(connection);
+        let player = this.playerService.GetPlayer(ws);
+        let room = this.roomService.GetRoom(player);
+        room.SetPlayerReady(player);
+    }
+
+    ChooseCard(ws, dto) {
+        let player = this.playerService.GetPlayer(ws);
+        let room = this.roomService.GetRoom(player);
+        room.PlayerChoseCard(player, dto)
     }
 
     EndRound(ws) {
-        let connection = this.connectionService.GetConnection(ws);
-        let room = this.roomService.GetRoom(connection);
+        let player = this.playerService.GetPlayer(ws);
+        let room = this.roomService.GetRoom(player);
         room.EndRound();
     }
 

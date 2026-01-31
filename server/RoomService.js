@@ -3,7 +3,7 @@ import { Room } from "./Room.js";
 export class RoomService
 {
     rooms = [];
-    connectionToRoom = new Map();
+    playerToRoom = new Map();
     roomId = 0;
     dtoService;
     
@@ -14,7 +14,7 @@ export class RoomService
     
     GetAvailableRoom()
     {
-        return this.rooms.find(room => room.connections.length === 1);
+        return this.rooms.find(room => room.players.length === 1);
     }
 
     CreateRoom(roomId)
@@ -25,36 +25,36 @@ export class RoomService
         return room;
     }
 
-    GetRoom(connection)
+    GetRoom(player)
     {
-        return this.connectionToRoom.get(connection);
+        return this.playerToRoom.get(player);
     }
 
-    AddUserToRoom(room, connection)
+    AddUserToRoom(room, player)
     {
-        room.AddConnection(connection);
-        this.connectionToRoom.set(connection, room);
+        room.AddPlayer(player);
+        this.playerToRoom.set(player, room);
     }
     
-    AddConnection(connection)
+    AddPlayer(player)
     {
         let room = this.GetAvailableRoom();
         if(!room)
             room = this.CreateRoom((this.roomId++).toString());
         
-        this.AddUserToRoom(room, connection);
+        this.AddUserToRoom(room, player);
     }
 
-    RemoveConnection(connection)
+    RemovePlayer(player)
     {
-        let room = this.GetRoom(connection);
+        let room = this.GetRoom(player);
         if(!room)
             return;
         
-        room.RemoveConnection(connection);
+        room.RemovePlayer(player);
         this.rooms.splice(this.rooms.indexOf(room), 1);
-        this.connectionToRoom.delete(connection);
-        this.connectionToRoom.delete(room.connections[0]);
+        this.playerToRoom.delete(player);
+        this.playerToRoom.delete(room.players[0]);
         console.log(`[RoomService] Removed room > id: ${room.roomId}`);
     }
 }

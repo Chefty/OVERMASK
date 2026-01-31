@@ -26,8 +26,6 @@ namespace Engine
             
             Client.Instance.OnCardRequested.AddListener(OnCardRequested);
             Client.Instance.OnRoundEnded.AddListener(OnRoundEnded);
-            
-            Client.Instance.SendMessage(new MessageDto("ReadyToPlay"));
         }
 
         private void OnCardRequested(RequestCardDto requestCardDto)
@@ -37,8 +35,8 @@ namespace Engine
 
         private void OnRoundEnded(EndRoundDto endRoundDto)
         {
-            GetPlayerBy(endRoundDto.Player1EndRound.ConnectionId).OnRoundEnded(endRoundDto.Player1EndRound);
-            GetPlayerBy(endRoundDto.Player2EndRound.ConnectionId).OnRoundEnded(endRoundDto.Player2EndRound);
+            GetPlayerBy(endRoundDto.Player1EndRound.PlayerId).OnRoundEnded(endRoundDto.Player1EndRound);
+            GetPlayerBy(endRoundDto.Player2EndRound.PlayerId).OnRoundEnded(endRoundDto.Player2EndRound);
         }
 
         public void ChooseCard(byte cardId)

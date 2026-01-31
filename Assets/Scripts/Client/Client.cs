@@ -81,7 +81,7 @@ namespace client
                         break;
                     case "CardData":
                         //todo: get card data dto
-                        SendMessage(new MessageDto("Ready"));
+                        SendMessage(new MessageDto("ReadyToPlay"));
                         break;
                     case "RequestCard":
                         var crdto = new RequestCardDto();
