@@ -3,9 +3,12 @@ import {ChooseCardDto} from "./ChooseCardDto.js";
 import StreamBuffer from 'streambuf';
 
 export class DtoService {
-    constructor(playerService, roomService) {
+    constructor(playerService, roomService, cardsService) {
         this.playerService = playerService;
         this.roomService = roomService;
+        this.cardsService = cardsService;
+
+        //todo: create the dealer with the cards service here
 
         this.roomService.InjectDtoService(this);
     }
