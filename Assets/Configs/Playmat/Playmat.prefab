@@ -234,6 +234,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Playmat
   playerName: {fileID: 3989299897543176838}
   opponentName: {fileID: 810235766175552569}
+  playerSlot: {fileID: 4685123666708896659}
+  opponentSlot: {fileID: 4218508037386767933}
+  houseSlot: {fileID: 212581530406362980}
+  combatSlot: {fileID: 6986152424279924167}
 --- !u!1 &7946541568240784884
 GameObject:
   m_ObjectHideFlags: 0
