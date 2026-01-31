@@ -11,4 +11,9 @@ export class ChooseCardDto
     {
         buffer.writeUInt8(cardId);
     }
+
+    toString()
+    {
+        return `[ChooseCardDto] cardId: ${this.cardId}`;
+    }
 }

@@ -1,0 +1,19 @@
+﻿namespace client.dto
+{
+    public class CardDto : IDto
+    {
+        public PlayerEndRoundDto Player1EndRound { get; private set; }
+        public PlayerEndRoundDto Player2EndRound { get; private set; }
+            
+        public void WriteToStream(CustomMemoryStream ms)
+        {
+            
+        }
+
+        public void ReadFromStream(CustomMemoryStream ms)
+        {
+            Player1EndRound = new PlayerEndRoundDto(ms);
+            Player2EndRound = new PlayerEndRoundDto(ms);
+        }
+    }
+}

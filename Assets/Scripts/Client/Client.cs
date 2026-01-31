@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using client.dto;
+using Engine;
 using PimDeWitte.UnityMainThreadDispatcher;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +17,7 @@ namespace client
         public readonly UnityEvent<GameStartDto> OnOpponentFound = new();
         public readonly UnityEvent<RequestCardDto> OnCardRequested = new();
         public readonly UnityEvent<EndRoundDto> OnRoundEnded = new();
+        public readonly UnityEvent<DealInitialCardsDto> OnDealInitialCardsDto = new();
         
         private readonly TimeSpan pingTimeSpan = new(0, 0, 15);
         private CancellationTokenSource pingCancellationTokenSource;
@@ -74,14 +76,20 @@ namespace client
                     case "OpponentFound":
                         GameDto = new GameStartDto();
                         GameDto.ReadFromStream(ms);
-                        Callback(() => OnOpponentFound.Invoke(GameDto));
+                        CardsService.Instance.InjectCardsData(GameDto.CardsData);
+                        Callback(() =>
+                        {
+                            OnOpponentFound.Invoke(GameDto);
+                            SendMessage(new MessageDto("ReadyToPlay"));
+                        });
                         break;
                     case "OpponentDisconnected":
                         Callback(() => { OnOpponentDisconnected.Invoke(); });
                         break;
-                    case "CardData":
-                        //todo: get card data dto
-                        SendMessage(new MessageDto("ReadyToPlay"));
+                    case "DealInitialCards":
+                        var dicdto = new DealInitialCardsDto();
+                        dicdto.ReadFromStream(ms);
+                        Callback(() => { OnDealInitialCardsDto.Invoke(dicdto); });
                         break;
                     case "RequestCard":
                         var crdto = new RequestCardDto();

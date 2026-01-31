@@ -5,10 +5,14 @@ import { RequestCardDto } from "./dto/RequestCardDto.js";
 
 export class Room
 {
+    INITIAL_CARD_AMOUNT = 3;
+
     players = [];
     roomId;
     dtoService;
     cardsService;
+
+    dealtInitialCards = false;
 
     ready = 0;
     currentMaskCardId = 0;
@@ -29,11 +33,30 @@ export class Room
     
     ChangeRound()
     {
+        if(!dealtInitialCards)
+            this.DealInitialCards();
+
         this.ready = 0;
         this.moved = false;
         this.ResetPlayersCards();
         this.currentMaskCardId = this.GetRandomMaskCard();
         this.BroadcastDto("RequestCard", new RequestCardDto(currentMaskCardId));
+    }
+
+    DealInitialCards()
+    {
+        this.dealtInitialCards = true;
+
+        var player1Cards = [];
+        var player2Cards = [];
+
+        for (let i = 0; i < INITIAL_CARD_AMOUNT; i++) {
+            player1Cards.push(this.GetRandomPlayerCard());
+            player2Cards.push(this.GetRandomPlayerCard());
+        }
+
+        this.dtoService.Send("DealInitialCards", this.players[0].ws, new GameStartDto(this.players[0], this.players[1]));
+        this.dtoService.Send("DealInitialCards", this.players[1].ws, new GameStartDto(this.players[1], this.players[0]));
     }
     
     PlayerChoseCard(player, chooseCardDto)

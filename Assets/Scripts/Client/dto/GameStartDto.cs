@@ -5,6 +5,8 @@
         public PlayerDto Player { get; private set; }
         public PlayerDto Opponent { get; private set; }
         
+        public CardsDataDto CardsData { get; private set; }
+        
         public GameStartDto()
         {
         }
@@ -23,6 +25,7 @@
         {
             Player = new PlayerDto(ms);
             Opponent = new PlayerDto(ms);
+            CardsData = new CardsDataDto(ms);
         }
     }
 }
