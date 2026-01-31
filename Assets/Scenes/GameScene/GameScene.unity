@@ -3051,6 +3051,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1667636357}
+    - target: {fileID: 1510890624916045514, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1787785077633565441, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3081,7 +3085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9146767016412850110, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.45
+      value: 1.89
       objectReference: {fileID: 0}
     - target: {fileID: 9146767016412850110, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
       propertyPath: m_LocalPosition.z
