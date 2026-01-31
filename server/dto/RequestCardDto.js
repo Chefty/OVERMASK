@@ -8,7 +8,7 @@ export class RequestCardDto
 
     writeToBuffer(buffer)
     {
-        buffer.writeUInt8(maskCardId);
+        buffer.writeUInt8(this.maskCardId);
     }
 
     toString()

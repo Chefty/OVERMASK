@@ -12,7 +12,8 @@ namespace Engine
         
         public byte CurrentMaskCardId { get; private set; }
         
-        public UnityEvent<byte> OnDrawMaskCard = 
+        public UnityEvent<byte> OnDrawMaskCard = new UnityEvent<byte>(); 
+        public UnityEvent OnRoundEnded = new UnityEvent(); 
         
         private readonly Dictionary<string, Player> connectionIdToPlayer;
 
@@ -29,7 +30,7 @@ namespace Engine
             
             Client.Instance.OnCardRequested.AddListener(OnCardRequested);
             Client.Instance.OnDealInitialCardsDto.AddListener(OnDealInitialCards);
-            Client.Instance.OnRoundEnded.AddListener(OnRoundEnded);
+            Client.Instance.OnRoundEnded.AddListener(InternalOnRoundEnded);
         }
 
         private void OnDealInitialCards(DealInitialCardsDto arg0)
@@ -40,12 +41,14 @@ namespace Engine
         private void OnCardRequested(RequestCardDto requestCardDto)
         {
             CurrentMaskCardId = requestCardDto.MaskCardId;
+            OnDrawMaskCard.Invoke(CurrentMaskCardId);
         }
 
-        private void OnRoundEnded(EndRoundDto endRoundDto)
+        private void InternalOnRoundEnded(EndRoundDto endRoundDto)
         {
             GetPlayerBy(endRoundDto.Player1EndRound.PlayerId).OnRoundEnded(endRoundDto.Player1EndRound);
             GetPlayerBy(endRoundDto.Player2EndRound.PlayerId).OnRoundEnded(endRoundDto.Player2EndRound);
+            OnRoundEnded.Invoke();
         }
 
         public void ChooseCard(byte cardId)

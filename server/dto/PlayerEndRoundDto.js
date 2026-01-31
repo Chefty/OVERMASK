@@ -19,9 +19,9 @@ export class PlayerEndRoundDto
         buffer.writeUInt8(length);
         buffer.writeString(this.playerId);
         
-        buffer.writeUInt8(playerCardId);
-        buffer.writeUInt8(playerScore);
-        buffer.writeUInt8(newCardId);
+        buffer.writeUInt8(this.playerCardId);
+        buffer.writeUInt8(this.playerScore);
+        buffer.writeUInt8(this.newCardId);
 
         length = this.playerIdOnBottom.length;
         buffer.writeUInt8(length);
