@@ -2665,6 +2665,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 9fb206bb9f8c34c8b81328aee6f9f7d1, type: 2}
+    - target: {fileID: 6494126354648222808, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b987e20bedd9040b3a1b5c8c95756733, type: 2}
     - target: {fileID: 9146767016412850110, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.07
@@ -5187,6 +5191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardView (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6494126354648222808, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a0cd6047a35d431a91444951ca44038, type: 2}
     - target: {fileID: 9146767016412850110, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.59
@@ -5459,7 +5467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 219, y: -53.00006}
+  m_AnchoredPosition: {x: 219, y: -53.000122}
   m_SizeDelta: {x: 422.27197, y: 94.454}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1752986360
