@@ -17,15 +17,20 @@ public class ServerLauncher : EditorWindow
         {
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = $"/k cd /d \"{serverPath}\" && node main.js";
+            
+            startInfo.UseShellExecute = true; // Important: Allows launching external processes
+            startInfo.CreateNoWindow = false; // Show the terminal window (use true to hide)
         }
         else
         {
-            startInfo.FileName = "/bin/bash";
-            startInfo.Arguments = $"-c \"cd '{serverPath}' && node main.js\"";
+            startInfo.FileName = "osascript";
+            startInfo.Arguments = $"-e 'tell application \"Terminal\" to do script \"cd ''{serverPath}'' && node main.js\"'";
+            
+            
+            startInfo.UseShellExecute = false; // Important: Allows launching external processes
+            startInfo.CreateNoWindow = true; // Show the terminal window (use true to hide)
         }
 
-        startInfo.UseShellExecute = true; // Important: Allows launching external processes
-        startInfo.CreateNoWindow = false; // Show the terminal window (use true to hide)
 
         Process.Start(startInfo);
     }
