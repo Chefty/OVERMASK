@@ -18,7 +18,6 @@ export class Room
     dealtInitialCards = false;
 
     ready = 0;
-    currentMaskCardId = 0;
 
     constructor(roomId, dtoService, cardsService)
     {
@@ -43,8 +42,7 @@ export class Room
         this.ready = 0;
         this.moved = false;
         this.ResetPlayersCards();
-        this.currentMaskCardId = this.GetRandomMaskCard();
-        this.BroadcastDto("RequestCard", new RequestCardDto(this.currentMaskCardId));
+        this.BroadcastDto("RequestCard", new RequestCardDto(this.GetRandomMaskCard()));
     }
 
     DealInitialCards()
@@ -65,21 +63,21 @@ export class Room
     
     PlayerChoseCard(player, chooseCardDto)
     {
-        player.currentCardId = chooseCardDto.cardId;
+        this.dealer.SetPlayerCard(player, chooseCardDto.cardId);
         if(this.players[0].currentCardId !== -1 && this.players[1].currentCardId !== -1)
             this.EndRound();
     }
 
     EndRound()
     {
-        
+        this.dealer.EndOfRound();
 
-        var playerOnBottom = this.players[0].score > this.players[1].score ? this.players[1].playerId : this.players[0].playerId;
+        var playerOnBottom = this.dealer.GetLeadingPlayer();
         var player1NewCard = this.GetRandomPlayerCard();
-        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.players[0].currentCardId, this.players[0].score, player1NewCard, playerOnBottom);
+        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayer1Card(), this.dealer.GetPlayer1Score(), player1NewCard, playerOnBottom);
 
         var player2NewCard = this.GetRandomPlayerCard();
-        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.players[1].currentCardId, this.players[1].score, player2NewCard, playerOnBottom);
+        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayer2Card(), this.dealer.GetPlayer2Score(), player2NewCard, playerOnBottom);
 
         var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound);
         this.BroadcastDto("EndRound", endRoundDto);

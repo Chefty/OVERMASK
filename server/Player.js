@@ -4,10 +4,7 @@ export class Player
     userName;
     availableCards = [];
     ws;
-
-    score;
-    currentCardId;
-
+    
     constructor(buffer)
     {
         let leng = buffer.readUInt8();
