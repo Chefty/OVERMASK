@@ -12,7 +12,7 @@ export class Room
 
     ready = 0;
     currentMaskCardId = 0;
-    
+
     constructor(roomId, dtoService, cardsService)
     {
         this.roomId = roomId;
@@ -67,7 +67,7 @@ export class Room
         //TODO: get a random player card id
         return 0;
     }
-    
+
     AddPlayer(player)
     {
         this.players.push(player);

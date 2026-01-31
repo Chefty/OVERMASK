@@ -1,5 +1,5 @@
-import { shuffleArray, isValid } from './dto/utils.js';
-import { Card } from './Card.js';
+import { shuffleArray, isValid } from './utils.js';
+import { CardDto } from '../server/dto/CardDto.js';
 import * as fs from 'fs';
 
 const MASK_DECK_FILE = './CardsData/mask-deck.json';
@@ -18,11 +18,11 @@ export class CardsGenerator {
         const emptyCellsCount = TOTAL_CELLS - grayCellsCount;
 
         while (deck.length < MASK_CARDS_COUNT) {
-            let cells = new Array(emptyCellsCount).fill(Card.EMPTY).concat(new Array(grayCellsCount).fill(Card.GRAY));
+let cells = new Array(emptyCellsCount).fill(CardDto.EMPTY).concat(new Array(grayCellsCount).fill(CardDto.GRAY));
             cells = shuffleArray(cells);
             const card = new Uint8Array(cells);
-if (isValid(card, Card.GRAY)) {
-                deck.push(new Card(Array.from(card)));
+            if (isValid(card, CardDto.GRAY)) {
+                deck.push(new CardDto(Array.from(card)));
             }
         }
         return deck;
@@ -35,14 +35,14 @@ if (isValid(card, Card.GRAY)) {
         const emptyCellsCount = TOTAL_CELLS - redCellsCount - blueCellsCount;
 
         while (deck.length < PLAYER_CARDS_COUNT) {
-            let cells = new Array(emptyCellsCount).fill(Card.EMPTY)
-                .concat(new Array(redCellsCount).fill(Card.RED))
-                .concat(new Array(blueCellsCount).fill(Card.BLUE));
+let cells = new Array(emptyCellsCount).fill(CardDto.EMPTY)
+                .concat(new Array(redCellsCount).fill(CardDto.RED))
+                .concat(new Array(blueCellsCount).fill(CardDto.BLUE));
             
             const card = new Uint8Array(shuffleArray(cells));
 
-            if (isValid(card, Card.RED) && isValid(card, Card.BLUE)) {
-                deck.push(new Card(Array.from(card)));
+            if (isValid(card, CardDto.RED) && isValid(card, CardDto.BLUE)) {
+                deck.push(new CardDto(Array.from(card)));
             }
         }
         
@@ -53,7 +53,7 @@ if (isValid(card, Card.GRAY)) {
         if (fs.existsSync(MASK_DECK_FILE)) {
             const data = fs.readFileSync(MASK_DECK_FILE, 'utf-8');
             const plainCards = JSON.parse(data);
-            return plainCards.map(p => new Card(p.cells));
+            return plainCards.map(p => new CardDto(p.grid));
         } else {
             const deck = this.generateMaskDeck();
             fs.writeFileSync(MASK_DECK_FILE, JSON.stringify(deck, null, 2));
@@ -65,7 +65,7 @@ if (isValid(card, Card.GRAY)) {
         if (fs.existsSync(PLAYER_DECK_FILE)) {
             const data = fs.readFileSync(PLAYER_DECK_FILE, 'utf-8');
             const plainCards = JSON.parse(data);
-            return plainCards.map(p => new Card(p.cells));
+            return plainCards.map(p => new CardDto(p.cells));
         } else {
             const deck = this.generatePlayerDeck();
             fs.writeFileSync(PLAYER_DECK_FILE, JSON.stringify(deck, null, 2));
