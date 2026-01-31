@@ -10,6 +10,7 @@ public class CardGenService : MonoBehaviour
     [SerializeField] private Material grayMaterial;
     [SerializeField] private CardDataMockupDataConfig mockData;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private Vector2 targetSize = new Vector2(3f, 3f);
 
     [ContextMenu(nameof(GenerateMockData))]
     public void GenerateMockData()
@@ -43,6 +44,19 @@ public class CardGenService : MonoBehaviour
         List<CombineInstance> grayCombines = new();
 
         CardCellDefinition[][] grid = data.Data;
+        int rowCount = grid.Length;
+        int columnCount = 0;
+        for (int r = 0; r < grid.Length; r++)
+        {
+            if (grid[r] != null && grid[r].Length > columnCount)
+            {
+                columnCount = grid[r].Length;
+            }
+        }
+
+        float xScale = columnCount > 0 ? targetSize.x / columnCount : 1f;
+        float zScale = rowCount > 0 ? targetSize.y / rowCount : 1f;
+        Vector3 cellScale = new Vector3(xScale, 1f, zScale);
         for (int r = 0; r < grid.Length; r++)
         {
             CardCellDefinition[] row = grid[r];
@@ -59,10 +73,15 @@ public class CardGenService : MonoBehaviour
                     continue;
                 }
 
+                Vector3 cellPosition = new Vector3(
+                    (c + 0.5f) * xScale,
+                    0f,
+                    -(r + 0.5f) * zScale);
+
                 CombineInstance instance = new CombineInstance
                 {
                     mesh = cellMesh,
-                    transform = Matrix4x4.TRS(new Vector3(c, 0f, -r), Quaternion.identity, Vector3.one)
+                    transform = Matrix4x4.TRS(cellPosition, Quaternion.identity, cellScale)
                 };
 
                 if (cell == CardCellDefinition.Red)
