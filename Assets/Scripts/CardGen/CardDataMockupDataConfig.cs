@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardDataMockupDataConfig : ScriptableObject
 {
     [SerializeField] private CardDataMockupData cardDataMockupData;
+    public CardDataMockupData CardDataMockupData => cardDataMockupData;
 }
 
 
@@ -94,6 +95,7 @@ public enum CardCellDefinition
     Empty = 0,
     Red = 1,
     Blue = 2,
+    Gray = 3,
 }
 
 public interface ICardData
