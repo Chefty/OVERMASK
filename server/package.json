@@ -1,0 +1,22 @@
+{
+  "name": "draft-lock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@picode/binary-reader": "^1.0.0",
+    "streambuf": "^1.2.3",
+    "ws": "^8.14.2",
+    "get-port": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
