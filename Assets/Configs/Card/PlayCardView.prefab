@@ -250,6 +250,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayCardView
   mockData: {fileID: 11400000, guid: 780e558f9810d449fbc0c92ef4ba61b8, type: 2}
   meshGenRoot: {fileID: 7902767439650213425}
+  FactionMeshRenderer: {fileID: 0}
+  id: 0
+  PlayerColor: {r: 0, g: 0, b: 0, a: 0}
+  OpponentColor: {r: 0, g: 0, b: 0, a: 0}
+  HouseColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7902767439650213425
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,15 +359,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5549729
+      value: 53.27324
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5323653
+      value: 51.10308
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.12060671
+      value: 11.57734
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: m_LocalPosition.x
@@ -404,6 +409,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -412,6 +421,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: dc832a90bc12a4b238720a4ec17045bf, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4493585093827132993, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}
     - target: {fileID: 919132149155446097, guid: 6022db1cc8a3d449d8fa3bb83e9db278, type: 3}
       propertyPath: m_Name
       value: cardBody
