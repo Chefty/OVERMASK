@@ -85,12 +85,12 @@ export class Room
 
     GetRandomMaskCard()
     {
-        return this.dealer.GetRandomMaskCard();
+        return this.dealer.DrawMaskCard();
     }
 
     GetRandomPlayerCard()
     {
-        return this.dealer.GetRandomPlayerCard();
+        return this.dealer.DrawPlayerCard();
     }
 
     AddPlayer(player)

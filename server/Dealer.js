@@ -1,45 +1,44 @@
-import { CardsDto } from './dto/CardsDto.js';
 import { shuffleArray } from '../CardsGenerator/utils.js';
 
 export class Dealer {
-    #playerDeck;
-    #maskDeck;
+    #playerDeckIndices;
+    #maskDeckIndices;
     #originalPlayerDeck;
     #originalMaskDeck;
 
     constructor(cardsDto) {
         this.#originalPlayerDeck = [...cardsDto.playerDeck];
         this.#originalMaskDeck = [...cardsDto.maskDeck];
-        this.reset();
+        this.Reset();
     }
 
     /**
      * Resets the decks to their original state and shuffles them for a new game.
      */
-    reset() {
-        this.#playerDeck = shuffleArray([...this.#originalPlayerDeck]);
-        this.#maskDeck = shuffleArray([...this.#originalMaskDeck]);
+    Reset() {
+        this.#playerDeckIndices = shuffleArray([...Array(this.#originalPlayerDeck.length).keys()]);
+        this.#maskDeckIndices = shuffleArray([...Array(this.#originalMaskDeck.length).keys()]);
     }
 
-    drawPlayerCard() {
-        if (this.#playerDeck.length > 0) {
-            return this.#playerDeck.pop();
+    /**
+     * Draws a card from the player deck and returns its index (ID).
+     * @returns {number|null} The index of the drawn card, or null if the deck is empty.
+     */
+    DrawPlayerCard() {
+        if (this.#playerDeckIndices.length > 0) {
+            return this.#playerDeckIndices.pop();
         }
         return null;
     }
 
-    drawMaskCard() {
-        if (this.#maskDeck.length > 0) {
-            return this.#maskDeck.pop();
+    /**
+     * Draws a card from the mask deck and returns its index (ID).
+     * @returns {number|null} The index of the drawn card, or null if the deck is empty.
+     */
+    DrawMaskCard() {
+        if (this.#maskDeckIndices.length > 0) {
+            return this.#maskDeckIndices.pop();
         }
         return null;
-    }
-
-    remainingPlayerCards() {
-        return this.#playerDeck.length;
-    }
-
-    remainingMaskCards() {
-        return this.#maskDeck.length;
     }
 }
