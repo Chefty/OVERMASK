@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9146767016412850110}
-  - component: {fileID: 2926431305419937357}
   - component: {fileID: 1964411862472921815}
+  - component: {fileID: 4142467512621309574}
   m_Layer: 0
-  m_Name: CardView
+  m_Name: UiCardView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,21 +35,6 @@ Transform:
   - {fileID: 1433364544807505968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2926431305419937357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3126384459390374216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2f2c5ee0e6ff4eebb6606be2e86ae91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  cardGenService: {fileID: 0}
-  mockData: {fileID: 11400000, guid: ceac7cada6f4d43359de47f276dcfcea, type: 2}
-  meshGenRoot: {fileID: 5641290194369940592}
 --- !u!65 &1964411862472921815
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -71,6 +56,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.2, y: 0.26, z: 3.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4142467512621309574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3126384459390374216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa70c1bd55d4738a9732801e3c0b279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UiCardView
+  cardGenService: {fileID: 0}
+  mockData: {fileID: 11400000, guid: f3e6b3b207f444a168240c82704cddf2, type: 2}
+  meshGenRoot: {fileID: 5641290194369940592}
 --- !u!1 &4380233790655525951
 GameObject:
   m_ObjectHideFlags: 0

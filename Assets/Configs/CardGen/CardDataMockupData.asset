@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631b91f4f0bd4445822c43f1cecebb12, type: 3}
   m_Name: CardDataMockupData
   m_EditorClassIdentifier: Assembly-CSharp::CardDataMockupData
-  redCount: 8
-  blueCount: 8
+  redCount: 5
+  blueCount: 5
   grayCount: 0
   cardDataMockupData:
     rows: 4
