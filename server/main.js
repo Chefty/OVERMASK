@@ -5,6 +5,7 @@ import { PlayerService } from "./PlayerService.js";
 import { RoomService } from "./RoomService.js";
 import StreamBuffer from "streambuf";
 import getPort from "get-port";
+import { CardsService } from "./CardsService.js";
 
 (async () => {
   const PORT = await getPort({ port: [8080, 8081, 8082, 3000] }); // Try these ports
@@ -17,7 +18,8 @@ import getPort from "get-port";
   const ws = new WebSocketServer({ server });
   let playerService = new PlayerService();
   let roomService = new RoomService();
-  let dtoService = new DtoService(playerService, roomService);
+  let cardsService = CardsService.fromFiles();
+  let dtoService = new DtoService(playerService, roomService, cardsService);
 
   ws.on("connection", (ws) => {
     ws.on("message", (message) => {

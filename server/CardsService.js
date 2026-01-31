@@ -1,10 +1,10 @@
 import * as fs from 'fs';
-import { CardDto } from './CardDto.js';
+import { CardDto } from './dto/CardDto.js';
 
 const MASK_DECK_FILE = './CardsData/mask-deck.json';
 const PLAYER_DECK_FILE = './CardsData/player-deck.json';
 
-export class CardsDto {
+export class CardsService {
     maskDeck = [];
     playerDeck = [];
 
@@ -28,7 +28,7 @@ export class CardsDto {
 
     /**
      * Loads card decks from JSON files and returns a new CardsDto instance.
-     * @returns {CardsDto}
+     * @returns {CardsService}
      */
     static fromFiles() {
         if (!fs.existsSync(MASK_DECK_FILE) || !fs.existsSync(PLAYER_DECK_FILE)) {
@@ -41,6 +41,6 @@ export class CardsDto {
         const maskDeck = JSON.parse(maskData).map(p => new CardDto(p.grid));
         const playerDeck = JSON.parse(playerData).map(p => new CardDto(p.grid));
 
-        return new CardsDto(maskDeck, playerDeck);
+        return new CardsService(maskDeck, playerDeck);
     }
 }
