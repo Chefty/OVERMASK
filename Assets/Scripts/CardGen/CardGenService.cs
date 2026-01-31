@@ -5,19 +5,13 @@ using UnityEngine.Rendering;
 public class CardGenService : MonoBehaviour
 {
     [SerializeField] private Mesh cellMesh;
+    [SerializeField] private Mesh emptyCellMesh;
     [SerializeField] private Material redMaterial;
     [SerializeField] private Material blueMaterial;
     [SerializeField] private Material grayMaterial;
-    [SerializeField] private CardDataMockupDataConfig mockData;
-    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private Material maskMaterial;
+    [SerializeField] private Material emptyCellMaterial;
     [SerializeField] private Vector2 targetSize = new Vector2(3f, 3f);
-
-    [ContextMenu(nameof(GenerateMockData))]
-    public void GenerateMockData()
-    {
-        GenerateMesh(mockData.CardDataMockupData, cardPrefab);
-    }
-
 
     public void GenerateMesh(ICardData data, GameObject target)
     {
@@ -42,6 +36,8 @@ public class CardGenService : MonoBehaviour
         List<CombineInstance> redCombines = new();
         List<CombineInstance> blueCombines = new();
         List<CombineInstance> grayCombines = new();
+        List<CombineInstance> emptyCombines = new();
+        List<CombineInstance> emptyCellCombines = new();
 
         CardCellDefinition[][] grid = data.Data;
         int rowCount = grid.Length;
@@ -68,11 +64,6 @@ public class CardGenService : MonoBehaviour
             for (int c = 0; c < row.Length; c++)
             {
                 CardCellDefinition cell = row[c];
-                if (cell == CardCellDefinition.Empty)
-                {
-                    continue;
-                }
-
                 Vector3 cellPosition = new Vector3(
                     (c + 0.5f) * xScale,
                     0f,
@@ -83,6 +74,21 @@ public class CardGenService : MonoBehaviour
                     mesh = cellMesh,
                     transform = Matrix4x4.TRS(cellPosition, Quaternion.identity, cellScale)
                 };
+
+                if (cell == CardCellDefinition.Empty)
+                {
+                    emptyCombines.Add(instance);
+                    if (emptyCellMesh != null)
+                    {
+                        CombineInstance emptyCellInstance = new CombineInstance
+                        {
+                            mesh = emptyCellMesh,
+                            transform = Matrix4x4.TRS(cellPosition, Quaternion.identity, cellScale)
+                        };
+                        emptyCellCombines.Add(emptyCellInstance);
+                    }
+                    continue;
+                }
 
                 if (cell == CardCellDefinition.Red)
                 {
@@ -102,6 +108,8 @@ public class CardGenService : MonoBehaviour
         Mesh redMesh = BuildSubmesh(redCombines);
         Mesh blueMesh = BuildSubmesh(blueCombines);
         Mesh grayMesh = BuildSubmesh(grayCombines);
+        Mesh maskMesh = BuildSubmesh(emptyCombines);
+        Mesh emptyCellMeshCombined = BuildSubmesh(emptyCellCombines);
 
         Mesh combined = new Mesh();
         int totalVertexCount = redMesh.vertexCount + blueMesh.vertexCount + grayMesh.vertexCount;
@@ -131,6 +139,9 @@ public class CardGenService : MonoBehaviour
 
         filter.sharedMesh = combined;
         renderer.sharedMaterials = new[] { redMaterial, blueMaterial, grayMaterial };
+
+        SetupMaskMesh(target.transform, maskMesh);
+        SetupEmptyCellMesh(target.transform, emptyCellMeshCombined);
     }
 
     private static Mesh BuildSubmesh(List<CombineInstance> combines)
@@ -158,6 +169,69 @@ public class CardGenService : MonoBehaviour
         mesh.CombineMeshes(combines.ToArray(), true, true);
         mesh.RecalculateBounds();
         return mesh;
+    }
+
+    private void SetupMaskMesh(Transform parent, Mesh maskMesh)
+    {
+        if (maskMaterial == null)
+        {
+            return;
+        }
+
+        Transform maskTransform = parent.Find("MaskMesh");
+        if (maskTransform == null)
+        {
+            GameObject maskObject = new GameObject("MaskMesh");
+            maskObject.layer = LayerMask.NameToLayer("HoleMask");
+            maskTransform = maskObject.transform;
+            maskTransform.SetParent(parent, false);
+        }
+
+        MeshFilter filter = maskTransform.GetComponent<MeshFilter>();
+        if (filter == null)
+        {
+            filter = maskTransform.gameObject.AddComponent<MeshFilter>();
+        }
+
+        MeshRenderer renderer = maskTransform.GetComponent<MeshRenderer>();
+        if (renderer == null)
+        {
+            renderer = maskTransform.gameObject.AddComponent<MeshRenderer>();
+        }
+
+        filter.sharedMesh = maskMesh;
+        renderer.sharedMaterial = maskMaterial;
+    }
+
+    private void SetupEmptyCellMesh(Transform parent, Mesh emptyMesh)
+    {
+        if (emptyCellMaterial == null)
+        {
+            return;
+        }
+
+        Transform emptyTransform = parent.Find("EmptyCells");
+        if (emptyTransform == null)
+        {
+            GameObject emptyObject = new GameObject("EmptyCells");
+            emptyTransform = emptyObject.transform;
+            emptyTransform.SetParent(parent, false);
+        }
+
+        MeshFilter filter = emptyTransform.GetComponent<MeshFilter>();
+        if (filter == null)
+        {
+            filter = emptyTransform.gameObject.AddComponent<MeshFilter>();
+        }
+
+        MeshRenderer renderer = emptyTransform.GetComponent<MeshRenderer>();
+        if (renderer == null)
+        {
+            renderer = emptyTransform.gameObject.AddComponent<MeshRenderer>();
+        }
+
+        filter.sharedMesh = emptyMesh;
+        renderer.sharedMaterial = emptyCellMaterial;
     }
 }
 
