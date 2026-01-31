@@ -1,0 +1,14 @@
+{
+  "name": "ggj-2026",
+  "version": "1.0.0",
+  "description": "GGJ 2026 Project",
+  "type": "module",
+  "main": "server/main.js",
+  "scripts": {
+    "start": "node server/main.js",
+    "generate-cards": "node CardsGenerator/generate-cards.js",
+    "display-cards": "node CardsGenerator/display-cards.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,5 +1,8 @@
-import { CardsDto } from './dto/CardsDto.js';
-import { Card } from './Card.js';
+import { CardDto } from '../server/dto/CardDto.js';
+import * as fs from 'fs';
+
+const MASK_DECK_FILE = './CardsData/mask-deck.json';
+const PLAYER_DECK_FILE = './CardsData/player-deck.json';
 
 /**
  * Helper function to format and print a single card grid.
@@ -11,16 +14,16 @@ function printCard(card) {
         const cell = card.grid[i];
         let symbol = ' ';
         switch (cell) {
-            case Card.EMPTY:
+            case CardDto.EMPTY:
                 symbol = ' '; // Empty
                 break;
-            case Card.RED:
+            case CardDto.RED:
                 symbol = 'R'; // Red
                 break;
-            case Card.BLUE:
+            case CardDto.BLUE:
                 symbol = 'B'; // Blue
                 break;
-            case Card.GRAY:
+            case CardDto.GRAY:
                 symbol = 'X'; // Gray (Block)
                 break;
         }
@@ -48,11 +51,16 @@ function printDeck(deckName, deck) {
 
 // --- Load and Display Decks ---
 
-try {
-    const cards = CardsDto.fromFiles();
-    printDeck("Mask Deck", cards.maskDeck);
-    printDeck("Player Deck", cards.playerDeck);
-} catch (error) {
-    console.error(error.message);
+if (fs.existsSync(MASK_DECK_FILE) && fs.existsSync(PLAYER_DECK_FILE)) {
+    const maskData = fs.readFileSync(MASK_DECK_FILE, 'utf-8');
+    const playerData = fs.readFileSync(PLAYER_DECK_FILE, 'utf-8');
+
+    const maskDeck = JSON.parse(maskData).map(p => new CardDto(p.grid));
+    const playerDeck = JSON.parse(playerData).map(p => new CardDto(p.grid));
+
+    printDeck("Mask Deck", maskDeck);
+    printDeck("Player Deck", playerDeck);
+} else {
+    console.log("Card deck JSON files not found. Please run 'node generate-cards.js' first.");
 }
 
