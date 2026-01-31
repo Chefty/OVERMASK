@@ -5,9 +5,9 @@ namespace client.dto
     [Serializable]
     public class PlayerDto : IDto
     {
-        public string ConnectionId { get; private set; }
+        public string PlayerId { get; private set; }
         public string UserName { get; private set; }
-        public byte[] AvailableCards { get; private set; }
+        public byte[] AvailableCards { get; private set; } = Array.Empty<byte>();
         
         public PlayerDto(CustomMemoryStream ms)
         {
@@ -16,19 +16,22 @@ namespace client.dto
 
         public PlayerDto(string userName)
         {
-            ConnectionId = Guid.NewGuid().ToString();
+            PlayerId = Guid.NewGuid().ToString();
             UserName = userName;
         }
 
         public void WriteToStream(CustomMemoryStream ms)
         {
-            ms.WriteString(ConnectionId);
+            ms.WriteString(PlayerId);
             ms.WriteString(UserName);
+            ms.WriteByte(byte.Parse(AvailableCards.Length.ToString()));
+            for (var i = 0; i < AvailableCards.Length; i++)
+                ms.WriteByte(AvailableCards[i]);
         }
 
         public void ReadFromStream(CustomMemoryStream ms)
         {
-            ConnectionId = ms.ReadString();
+            PlayerId = ms.ReadString();
             UserName = ms.ReadString();
             var cardsLenght = ms.ReadByte();
             AvailableCards = new byte[cardsLenght];

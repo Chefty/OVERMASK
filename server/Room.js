@@ -29,7 +29,7 @@ export class Room
     }
 
     SetPlayerReady(player) {
-        console.log(`[Room ${this.roomId}] Use ${player.userName} is ready.`);
+        console.log(`[Room ${this.roomId}] User ${player.userName} is ready.`);
 
         if (++this.ready === 2)
             this.ChangeRound();
@@ -37,14 +37,14 @@ export class Room
     
     ChangeRound()
     {
-        if(!dealtInitialCards)
+        if(!this.dealtInitialCards)
             this.DealInitialCards();
 
         this.ready = 0;
         this.moved = false;
         this.ResetPlayersCards();
         this.currentMaskCardId = this.GetRandomMaskCard();
-        this.BroadcastDto("RequestCard", new RequestCardDto(currentMaskCardId));
+        this.BroadcastDto("RequestCard", new RequestCardDto(this.currentMaskCardId));
     }
 
     DealInitialCards()
@@ -54,7 +54,7 @@ export class Room
         var player1Cards = [];
         var player2Cards = [];
 
-        for (let i = 0; i < INITIAL_CARD_AMOUNT; i++) {
+        for (let i = 0; i < this.INITIAL_CARD_AMOUNT; i++) {
             player1Cards.push(this.GetRandomPlayerCard());
             player2Cards.push(this.GetRandomPlayerCard());
         }
@@ -72,6 +72,8 @@ export class Room
 
     EndRound()
     {
+        
+
         var playerOnBottom = this.players[0].score > this.players[1].score ? this.players[1].playerId : this.players[0].playerId;
         var player1NewCard = this.GetRandomPlayerCard();
         var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.players[0].currentCardId, this.players[0].score, player1NewCard, playerOnBottom);

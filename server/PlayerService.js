@@ -1,12 +1,10 @@
-import { Player } from "./Player.js";
-
 export class PlayerService
 {
     playerMap = new Map();
 
-    CreatePlayer(ws, playerDto)
+    CreatePlayer(ws, player)
     {
-        let player =  new Player(playerDto.playerId,  playerDto.userName, ws);
+        player.InjectWs(ws);
         this.playerMap.set(ws, player);
         console.log("[PlayerService] Add player > " + player);
         return player;

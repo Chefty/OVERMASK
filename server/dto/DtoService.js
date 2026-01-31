@@ -1,6 +1,7 @@
 import {ConnectDto} from "./ConnectDto.js";
 import {ChooseCardDto} from "./ChooseCardDto.js";
 import StreamBuffer from 'streambuf';
+import { Player } from "../Player.js";
 
 export class DtoService {
     constructor(playerService, roomService, cardsService) {
@@ -17,7 +18,7 @@ export class DtoService {
 
         switch (type) {
             case "Connection":
-                this.Connect(ws, new ConnectDto(buffer));
+                this.Connect(ws, new Player(buffer));
                 break;
             case "CreateOrJoinRoom":
                 this.CreateOrJoinRoom(ws);

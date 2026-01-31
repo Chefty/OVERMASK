@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using client;
 using client.dto;
+using UnityEngine.Events;
 
 namespace Engine
 {
@@ -10,6 +11,8 @@ namespace Engine
         public Player OpponentPlayer { get; private set; }
         
         public byte CurrentMaskCardId { get; private set; }
+        
+        public UnityEvent<byte> OnDrawMaskCard = 
         
         private readonly Dictionary<string, Player> connectionIdToPlayer;
 
@@ -25,7 +28,13 @@ namespace Engine
             OpponentPlayer = playerOne.IsLocalPlayer ? playerTwo : playerOne;
             
             Client.Instance.OnCardRequested.AddListener(OnCardRequested);
+            Client.Instance.OnDealInitialCardsDto.AddListener(OnDealInitialCards);
             Client.Instance.OnRoundEnded.AddListener(OnRoundEnded);
+        }
+
+        private void OnDealInitialCards(DealInitialCardsDto arg0)
+        {
+            LocalPlayer.AddCards(arg0.CardIds);
         }
 
         private void OnCardRequested(RequestCardDto requestCardDto)
