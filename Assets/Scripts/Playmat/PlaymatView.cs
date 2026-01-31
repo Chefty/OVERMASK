@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class PlaymatView : MonoBehaviour
 {
-    [SerializeField] TMP_Text playerName;
-    [SerializeField] TMP_Text opponentName;
-    
+    [SerializeField] private TMP_Text playerName;
+    [SerializeField] private TMP_Text opponentName;
+    public PlayerSlot playerSlot;
+    public OpponentSlot opponentSlot;
+    public HouseSlot houseSlot;
+    public CombatSlot combatSlot;
 }

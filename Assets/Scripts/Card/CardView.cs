@@ -11,7 +11,7 @@ public class CardView : MonoBehaviour
     private Quaternion originalRotation;
     private Vector3 originalScale;
     public int id;
-    private PlayerFaction  playerFaction;
+    [SerializeField] private PlayerFaction  playerFaction;
     [SerializeField] Color PlayerColor;
     [SerializeField] Color OpponentColor;
     [SerializeField] Color HouseColor;
@@ -29,7 +29,14 @@ public class CardView : MonoBehaviour
         transform.rotation = context.Rotation;
         transform.localScale = context.Scale;
         playerFaction  = context.Faction;
-        
+        ApplyFactionColor();
+
+        var cardData = CardDataService.Instance.GetCardData(context.CardId);
+        CardMeshGenService.Instance.GenerateMesh(cardData, meshGenRoot);
+    }
+
+    private void ApplyFactionColor()
+    {
         var mpb = new MaterialPropertyBlock();
         var color = new Color();
         switch (playerFaction)
@@ -46,8 +53,6 @@ public class CardView : MonoBehaviour
         }
         mpb.SetColor(ColorId, color);
         FactionMeshRenderer.SetPropertyBlock(mpb, 0);
-        var cardData = CardDataService.Instance.GetCardData(context.CardId);
-        CardMeshGenService.Instance.GenerateMesh(cardData, meshGenRoot);
     }
 
     private void ResolveDependency()
@@ -65,6 +70,7 @@ public class CardView : MonoBehaviour
         ResolveDependency();
         var data = mockData.CardDataMockupData as ICardData;
         cardMeshGenService.GenerateMesh(data, meshGenRoot);
+        ApplyFactionColor();
     }
 
     public void CacheOriginalTransform()
