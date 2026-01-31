@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class CardGenService : MonoBehaviour
+public class CardMeshGenService : MonoBehaviour
 {
     [SerializeField] private Mesh cellMesh;
     [SerializeField] private Mesh emptyCellMesh;
@@ -12,6 +13,13 @@ public class CardGenService : MonoBehaviour
     [SerializeField] private Material maskMaterial;
     [SerializeField] private Material emptyCellMaterial;
     [SerializeField] private Vector2 targetSize = new Vector2(3f, 3f);
+
+    public static CardMeshGenService Instance;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public void GenerateMesh(ICardData data, GameObject target)
     {
@@ -112,18 +120,41 @@ public class CardGenService : MonoBehaviour
         Mesh emptyCellMeshCombined = BuildSubmesh(emptyCellCombines);
 
         Mesh combined = new Mesh();
-        int totalVertexCount = redMesh.vertexCount + blueMesh.vertexCount + grayMesh.vertexCount;
+        List<CombineInstance> submeshInstances = new();
+        List<Material> materials = new();
+        int totalVertexCount = 0;
+
+        if (redMesh.vertexCount > 0)
+        {
+            submeshInstances.Add(new CombineInstance { mesh = redMesh, transform = Matrix4x4.identity });
+            materials.Add(redMaterial);
+            totalVertexCount += redMesh.vertexCount;
+        }
+
+        if (blueMesh.vertexCount > 0)
+        {
+            submeshInstances.Add(new CombineInstance { mesh = blueMesh, transform = Matrix4x4.identity });
+            materials.Add(blueMaterial);
+            totalVertexCount += blueMesh.vertexCount;
+        }
+
+        if (grayMesh.vertexCount > 0)
+        {
+            submeshInstances.Add(new CombineInstance { mesh = grayMesh, transform = Matrix4x4.identity });
+            materials.Add(grayMaterial);
+            totalVertexCount += grayMesh.vertexCount;
+        }
+
         if (totalVertexCount > 65535)
         {
             combined.indexFormat = IndexFormat.UInt32;
         }
 
-        CombineInstance[] submeshes = new CombineInstance[3];
-        submeshes[0] = new CombineInstance { mesh = redMesh, transform = Matrix4x4.identity };
-        submeshes[1] = new CombineInstance { mesh = blueMesh, transform = Matrix4x4.identity };
-        submeshes[2] = new CombineInstance { mesh = grayMesh, transform = Matrix4x4.identity };
-        combined.CombineMeshes(submeshes, false, false);
-        combined.RecalculateBounds();
+        if (submeshInstances.Count > 0)
+        {
+            combined.CombineMeshes(submeshInstances.ToArray(), false, false);
+            combined.RecalculateBounds();
+        }
 
         MeshFilter filter = target.GetComponent<MeshFilter>();
         if (filter == null)
@@ -138,7 +169,7 @@ public class CardGenService : MonoBehaviour
         }
 
         filter.sharedMesh = combined;
-        renderer.sharedMaterials = new[] { redMaterial, blueMaterial, grayMaterial };
+        renderer.sharedMaterials = materials.ToArray();
 
         SetupMaskMesh(target.transform, maskMesh);
         SetupEmptyCellMesh(target.transform, emptyCellMeshCombined);
