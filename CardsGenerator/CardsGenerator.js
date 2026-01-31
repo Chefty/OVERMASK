@@ -2,8 +2,8 @@ import { shuffleArray, isValid } from './utils.js';
 import { CardDto } from '../server/dto/CardDto.js';
 import * as fs from 'fs';
 
-const MASK_DECK_FILE = './CardsData/mask-deck.json';
-const PLAYER_DECK_FILE = './CardsData/player-deck.json';
+const MASK_DECK_FILE = '../server/CardsData/mask-deck.json';
+const PLAYER_DECK_FILE = '../server/CardsData/player-deck.json';
 const PLAYER_CARDS_COUNT = 24;
 const MASK_CARDS_COUNT = 10;
 const PLAYER_PERCENTAGE_RED = 0.25;
