@@ -3,6 +3,7 @@ import {GameStartDto} from "./dto/GameStartDto.js";
 import {PlayerEndRoundDto} from "./dto/PlayerEndRoundDto.js";
 import {RequestCardDto} from "./dto/RequestCardDto.js";
 import {Dealer} from "./Dealer.js";
+import { DealInitialCardsDto } from "./dto/DealInitialCardsDto.js";
 
 export class Room
 {
@@ -58,8 +59,8 @@ export class Room
             player2Cards.push(this.GetRandomPlayerCard());
         }
 
-        this.dtoService.Send("DealInitialCards", this.players[0].ws, new GameStartDto(this.players[0], this.players[1]));
-        this.dtoService.Send("DealInitialCards", this.players[1].ws, new GameStartDto(this.players[1], this.players[0]));
+        this.dtoService.Send("DealInitialCards", this.players[0].ws, new DealInitialCardsDto(player1Cards));
+        this.dtoService.Send("DealInitialCards", this.players[1].ws, new DealInitialCardsDto(player2Cards));
     }
     
     PlayerChoseCard(player, chooseCardDto)
@@ -101,8 +102,8 @@ export class Room
         {
             console.log(`[Room ${this.roomId}] Room is full. Starting a new match.`);
             
-            this.dtoService.Send("OpponentFound", this.players[0].ws, new GameStartDto(this.players[0], this.players[1]));
-            this.dtoService.Send("OpponentFound", this.players[1].ws, new GameStartDto(this.players[1], this.players[0]));
+            this.dtoService.Send("OpponentFound", this.players[0].ws, new GameStartDto(this.players[0], this.players[1], this.cardsService));
+            this.dtoService.Send("OpponentFound", this.players[1].ws, new GameStartDto(this.players[1], this.players[0], this.cardsService));
         }
     }
 
