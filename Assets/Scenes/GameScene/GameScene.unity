@@ -2234,7 +2234,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555788875}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.24}
+  m_LocalPosition: {x: 0, y: 0, z: -0.28}
   m_LocalScale: {x: 0.36099753, y: 0.36099753, z: 0.36099753}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2636,6 +2636,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8217195079631305453, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
   m_PrefabInstance: {fileID: 4823212076893327726}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &639084245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639084246}
+  m_Layer: 0
+  m_Name: CardGenService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &639084246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639084245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.97035, y: 4.4352, z: -3.88344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &709197966
 GameObject:
   m_ObjectHideFlags: 0
@@ -3892,6 +3923,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDragManager
   dragHeightY: 5
   maxRayDistance: 200
+  snapDuration: 0.5
+  snapEase: 6
 --- !u!4 &1602384729
 Transform:
   m_ObjectHideFlags: 0
@@ -4103,6 +4136,11 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!23 &1886840525 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7187059424166883488, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
+  m_PrefabInstance: {fileID: 1882502226036579351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2020675895
 Mesh:
   m_ObjectHideFlags: 0
@@ -4884,6 +4922,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 62863159664042622, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
+      propertyPath: FactionMeshRenderer
+      value: 
+      objectReference: {fileID: 1886840525}
     - target: {fileID: 360401067013583543, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5165,7 +5207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6302310635405218807, guid: df89ebd8a3ef04310a005dc4a1119bfa, type: 3}
       propertyPath: m_Name
-      value: CardGenService
+      value: CardMeshGenService
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5253,6 +5295,7 @@ SceneRoots:
   - {fileID: 459218293}
   - {fileID: 63758274}
   - {fileID: 3645298724378211021}
+  - {fileID: 639084246}
   - {fileID: 2332673932206991372}
   - {fileID: 4823212076893327726}
   - {fileID: 225910187}
