@@ -63,16 +63,23 @@ export class Room
     
     PlayerChoseCard(player, chooseCardDto)
     {
-        this.dealer.SetPlayerCard(player, chooseCardDto.cardId);
-        if(this.players[0].currentCardId !== -1 && this.players[1].currentCardId !== -1)
+        this.dealer.SetPlayerCard(this.GetPlayerNumber(player), chooseCardDto.cardId);
+        if(this.dealer.GetPlayer1Card() !== -1 && this.dealer.GetPlayer2Card() !== -1)
             this.EndRound();
+    }
+
+    GetPlayerNumber(player)
+    {
+        if(player.playerId === this.players[0].playerId)
+            return 0;
+        return 1;
     }
 
     EndRound()
     {
         this.dealer.EndOfRound();
 
-        var playerOnBottom = this.dealer.GetLeadingPlayer();
+        var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
         var player1NewCard = this.GetRandomPlayerCard();
         var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayer1Card(), this.dealer.GetPlayer1Score(), player1NewCard, playerOnBottom);
 
@@ -125,7 +132,7 @@ export class Room
 
     ResetPlayersCards()
     {
-        this.players[0].currentCardId = -1;
-        this.players[1].currentCardId = -1;
+        this.dealer.SetPlayerCard(this.players[0], -1);
+        this.dealer.SetPlayerCard(this.players[1], -1);
     }
 }

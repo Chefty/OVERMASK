@@ -33,8 +33,8 @@ export class Dealer {
         this.#player2Score = 0;
         this.#playerLeading = 1;
         this.#currentStack = null;
-        this.#currentPlayer1CardId = null;
-        this.#currentPlayer2CardId = null;
+        this.#currentPlayer1CardId = -1;
+        this.#currentPlayer2CardId = -1;
         this.#maskCardId = null;
     }
 
@@ -96,14 +96,18 @@ export class Dealer {
         this.#player1Score += redCount;
         this.#player2Score += blueCount;
 
+        this.#playerLeading = this.GetLeadingPlayer();
+    }
+
+    GetLeadingPlayer()
+    {
         if (this.#player1Score > this.#player2Score) {
-            this.#playerLeading = 1;
+            return 0;
         } else if (this.#player2Score > this.#player1Score) {
-            this.#playerLeading = 2;
+            return 1;
         }
-        
         else {
-            this.#playerLeading = Math.random() < 0.5 ? 1 : 2;
+            return Math.random() < 0.5 ? 0 : 1;
         }
     }
     
@@ -112,9 +116,9 @@ export class Dealer {
     }
     
     SetPlayerCard(player, cardId) {
-        if (player === 1) {
+        if (player === 0) {
             this.#currentPlayer1CardId = cardId;
-        } else if (player === 2) {
+        } else if (player === 1) {
             this.#currentPlayer2CardId = cardId;
         }
     }
