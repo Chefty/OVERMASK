@@ -3810,11 +3810,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!23 &1886840525 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7187059424166883488, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
-  m_PrefabInstance: {fileID: 1882502226036579351}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &2020675895
 Mesh:
   m_ObjectHideFlags: 0
@@ -4384,17 +4379,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!114 &2083218457 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7498029697648070037, guid: df89ebd8a3ef04310a005dc4a1119bfa, type: 3}
-  m_PrefabInstance: {fileID: 3645298724378211021}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408b32798ca27478d8f944b2989e422d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CardGenService
 --- !u!4 &2083218458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4102847754750659202, guid: df89ebd8a3ef04310a005dc4a1119bfa, type: 3}
@@ -4604,7 +4588,7 @@ PrefabInstance:
     - target: {fileID: 62863159664042622, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
       propertyPath: FactionMeshRenderer
       value: 
-      objectReference: {fileID: 1886840525}
+      objectReference: {fileID: 0}
     - target: {fileID: 360401067013583543, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4759,14 +4743,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1255297893633972545, guid: cfd4209523f8b429498ca7e610f0ee6d, type: 3}
-      propertyPath: mockData
-      value: 
-      objectReference: {fileID: 11400000, guid: 3e0746c0aeb914fe78ca67a199cf0ceb, type: 2}
-    - target: {fileID: 1255297893633972545, guid: cfd4209523f8b429498ca7e610f0ee6d, type: 3}
-      propertyPath: cardGenService
-      value: 
-      objectReference: {fileID: 2083218457}
     - target: {fileID: 1312433313313553383, guid: cfd4209523f8b429498ca7e610f0ee6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.11
@@ -4823,14 +4799,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayCardView
       objectReference: {fileID: 0}
-    - target: {fileID: 7033848255346189996, guid: cfd4209523f8b429498ca7e610f0ee6d, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7033848255346189996, guid: cfd4209523f8b429498ca7e610f0ee6d, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 9fb206bb9f8c34c8b81328aee6f9f7d1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

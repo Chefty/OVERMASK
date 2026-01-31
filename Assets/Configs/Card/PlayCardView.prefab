@@ -250,11 +250,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayCardView
   mockData: {fileID: 11400000, guid: 3e0746c0aeb914fe78ca67a199cf0ceb, type: 2}
   meshGenRoot: {fileID: 7902767439650213425}
-  FactionMeshRenderer: {fileID: 0}
+  FactionMeshRenderer: {fileID: 7319030525357627417}
   id: 0
-  PlayerColor: {r: 0, g: 0, b: 0, a: 0}
-  OpponentColor: {r: 0, g: 0, b: 0, a: 0}
-  HouseColor: {r: 0, g: 0, b: 0, a: 0}
+  PlayerColor: {r: 0.3443396, g: 0.78401774, b: 1, a: 1}
+  OpponentColor: {r: 1, g: 0.2783019, b: 0.2783019, a: 1}
+  HouseColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
 --- !u!1 &7902767439650213425
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +420,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}
+--- !u!23 &7319030525357627417 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}
+  m_PrefabInstance: {fileID: 8238208372668368029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8491897327189058422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}

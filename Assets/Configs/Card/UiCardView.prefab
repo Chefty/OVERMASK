@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UiCardView
   mockData: {fileID: 11400000, guid: f3e6b3b207f444a168240c82704cddf2, type: 2}
   meshGenRoot: {fileID: 5641290194369940592}
-  FactionMeshRenderer: {fileID: 0}
+  FactionMeshRenderer: {fileID: 1510890624916045514}
   id: 0
   PlayerColor: {r: 0.2216981, g: 0.7157682, b: 1, a: 1}
   OpponentColor: {r: 1, g: 0.41037738, b: 0.41037738, a: 1}
@@ -425,5 +425,10 @@ PrefabInstance:
 --- !u!4 &341411383244047781 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}
+  m_PrefabInstance: {fileID: 231467699173335630}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1510890624916045514 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: e192ec1de93214c2b98f6c4025eccba8, type: 3}
   m_PrefabInstance: {fileID: 231467699173335630}
   m_PrefabAsset: {fileID: 0}
