@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { Card } from '../Card.js';
+import { CardDto } from './CardDto.js';
 
 const MASK_DECK_FILE = './CardsData/mask-deck.json';
 const PLAYER_DECK_FILE = './CardsData/player-deck.json';
@@ -11,6 +11,19 @@ export class CardsDto {
     constructor(maskDeck, playerDeck) {
         this.maskDeck = maskDeck;
         this.playerDeck = playerDeck;
+    }
+
+    writeToBuffer(buffer)
+    {
+        let length = this.maskDeck.length;
+        buffer.writeUInt8(length);
+        for (let i = 0; i < length; i++)
+            this.maskDeck[i].writeToBuffer(buffer);
+
+        length = this.playerDeck.length;
+        buffer.writeUInt8(length);
+        for (let i = 0; i < length; i++)
+            this.playerDeck[i].writeToBuffer(buffer);
     }
 
     /**
@@ -25,8 +38,8 @@ export class CardsDto {
         const maskData = fs.readFileSync(MASK_DECK_FILE, 'utf-8');
         const playerData = fs.readFileSync(PLAYER_DECK_FILE, 'utf-8');
 
-        const maskDeck = JSON.parse(maskData).map(p => new Card(p.grid));
-        const playerDeck = JSON.parse(playerData).map(p => new Card(p.grid));
+        const maskDeck = JSON.parse(maskData).map(p => new CardDto(p.grid));
+        const playerDeck = JSON.parse(playerData).map(p => new CardDto(p.grid));
 
         return new CardsDto(maskDeck, playerDeck);
     }

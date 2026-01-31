@@ -1,4 +1,4 @@
-export class Card {
+export class CardDto {
     static EMPTY = 0x00;
     static RED = 0x01;
     static BLUE = 0x02;
@@ -15,5 +15,14 @@ export class Card {
      */
     constructor(grid) {
         this.grid = grid;
+    }
+
+    writeToBuffer(buffer)
+    {
+        let length = this.grid.length;
+        buffer.writeUInt8(length);
+        for (let i = 0; i < length; i++) {
+            buffer.writeUInt8(this.grid[i]);
+        }
     }
 }
