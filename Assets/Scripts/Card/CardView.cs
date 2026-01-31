@@ -2,16 +2,52 @@ using UnityEngine;
 
 public class CardView : MonoBehaviour
 {
+    private static readonly int ColorId = Shader.PropertyToID("_BaseColor");
     private CardMeshGenService cardMeshGenService;
     [SerializeField] private CardDataMockupDataConfig mockData;
     [SerializeField] private GameObject meshGenRoot;
+    [SerializeField] private Renderer FactionMeshRenderer;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Vector3 originalScale;
+    public int id;
+    private PlayerFaction  playerFaction;
+    [SerializeField] Color PlayerColor;
+    [SerializeField] Color OpponentColor;
+    [SerializeField] Color HouseColor;
+    
 
     private void Start()
     {
         ResolveDependency();
+    }
+
+    public void SetupCard(CardGenContext context)
+    {
+        transform.parent = context.Parent;
+        transform.position = context.Position;
+        transform.rotation = context.Rotation;
+        transform.localScale = context.Scale;
+        playerFaction  = context.Faction;
+        
+        var mpb = new MaterialPropertyBlock();
+        var color = new Color();
+        switch (playerFaction)
+        {
+            case PlayerFaction.House:
+                color = HouseColor;
+                break;
+            case PlayerFaction.Opponent:
+                color = OpponentColor;
+                break;
+            case PlayerFaction.Player:
+                color = PlayerColor;
+                break;
+        }
+        mpb.SetColor(ColorId, color);
+        FactionMeshRenderer.SetPropertyBlock(mpb, 0);
+        var cardData = CardDataService.Instance.GetCardData(context.CardId);
+        CardMeshGenService.Instance.GenerateMesh(cardData, meshGenRoot);
     }
 
     private void ResolveDependency()
