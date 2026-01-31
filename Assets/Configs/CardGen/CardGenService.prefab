@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6302310635405218807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4102847754750659202}
+  - component: {fileID: 7498029697648070037}
+  m_Layer: 0
+  m_Name: CardGenService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4102847754750659202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302310635405218807}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.33927, y: 0, z: -9.44663}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7498029697648070037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302310635405218807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408b32798ca27478d8f944b2989e422d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardGenService
+  cellMesh: {fileID: -5495902117074765545, guid: 0162df5bf692a431cb051fa26304aa77, type: 3}
+  emptyCellMesh: {fileID: -5495902117074765545, guid: 61117dd131fb74ae2be532c7db4c62a3, type: 3}
+  redMaterial: {fileID: 2100000, guid: 6d19a594bf7ae46728f75a0e7efeeec2, type: 2}
+  blueMaterial: {fileID: 2100000, guid: 9a4edb9c3757c41a7be94e8ebfbbd13b, type: 2}
+  grayMaterial: {fileID: 2100000, guid: 9fb206bb9f8c34c8b81328aee6f9f7d1, type: 2}
+  maskMaterial: {fileID: 2100000, guid: 537abdd0decef4ace968a73f41d26e1a, type: 2}
+  emptyCellMaterial: {fileID: 2100000, guid: 9fb206bb9f8c34c8b81328aee6f9f7d1, type: 2}
+  targetSize: {x: 3, y: 3}
