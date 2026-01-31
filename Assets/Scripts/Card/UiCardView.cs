@@ -1,1 +1,3 @@
-public class UiCardView : CardView { }
+public class UiCardView : CardView
+{
+}

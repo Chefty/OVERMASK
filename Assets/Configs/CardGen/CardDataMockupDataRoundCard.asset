@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardDataMockupData
   redCount: 0
   blueCount: 0
-  grayCount: 12
+  grayCount: 10
   cardDataMockupData:
     rows: 4
     columns: 4
     rowsData:
-    - cells: 00000000030000000300000000000000
     - cells: 03000000030000000300000003000000
-    - cells: 03000000030000000300000003000000
-    - cells: 03000000000000000000000003000000
+    - cells: 00000000030000000000000000000000
+    - cells: 03000000030000000000000000000000
+    - cells: 03000000000000000300000003000000

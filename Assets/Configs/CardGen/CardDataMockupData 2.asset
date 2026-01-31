@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631b91f4f0bd4445822c43f1cecebb12, type: 3}
   m_Name: CardDataMockupData 2
   m_EditorClassIdentifier: Assembly-CSharp::CardDataMockupData
-  redCount: 5
-  blueCount: 5
+  redCount: 3
+  blueCount: 3
   grayCount: 0
   cardDataMockupData:
     rows: 4
     columns: 4
     rowsData:
-    - cells: 02000000020000000100000000000000
-    - cells: 02000000010000000200000000000000
-    - cells: 01000000000000000100000002000000
-    - cells: 00000000000000000000000001000000
+    - cells: 02000000000000000000000001000000
+    - cells: 01000000000000000000000001000000
+    - cells: 00000000020000000000000000000000
+    - cells: 00000000000000000200000000000000
