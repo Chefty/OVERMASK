@@ -12,10 +12,11 @@ export class EndRoundDto
 
     writeToBuffer(buffer)
     {
-        this.player1EndRound.writeToBuffer(buffer);
-        this.player2EndRound.writeToBuffer(buffer);
-        let length = this.playerIdOnBottom.length;
-        buffer.writeUInt8(length);
-        buffer.writeString(this.playerIdOnBottom);
+       this.player1EndRound.writeToBuffer(buffer);
+       this.player2EndRound.writeToBuffer(buffer);
+       
+       let length = this.playerIdOnBottom.length;
+       buffer.writeUInt8(length);
+       buffer.writeString(this.playerIdOnBottom);
     }
 }

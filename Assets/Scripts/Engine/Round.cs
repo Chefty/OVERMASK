@@ -15,8 +15,11 @@ namespace Engine
         public UnityEvent<byte> OnDrawMaskCard = new UnityEvent<byte>(); 
         public UnityEvent OnCardRequested = new UnityEvent(); 
         public UnityEvent<EndRoundDto> OnRoundEnded = new UnityEvent<EndRoundDto>(); 
+        public UnityEvent<PlayerFaction, PlayerFaction> OnStackUpdated = new UnityEvent<PlayerFaction, PlayerFaction>();
         
         private readonly Dictionary<string, Player> connectionIdToPlayer;
+        private byte? localPlayerCardId;
+        private byte? opponentPlayerCardId;
 
         public Round(Player playerOne, Player playerTwo)
         {
@@ -48,11 +51,28 @@ namespace Engine
 
         private void InternalOnRoundEnded(EndRoundDto endRoundDto)
         {
-            GetPlayerBy(endRoundDto.Player1EndRound.PlayerId).OnRoundEnded(endRoundDto.Player1EndRound);
-            GetPlayerBy(endRoundDto.Player2EndRound.PlayerId).OnRoundEnded(endRoundDto.Player2EndRound);
-            PlaymatView.Instance.UpdateScores(GetScoreForFaction(endRoundDto, PlayerFaction.Blue),
+            var player1EndRound = endRoundDto.Player1EndRound;
+            var player2EndRound = endRoundDto.Player2EndRound;
+        
+            var player1IsLocal = player1EndRound.PlayerId == LocalPlayer.PlayerId;
+            localPlayerCardId = player1IsLocal ? player1EndRound.PlayerCardId : player2EndRound.PlayerCardId;
+            opponentPlayerCardId = player1IsLocal ? player2EndRound.PlayerCardId : player1EndRound.PlayerCardId;
+        
+            GetPlayerBy(player1EndRound.PlayerId).OnRoundEnded(player1EndRound);
+            GetPlayerBy(player2EndRound.PlayerId).OnRoundEnded(player2EndRound);
+            
+            PlaymatView.Instance.UpdateScores(
+                GetScoreForFaction(endRoundDto, PlayerFaction.Blue),
                 GetScoreForFaction(endRoundDto, PlayerFaction.Red));
+            
             OnRoundEnded.Invoke(endRoundDto);
+            
+            PimDeWitte.UnityMainThreadDispatcher.UnityMainThreadDispatcher.Instance.WaitAndCall(() =>
+            {
+                BuildStack(endRoundDto.PlayerIdOnBottom);
+                localPlayerCardId = null;
+                opponentPlayerCardId = null;
+            }, CardDisplayer.TIME_TO_SHOW + .2f);
         }
 
         private byte GetScoreForFaction(EndRoundDto endRoundDto, PlayerFaction playerFaction)
@@ -66,7 +86,21 @@ namespace Engine
         public void ChooseCard(byte cardId)
         {
             LocalPlayer.RemoveCard(cardId);
+            localPlayerCardId = cardId;
             Client.Instance.SendMessage(new MessageDto("ChooseCard", new ChooseCardDto(cardId)));
+        }
+        
+        private void BuildStack(string playerIdOnBottom)
+        {
+            if (!localPlayerCardId.HasValue || !opponentPlayerCardId.HasValue)
+                return;
+            
+            // Determine which faction is on bottom based on server's playerIdOnBottom
+            var localPlayerOnBottom = playerIdOnBottom == LocalPlayer.PlayerId;
+            var bottomFaction = localPlayerOnBottom ? LocalPlayer.Faction : OpponentPlayer.Faction;
+            var topFaction = localPlayerOnBottom ? OpponentPlayer.Faction : LocalPlayer.Faction;
+        
+            OnStackUpdated.Invoke(bottomFaction, topFaction);
         }
 
         public Player GetPlayerBy(string connectionId)
