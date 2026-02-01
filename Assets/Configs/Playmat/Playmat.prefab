@@ -649,7 +649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ff3ff05da784575b2252cd9cd647db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSlot
-  CardScale: 0.0166167
+  CardScale: 1
 --- !u!1001 &66513343428656616
 PrefabInstance:
   m_ObjectHideFlags: 0
