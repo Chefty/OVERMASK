@@ -12,6 +12,7 @@ public class CardDragManager : MonoBehaviour
 
     private Camera mainCamera;
     private CardView activeCard;
+    private bool canDragCard = false;
 
     private void Awake()
     {
@@ -22,7 +23,14 @@ public class CardDragManager : MonoBehaviour
         }
 
         Instance = this;
+        Game.Instance.Round.OnCardRequested.AddListener(OnCardRequested);
+        
         mainCamera = Camera.main;
+    }
+
+    private void OnCardRequested()
+    {
+        canDragCard = true;
     }
 
     private void Update()
@@ -38,6 +46,7 @@ public class CardDragManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if(!canDragCard) return;
             TrySelectTarget();
         }
 
@@ -82,6 +91,7 @@ public class CardDragManager : MonoBehaviour
                             .SetEase(snapEase)
                             .SetTarget(cardTransform);
                         activeCard.OnPlaced();
+                        canDragCard = false;
                     }
                 }
             }
