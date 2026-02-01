@@ -36,8 +36,18 @@ public class PlaymatView : MonoBehaviour
         Game.Instance.Round.OnRoundEnded.AddListener(OnRoundEnded);
         Game.Instance.Round.OnDrawMaskCard.AddListener(OnDrawMaskCard);
         Game.Instance.Round.OnStackUpdated.AddListener(UpdateStackVisuals);
+        Game.Instance.Round.OnCardRequested.AddListener(OnRoundStarted);
         
         currentStackHeight = 0;
+        readyText.alpha = 0;
+    }
+    
+    private void OnRoundStarted()
+    {
+        readyText.DOFade(1, 0.3f).OnComplete(() =>
+        {
+            readyText.DOFade(0, 0.5f).SetDelay(1f);
+        });
     }
 
     private void OnDrawMaskCard(byte cardId)

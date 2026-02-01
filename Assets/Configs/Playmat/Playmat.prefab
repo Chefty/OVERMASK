@@ -208,7 +208,7 @@ Transform:
   m_GameObject: {fileID: 3036529361028061324}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.44, y: 0.2, z: -1.31}
+  m_LocalPosition: {x: -4.44, y: 0.3, z: -1.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -265,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 5217105491192025841}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.31, z: -1.38}
+  m_LocalPosition: {x: 0, y: 0.3, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -422,7 +422,7 @@ Transform:
   m_GameObject: {fileID: 7153230624793162783}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.37, z: 2.93}
+  m_LocalPosition: {x: 0, y: 0.3, z: 2.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -499,8 +499,6 @@ MonoBehaviour:
   redScore: {fileID: 0}
   roundText: {fileID: 0}
   readyText: {fileID: 0}
-  blueSlot: {fileID: 0}
-  redSlot: {fileID: 7080190594399794771}
   combatSlot: {fileID: 3124199969117743064}
   maskCardDisplayer: {fileID: 6406422373752818961}
   blueCardDisplayer: {fileID: 3028956230956690439}
@@ -712,7 +710,7 @@ Transform:
   m_GameObject: {fileID: 9123585695318878890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.43, y: 0.23, z: -1.34}
+  m_LocalPosition: {x: 4.43, y: 0.3, z: -1.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
