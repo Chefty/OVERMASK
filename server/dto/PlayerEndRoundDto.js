@@ -5,12 +5,11 @@ export class PlayerEndRoundDto
     playerScore;
     newCardId;
     
-    constructor(playerId, playerCardId, playerScore, newCardId, playerIdOnBottom){
+    constructor(playerId, playerCardId, playerScore, newCardId){
         this.playerId = playerId;
         this.playerCardId = playerCardId;
         this.playerScore = playerScore;
         this.newCardId = newCardId;
-        this.playerIdOnBottom = playerIdOnBottom;
     }
 
     writeToBuffer(buffer)
@@ -22,9 +21,5 @@ export class PlayerEndRoundDto
         buffer.writeUInt8(this.playerCardId);
         buffer.writeUInt8(this.playerScore);
         buffer.writeUInt8(this.newCardId);
-
-        length = this.playerIdOnBottom.length;
-        buffer.writeUInt8(length);
-        buffer.writeString(this.playerIdOnBottom);
     }
 }
