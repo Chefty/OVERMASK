@@ -80,8 +80,9 @@ export class Room
 
     EndRound()
     {
-        var playerOnBottom = this.GetPlayerFromColor(this.dealer.GetLeadingPlayer()).playerId;
-        this.dealer.EndOfRound();
+        var leadingPlayer = this.dealer.GetLeadingPlayer();
+        var playerOnBottom = this.GetPlayerFromColor(leadingPlayer).playerId;
+        this.dealer.EndOfRound(leadingPlayer);
 
         var newCard = this.dealer.DrawPlayerCard();
         var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.players[0].color, this.dealer.GetPlayerCard(this.players[0]), this.dealer.GetPlayerScore(this.players[0]), newCard);

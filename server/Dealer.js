@@ -55,13 +55,13 @@ export class Dealer {
         return null;
     }
 
-    EndOfRound() {
+    EndOfRound(leadingPlayer) {
         const redCard = this.#originalPlayerDeck[this.#currentRedCardId];
         const blueCard = this.#originalPlayerDeck[this.#currentBlueCardId];
         const maskCard = this.#originalMaskDeck[this.#maskCardId];
 
         let bottomCard, middleCard;
-        if (this.GetLeadingPlayer() === Player.RED) {
+        if (leadingPlayer === Player.RED) {
             bottomCard = redCard;
             middleCard = blueCard;
         } else {
