@@ -1,8 +1,9 @@
 ﻿namespace Engine
 {
-    public class Card
+    public class Card : ICardData
     {
         public int CardId { get; private set; }
+        public CardCellDefinition[][] ArrayData => CardDataConverter.ToArray(Data);
         public byte[] Data { get; private set; }
 
         public Card(int cardId, byte[] data)

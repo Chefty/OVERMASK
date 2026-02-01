@@ -28,7 +28,7 @@ public class CardMeshGenService : MonoBehaviour
             return;
         }
 
-        if (data == null || data.Data == null)
+        if (data == null || data.ArrayData == null)
         {
             Debug.LogWarning("CardGenService: data is null or empty.", this);
             return;
@@ -46,7 +46,7 @@ public class CardMeshGenService : MonoBehaviour
         List<CombineInstance> emptyCombines = new();
         List<CombineInstance> emptyCellCombines = new();
 
-        CardCellDefinition[][] grid = data.Data;
+        CardCellDefinition[][] grid = data.ArrayData;
         int rowCount = grid.Length;
         int columnCount = 0;
         for (int r = 0; r < grid.Length; r++)

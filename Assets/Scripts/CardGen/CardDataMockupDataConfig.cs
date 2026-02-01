@@ -20,7 +20,7 @@ public class CardDataMockupDataConfig : ScriptableObject
             return;
         }
 
-        CardCellDefinition[][] current = cardDataMockupData.Data;
+        CardCellDefinition[][] current = cardDataMockupData.ArrayData;
         if (current == null)
         {
             Debug.LogWarning("CardDataMockupDataConfig: data grid is null.", this);
@@ -93,7 +93,7 @@ public class CardDataMockupDataConfig : ScriptableObject
             }
         }
 
-        cardDataMockupData.Data = data;
+        cardDataMockupData.ArrayData = data;
     }
 }
 
@@ -104,8 +104,11 @@ public class CardDataMockupData : ICardData
     [SerializeField] private int rows = 3;
     [SerializeField] private int columns = 3;
     [SerializeField] private List<CardCellDefinitionRow> rowsData = new();
+    [SerializeField] private int mockId = 0;
 
-    public CardCellDefinition[][] Data
+    public int CardId => mockId;
+
+    public CardCellDefinition[][] ArrayData
     {
         get
         {
@@ -189,5 +192,6 @@ public enum CardCellDefinition
 
 public interface ICardData
 {
-    public CardCellDefinition[][] Data { get; set; }
+    public int CardId { get; }
+    public CardCellDefinition[][] ArrayData { get;}
 }
