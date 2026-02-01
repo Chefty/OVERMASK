@@ -2,11 +2,11 @@
 {
     public class Card : ICardData
     {
-        public int CardId { get; private set; }
+        public byte CardId { get; private set; }
         public CardCellDefinition[][] ArrayData => CardDataConverter.ToArray(Data);
         public byte[] Data { get; private set; }
 
-        public Card(int cardId, byte[] data)
+        public Card(byte cardId, byte[] data)
         {
             CardId = cardId;
             Data = data;

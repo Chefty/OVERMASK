@@ -11,7 +11,7 @@ public class CardView : MonoBehaviour
     private Quaternion originalRotation;
     private Vector3 originalScale;
     public bool IsPlaced { get; private set; }
-    public int id;
+    public byte id;
     [SerializeField] private PlayerFaction  playerFaction;
     [SerializeField] Color PlayerColor;
     [SerializeField] Color OpponentColor;
@@ -29,6 +29,7 @@ public class CardView : MonoBehaviour
         transform.rotation = context.Rotation;
         transform.localScale = context.Scale;
         playerFaction  = context.Faction;
+        id = context.Data.CardId;
         ApplyFactionColor();
 
         CardMeshGenService.Instance.GenerateMesh(context.Data, meshGenRoot);
@@ -89,6 +90,7 @@ public class CardView : MonoBehaviour
     public void OnPlaced()
     {
         IsPlaced = true;
+        Game.Instance.Round.ChooseCard(id);
     }
 
     public Vector3 OriginalPosition => originalPosition;

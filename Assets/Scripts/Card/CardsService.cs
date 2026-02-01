@@ -1,4 +1,5 @@
-﻿using client.dto;
+﻿using System;
+using client.dto;
 
 namespace Engine
 {
@@ -14,16 +15,22 @@ namespace Engine
         {
             MaskCards = new Card[csd.MaskCards.Length];
             for (var i = 0; i < csd.MaskCards.Length; i++)
-                MaskCards[i] = new Card(i, csd.MaskCards[i]);
-            
+            {
+                var b = Convert.ToByte(i);
+                MaskCards[i] = new Card(b, csd.MaskCards[i]);
+            }
+
             PlayerCards = new Card[csd.PlayerCards.Length];
             for (var i = 0; i < csd.PlayerCards.Length; i++)
-                PlayerCards[i] = new Card(i, csd.PlayerCards[i]);
+            {
+                var b = Convert.ToByte(i);
+                PlayerCards[i] = new Card(b, csd.PlayerCards[i]);
+            }
         }
 
         public Card GetPlayerCardWithId(int cardId)
         {
-            if (cardId < 0 || cardId >= MaskCards.Length)
+            if (cardId < 0 || cardId >= PlayerCards.Length)
                 return null;
             return PlayerCards[cardId];
         }

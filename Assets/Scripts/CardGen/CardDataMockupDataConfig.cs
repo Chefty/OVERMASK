@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "CardDataMockupData", menuName = "CardDataMockupData", order = 1)]
 public class CardDataMockupDataConfig : ScriptableObject
@@ -106,7 +108,7 @@ public class CardDataMockupData : ICardData
     [SerializeField] private List<CardCellDefinitionRow> rowsData = new();
     [SerializeField] private int mockId = 0;
 
-    public int CardId => mockId;
+    public byte CardId => Convert.ToByte(mockId);
 
     public CardCellDefinition[][] ArrayData
     {
@@ -192,6 +194,6 @@ public enum CardCellDefinition
 
 public interface ICardData
 {
-    public int CardId { get; }
+    public byte CardId { get; }
     public CardCellDefinition[][] ArrayData { get;}
 }
