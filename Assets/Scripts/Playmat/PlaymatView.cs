@@ -10,6 +10,8 @@ public class PlaymatView : MonoBehaviour
     public OpponentSlot opponentSlot;
     public HouseSlot houseSlot;
     public CombatSlot combatSlot;
+    public OpponentCardDisplayer opponentCardDisplayer;
+    public HouseCardDisplayer houseCardDisplayer;
 
     private void Awake()
     {
