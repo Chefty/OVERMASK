@@ -80,7 +80,7 @@ export class Room
 
     EndRound()
     {
-        var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
+        var playerOnBottom = this.GetPlayerFromColor(this.dealer.GetLeadingPlayer()).playerId;
         this.dealer.EndOfRound();
 
         var newCard = this.dealer.DrawPlayerCard();
@@ -130,5 +130,12 @@ export class Room
     {
         this.dealer.SetPlayerCard(this.players[0], -1);
         this.dealer.SetPlayerCard(this.players[1], -1);
+    }
+
+    GetPlayerFromColor(color)
+    {
+        if(this.players[0].color === color)
+            return this.players[0];
+        return this.players[1];
     }
 }
