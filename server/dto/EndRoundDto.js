@@ -14,6 +14,6 @@ export class EndRoundDto
     {
        this.player1EndRound.writeToBuffer(buffer);
        this.player2EndRound.writeToBuffer(buffer);
-       buffer.writeUInt8(playerIdOnBottom);
+       buffer.writeUInt8(this.playerIdOnBottom);
     }
 }
