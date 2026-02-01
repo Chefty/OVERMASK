@@ -10,5 +10,8 @@
     "display-cards": "node CardsGenerator/display-cards.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
 }

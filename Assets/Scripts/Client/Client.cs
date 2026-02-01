@@ -30,25 +30,51 @@ namespace client
         public async void ConnectToServer(string url, PlayerDto playerDto, Action onConnected)
         {
             Debug.Log($"Trying to connect to {url}");
+            
+            // DEVELOPMENT ONLY: Skip SSL certificate validation for Railway
+            // Remove this in production!
+            #if UNITY_EDITOR || DEVELOPMENT_BUILD
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = 
+                (sender, certificate, chain, errors) => true;
+            #endif
+            
             ws = new WebSocket(url);
 
             ws.OnOpen += () =>
             {
+                Debug.Log($"WebSocket OnOpen triggered. State: {ws.State}");
                 SendMessage(new MessageDto("Connection", playerDto));
                 _ = StartServerPingRoutine(); // Fire-and-forget task
                 Debug.Log("Connected to WebSocket server");
                 onConnected.Invoke();
             };
 
-            ws.OnMessage += (bytes) => ReadMessage(bytes);
+            ws.OnMessage += (bytes) =>
+            {
+                Debug.Log($"Received message: {bytes.Length} bytes");
+                ReadMessage(bytes);
+            };
+
+            ws.OnError += (errorMsg) =>
+            {
+                Debug.LogError($"WebSocket Error: {errorMsg}");
+            };
 
             ws.OnClose += (e) =>
             {
-                Debug.Log($"Disconnected from WebSocket server: {e}");
+                Debug.LogWarning($"Disconnected from WebSocket server. Code: {e}, State: {ws.State}");
                 pingCancellationTokenSource?.Cancel();
             };
 
-            await ws.Connect();
+            try
+            {
+                await ws.Connect();
+                Debug.Log($"Connect() completed. State: {ws.State}");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to connect: {ex.Message}\nStack: {ex.StackTrace}");
+            }
         }
         
         // Add Update method to dispatch messages
@@ -116,13 +142,19 @@ namespace client
             UnityMainThreadDispatcher.Instance.Enqueue(action);
         }
 
-        public void SendMessage(MessageDto message)
+        public async void SendMessage(MessageDto message)
         {
+            if (ws == null || ws.State != WebSocketState.Open)
+            {
+                Debug.LogWarning("Cannot send message: WebSocket is not open");
+                return;
+            }
+
             using (var ms = new CustomMemoryStream())
             {
                 message.WriteToStream(ms);
                 var data = ms.ToArray();
-                ws.Send(data);
+                await ws.Send(data);
             }
         }
 

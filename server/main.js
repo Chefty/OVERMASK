@@ -19,18 +19,31 @@ let playerService = new PlayerService();
 let roomService = new RoomService(cardsService);
 let dtoService = new DtoService(playerService, roomService, cardsService);
 
-ws.on("connection", (ws) => {
-  console.log("Client connected"); // Add logging
+ws.on("connection", (ws, req) => {
+  console.log(`Client connected from ${req.socket.remoteAddress}`);
 
   ws.on("message", (message) => {
-    let buffer = StreamBuffer.from(message);
-    dtoService.Parse(ws, buffer);
+    try {
+      console.log(`Received message, length: ${message.length}`);
+      let buffer = StreamBuffer.from(message);
+      dtoService.Parse(ws, buffer);
+    } catch (error) {
+      console.error("Error processing message:", error);
+    }
   });
 
-  ws.on("close", () => {
-    console.log("Client disconnected"); // Add logging
-    let player = playerService.DeletePlayer(ws);
-    roomService.RemovePlayer(player);
+  ws.on("error", (error) => {
+    console.error("WebSocket error:", error);
+  });
+
+  ws.on("close", (code, reason) => {
+    console.log(`Client disconnected. Code: ${code}, Reason: ${reason}`);
+    try {
+      let player = playerService.DeletePlayer(ws);
+      roomService.RemovePlayer(player);
+    } catch (error) {
+      console.error("Error handling disconnect:", error);
+    }
   });
 });
 
