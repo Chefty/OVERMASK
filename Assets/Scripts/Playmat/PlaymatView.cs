@@ -6,9 +6,11 @@ using Engine;
 
 public class PlaymatView : MonoBehaviour
 {
-    private const float STACK_LAYER_SPACING = 0.05f;
-    
+    private const float StackLayerSpacing = 0.05f;
+
     public static PlaymatView Instance;
+    
+    private int currentStackHeight;
     
     [SerializeField] private TMP_Text blueName;
     [SerializeField] private TMP_Text redName;
@@ -34,6 +36,8 @@ public class PlaymatView : MonoBehaviour
         Game.Instance.Round.OnRoundEnded.AddListener(OnRoundEnded);
         Game.Instance.Round.OnDrawMaskCard.AddListener(OnDrawMaskCard);
         Game.Instance.Round.OnStackUpdated.AddListener(UpdateStackVisuals);
+        
+        currentStackHeight = 0;
     }
 
     private void OnDrawMaskCard(byte cardId)
@@ -81,9 +85,8 @@ public class PlaymatView : MonoBehaviour
     
     private void UpdateStackVisuals(PlayerFaction bottomFaction, PlayerFaction topFaction)
     {
-        Debug.Log($"Stack built: Bottom={bottomFaction}, Top={topFaction}, Mask=House");
+        Debug.Log($"Stack built: Bottom={bottomFaction}, Top={topFaction}, Mask=House, StackHeight={currentStackHeight}");
         
-        // Get the CardDisplayers for each faction
         var bottomDisplayer = GetCardDisplayerForFaction(bottomFaction);
         var topDisplayer = GetCardDisplayerForFaction(topFaction);
         
@@ -95,9 +98,20 @@ public class PlaymatView : MonoBehaviour
             return;
         }
         
-        AnimateCardToStack(bottomDisplayer, 0, 0f);
-        AnimateCardToStack(topDisplayer, 1, 0.3f);
-        var maskSequence = AnimateCardToStack(maskCardDisplayer, 2, 0.6f);
+        var bottomCard = bottomDisplayer.CardView;
+        var topCard = topDisplayer.CardView;
+        var maskCard = maskCardDisplayer.CardView;
+        
+        bottomDisplayer.ForceCardView(null);
+        topDisplayer.ForceCardView(null);
+        maskCardDisplayer.ForceCardView(null);
+        
+        AnimateCardToStack(bottomCard, currentStackHeight, 0f);
+        AnimateCardToStack(topCard, currentStackHeight + 1, 0.3f);
+        var maskSequence = AnimateCardToStack(maskCard, currentStackHeight + 2, 0.6f);
+        
+        currentStackHeight += 3;
+        
         maskSequence.OnComplete(() =>
         {
             DOVirtual.DelayedCall(1.5f, () =>
@@ -107,16 +121,15 @@ public class PlaymatView : MonoBehaviour
         });
     }
     
-    private Sequence AnimateCardToStack(CardDisplayer cardDisplayer, int stackLayer, float delay)
+    private Sequence AnimateCardToStack(CardView cardView, int stackLayer, float delay)
     {
-        if (cardDisplayer.CardView == null)
+        if (cardView == null)
         {
-            Debug.LogWarning($"CardDisplayer has no CardView to animate");
+            Debug.LogWarning($"CardView is null, cannot animate");
             return null;
         }
 
-        var cardView = cardDisplayer.CardView;
-        var targetPos = combatSlot.transform.position + Vector3.up * (stackLayer * STACK_LAYER_SPACING);
+        var targetPos = combatSlot.transform.position + Vector3.up * (stackLayer * StackLayerSpacing);
 
         var sequence = DOTween.Sequence();
         sequence.AppendInterval(delay);
