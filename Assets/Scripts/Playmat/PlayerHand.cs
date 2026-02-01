@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Engine;
@@ -8,11 +7,17 @@ public class PlayerHand : MonoBehaviour
 {
     private const float CARD_DISTANCE = 3f;
     private const float CARD_UPDATE_TIME = 0.3f;
+    public static PlayerHand Instance;
     
     [SerializeField] private Transform parent;
     
     private List<CardView> cards = new List<CardView>();
-    
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         Game.Instance.Round.LocalPlayer.OnDrawInitialHand.AddListener(OnDrawInitialHand);
