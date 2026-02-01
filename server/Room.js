@@ -63,8 +63,8 @@ export class Room
         var player2Cards = [];
 
         for (let i = 0; i < this.INITIAL_CARD_AMOUNT; i++) {
-            player1Cards.push(this.GetRandomPlayerCard());
-            player2Cards.push(this.GetRandomPlayerCard());
+            player1Cards.push(this.dealer.DrawPlayerCard());
+            player2Cards.push(this.dealer.DrawPlayerCard());
         }
 
         this.dtoService.Send("DealInitialCards", this.players[0].ws, new DealInitialCardsDto(player1Cards));
