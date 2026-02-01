@@ -9,8 +9,7 @@ namespace PimDeWitte.UnityMainThreadDispatcher
 {
     public class LobbyManager : MonoBehaviour
     {
-        //private const string IpToConnect = "wss://ggj-2026-production-8567.up.railway.app";
-        private const string IpToConnect = "ws://localhost:8080";
+        private const string IpToConnect = "wss://ggj-2026-production-8567.up.railway.app";
         private const string LOCAL_USERNAME_KEY = "USERNAME";
 
         [SerializeField] private TMP_InputField username;
