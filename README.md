@@ -120,4 +120,14 @@ GGJ-2026/
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is protected under an **End User License Agreement (EULA)**. See the [LICENSE](LICENSE) file for complete terms.
+
+**OVERMASK** is provided for **personal, non-commercial use only**. The source code is shared for educational and reference purposes as part of Global Game Jam 2026.
+
+**Restrictions:**
+- ❌ No commercial use without permission
+- ❌ No modification or derivative works
+- ❌ No redistribution or public hosting
+- ✅ Play and enjoy for personal use
+
+For commercial licensing inquiries, please contact the development team.

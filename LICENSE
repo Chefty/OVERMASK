@@ -1,21 +1,57 @@
-MIT License
+END USER LICENSE AGREEMENT (EULA)
 
-Copyright (c) 2026 Fabien
+OVERMASK
+Copyright (c) 2026 Fabien Cheftel, Mukarillo, XiaoWei Victor Qian
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This End User License Agreement ("Agreement") is a legal agreement between you 
+and the OVERMASK development team.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. GRANT OF LICENSE
+This software is provided for personal, non-commercial use only. You may 
+download, install, and play OVERMASK for entertainment purposes.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. RESTRICTIONS
+You may NOT:
+- Modify, adapt, translate, or create derivative works based on the software
+- Reverse engineer, decompile, or disassemble the software
+- Remove or alter any copyright notices or proprietary legends
+- Use the software for commercial purposes without explicit written permission
+- Distribute, sublicense, rent, lease, or lend the software
+- Host the software on public servers without permission
+
+3. OWNERSHIP
+All rights, title, and interest in OVERMASK, including all intellectual 
+property rights, remain with the development team. This Agreement does not 
+grant you any ownership rights in the software.
+
+4. GAME JAM CONTEXT
+This project was created for Global Game Jam 2026. The source code is made 
+available for educational and reference purposes only, subject to all 
+restrictions in this Agreement.
+
+5. NO WARRANTY
+The software is provided "AS IS" without warranty of any kind, express or 
+implied, including but not limited to the warranties of merchantability, 
+fitness for a particular purpose, or non-infringement.
+
+6. LIMITATION OF LIABILITY
+In no event shall the developers be liable for any damages, including but not 
+limited to direct, indirect, incidental, special, consequential, or punitive 
+damages arising from the use or inability to use this software.
+
+7. TERMINATION
+This license is effective until terminated. Your rights under this Agreement 
+will terminate automatically without notice if you fail to comply with any 
+terms. Upon termination, you must destroy all copies of the software.
+
+8. GOVERNING LAW
+This Agreement shall be governed by and construed in accordance with applicable 
+laws.
+
+9. ENTIRE AGREEMENT
+This Agreement constitutes the entire agreement between you and the OVERMASK 
+development team regarding the software and supersedes all prior agreements.
+
+BY INSTALLING, COPYING, OR USING OVERMASK, YOU AGREE TO BE BOUND BY THE TERMS 
+OF THIS AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT INSTALL OR USE 
+THE SOFTWARE.
