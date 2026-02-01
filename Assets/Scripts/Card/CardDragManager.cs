@@ -91,6 +91,8 @@ public class CardDragManager : MonoBehaviour
                             .SetEase(snapEase)
                             .SetTarget(cardTransform);
                         activeCard.OnPlaced();
+                        var clip = AudioPlayer.Instance.OnCardDrop;
+                        AudioPlayer.Instance.PlaySound(clip);
                         canDragCard = false;
                     }
                 }
@@ -120,6 +122,8 @@ public class CardDragManager : MonoBehaviour
                 }
 
                 activeCard.CacheOriginalTransform();
+                var clip = AudioPlayer.Instance.OnCardPickup;
+                AudioPlayer.Instance.PlaySound(clip);
             }
         }
     }
