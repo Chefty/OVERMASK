@@ -13,7 +13,7 @@ public class CardView : MonoBehaviour
     private Vector3 originalScale;
     public bool IsPlaced { get; private set; }
     public byte id;
-    [SerializeField] private PlayerFaction  playerFaction;
+    public PlayerFaction  playerFaction;
     [SerializeField] Color PlayerColor;
     [SerializeField] Color OpponentColor;
     [SerializeField] Color HouseColor;

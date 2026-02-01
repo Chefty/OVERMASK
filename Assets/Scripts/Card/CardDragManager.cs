@@ -104,6 +104,12 @@ public class CardDragManager : MonoBehaviour
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance))
         {
+            var possibleCard = hit.transform.GetComponentInParent<CardView>();
+            if (possibleCard == null || possibleCard.playerFaction != PlayerFaction.Player)
+            {
+                return;
+            }
+
             activeCard = hit.transform.GetComponentInParent<CardView>();
             if (activeCard != null)
             {
