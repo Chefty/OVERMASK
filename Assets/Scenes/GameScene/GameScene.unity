@@ -1687,7 +1687,7 @@ GameObject:
   - component: {fileID: 509431811}
   - component: {fileID: 509431812}
   m_Layer: 5
-  m_Name: PlayerScore
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player Score:'
+  m_text: 'Score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f195881b244ee43018fd20e5fe7f63c0, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c5d0b9c1132d64a83b0ec6b68f6c134b, type: 2}
@@ -2587,7 +2587,7 @@ GameObject:
   - component: {fileID: 747269049}
   - component: {fileID: 747269050}
   m_Layer: 5
-  m_Name: PlayerScore
+  m_Name: BlueScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2711,7 +2711,7 @@ GameObject:
   - component: {fileID: 823980659}
   - component: {fileID: 823980660}
   m_Layer: 5
-  m_Name: OpponentScore
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2764,7 +2764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Opponent Score:'
+  m_text: 'Score:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f195881b244ee43018fd20e5fe7f63c0, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c5d0b9c1132d64a83b0ec6b68f6c134b, type: 2}
@@ -3506,7 +3506,7 @@ GameObject:
   - component: {fileID: 1374784171}
   - component: {fileID: 1374784170}
   m_Layer: 5
-  m_Name: OpponentScore
+  m_Name: RedScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4802,6 +4802,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5618967718383083423, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
+      propertyPath: redScore
+      value: 
+      objectReference: {fileID: 1288826194}
+    - target: {fileID: 5618967718383083423, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
+      propertyPath: blueScore
+      value: 
+      objectReference: {fileID: 390037066}
     - target: {fileID: 5618967718383083423, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
       propertyPath: readyText
       value: 
