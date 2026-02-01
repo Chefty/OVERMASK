@@ -21,10 +21,6 @@ namespace PimDeWitte.UnityMainThreadDispatcher
             playButton.onClick.AddListener(ConnectToServer);
         }
 
-        private void Update()
-        {
-            Client.Instance.Update();
-        }
 
         private void ConnectToServer()
         {
