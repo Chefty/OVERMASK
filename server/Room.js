@@ -52,7 +52,7 @@ export class Room
         this.ready = 0;
         this.moved = false;
         this.ResetPlayersCards();
-        this.BroadcastDto("RequestCard", new RequestCardDto(this.GetRandomMaskCard()));
+        this.BroadcastDto("RequestCard", new RequestCardDto(this.dealer.DrawMaskCard()));
     }
 
     DealInitialCards()
@@ -73,16 +73,9 @@ export class Room
     
     PlayerChoseCard(player, chooseCardDto)
     {
-        this.dealer.SetPlayerCard(this.GetPlayerNumber(player), chooseCardDto.cardId);
-        if(this.dealer.GetPlayer1Card() !== -1 && this.dealer.GetPlayer2Card() !== -1)
+        this.dealer.SetPlayerCard(player, chooseCardDto.cardId);
+        if(this.dealer.GetPlayerCard(this.players[0]) !== -1 && this.dealer.GetPlayerCard(this.players[1]) !== -1)
             this.EndRound();
-    }
-
-    GetPlayerNumber(player)
-    {
-        if(player.playerId === this.players[0].playerId)
-            return 0;
-        return 1;
     }
 
     EndRound()
@@ -90,24 +83,14 @@ export class Room
         this.dealer.EndOfRound();
 
         var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
-        var newCard = this.GetRandomPlayerCard();
+        var newCard = this.dealer.DrawPlayerCard();
         var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayerCard(this.players[0]), this.dealer.GetPlayerScore(this.players[0]), newCard);
 
-        newCard = this.GetRandomPlayerCard();
+        newCard = this.dealer.DrawPlayerCard();
         var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayerCard(this.players[1]), this.dealer.GetPlayerScore(this.players[1]), newCard);
 
         var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound, playerOnBottom);
         this.BroadcastDto("EndRound", endRoundDto);
-    }
-
-    GetRandomMaskCard()
-    {
-        return this.dealer.DrawMaskCard();
-    }
-
-    GetRandomPlayerCard()
-    {
-        return this.dealer.DrawPlayerCard();
     }
 
     AddPlayer(player)
