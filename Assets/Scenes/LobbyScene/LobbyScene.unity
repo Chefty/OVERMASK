@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PimDeWitte.UnityMainThreadDispatcher.LobbyManager
   username: {fileID: 1608986620}
+  ip: {fileID: 1618729129}
   playButton: {fileID: 1092699919}
   loadingPanel: {fileID: 1708833985}
 --- !u!4 &341233579

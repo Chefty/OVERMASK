@@ -25,14 +25,13 @@ public class CardView : MonoBehaviour
     public void SetupCard(CardGenContext context)
     {
         transform.parent = context.Parent;
-        transform.position = context.Position;
+        transform.localPosition = context.Position;
         transform.rotation = context.Rotation;
         transform.localScale = context.Scale;
         playerFaction  = context.Faction;
         ApplyFactionColor();
 
-        var cardData = CardDataService.Instance.GetCardData(context.CardId);
-        CardMeshGenService.Instance.GenerateMesh(cardData, meshGenRoot);
+        CardMeshGenService.Instance.GenerateMesh(context.Data, meshGenRoot);
     }
 
     private void ApplyFactionColor()

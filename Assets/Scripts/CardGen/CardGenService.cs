@@ -35,7 +35,7 @@ public class CardGenContext
     public Transform Parent = null;
     public Vector3 Position;
     public Quaternion Rotation;
-    public Vector3 Scale;
+    public Vector3 Scale = new Vector3(1.5568f, 1.5568f, 1.5568f);
 }
 
 
