@@ -25,6 +25,6 @@ public class HouseCardDisplayer : MonoBehaviour
         };
         MaskCardView = CardGenService.Instance.GenCard(context);
         MaskCardView.transform.localScale = Vector3.zero;
-        MaskCardView.transform.DOScale(1, TIME_TO_SHOW).SetEase(Ease.OutQuart);
+        MaskCardView.transform.DOScale(1.52104f, TIME_TO_SHOW).SetEase(Ease.OutQuart);
     }
 }
