@@ -110,8 +110,8 @@ export class Room
         {
             console.log(`[Room ${this.roomId}] Room is full. Starting a new match.`);
             
-            this.players[0].color = Player.RED_COLOR;
-            this.players[1].color = Player.BLUE_COLOR;
+            this.players[0].SetColor(Player.RED);
+            this.players[1].SetColor(Player.BLUE);
 
             this.dtoService.Send("OpponentFound", this.players[0].ws, new GameStartDto(this.players[0], this.players[1], this.cardsService));
             this.dtoService.Send("OpponentFound", this.players[1].ws, new GameStartDto(this.players[1], this.players[0], this.cardsService));

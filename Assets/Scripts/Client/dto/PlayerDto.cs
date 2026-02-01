@@ -7,7 +7,7 @@ namespace client.dto
     {
         public string PlayerId { get; private set; }
         public string UserName { get; private set; }
-        public byte Faction { get; private set; }
+        public byte Faction { get; private set; } = 0;
         public byte[] AvailableCards { get; private set; } = Array.Empty<byte>();
         
         public PlayerDto(CustomMemoryStream ms)
@@ -19,6 +19,7 @@ namespace client.dto
         {
             PlayerId = Guid.NewGuid().ToString();
             UserName = userName;
+            Faction = 0;
         }
 
         public void WriteToStream(CustomMemoryStream ms)

@@ -1,7 +1,7 @@
 export class Player
 {
-    static RED_COLOR = 1;
-    static BLUE_COLOR = 2;
+    static RED = 0x01;
+    static BLUE = 0x02;
 
     playerId;
     userName;
@@ -17,7 +17,7 @@ export class Player
         leng = buffer.readUInt8();
         this.userName = buffer.readString(leng);
 
-        color = buffer.readUInt8();
+        this.color = buffer.readUInt8();
 
         leng = buffer.readUInt8();
         this.availableCards = [];
@@ -30,6 +30,11 @@ export class Player
         this.ws = ws;
     }
 
+    SetColor(color)
+    {
+        this.color = color;
+    }
+
     writeToBuffer(buffer)
     {
         let length = this.playerId.length;
@@ -40,7 +45,7 @@ export class Player
         buffer.writeUInt8(length);
         buffer.writeString(this.userName);
 
-        buffer.writeUInt8(color);
+        buffer.writeUInt8(this.color);
 
         length = this.availableCards.length;
         buffer.writeUInt8(length);
