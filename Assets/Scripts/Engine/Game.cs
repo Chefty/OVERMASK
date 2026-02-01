@@ -15,7 +15,6 @@ public class Game : MonoBehaviour
         Instance = this;
         
         var matchDto = Client.Instance?.GameDto;
-        
         var localPlayer = new Player(true, matchDto.Player);
         var opponentPlayer = new Player(false, matchDto.Opponent);
         
