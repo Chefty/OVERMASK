@@ -61,7 +61,7 @@ export class Dealer {
         const maskCard = this.#originalMaskDeck[this.#maskCardId];
 
         let bottomCard, middleCard;
-        if (this.#playerLeading === Player.RED) {
+        if (this.GetLeadingPlayer() === Player.RED) {
             bottomCard = redCard;
             middleCard = blueCard;
         } else {
@@ -74,8 +74,6 @@ export class Dealer {
 
         // Start with the previous stack
         for (let i = 0; i < cardSize; i++) {
-            stackedGrid[i] = this.#currentStack[i];
-
             if (maskCard.grid[i] !== CardDto.EMPTY) {
                 stackedGrid[i] = maskCard.grid[i];
             }
@@ -84,6 +82,8 @@ export class Dealer {
             }
             else if (bottomCard.grid[i] !== CardDto.EMPTY) {
                 stackedGrid[i] = bottomCard.grid[i];
+            }else{
+                stackedGrid[i] = this.#currentStack[i];
             }
         }
 
@@ -101,8 +101,6 @@ export class Dealer {
 
         this.#redScore += redCount;
         this.#blueScore += blueCount;
-
-        this.#playerLeading = this.GetLeadingPlayer();
     }
 
     GetLeadingPlayer()
@@ -147,9 +145,5 @@ export class Dealer {
         if(player.color == Player.BLUE)
             return this.#currentBlueCardId;
         return this.#currentRedCardId;
-    }
-    
-    GetLeadingPlayer() {
-        return this.#playerLeading;
     }
 }
