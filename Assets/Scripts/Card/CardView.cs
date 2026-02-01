@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CardView : MonoBehaviour
 {
@@ -90,7 +91,9 @@ public class CardView : MonoBehaviour
     public void OnPlaced()
     {
         IsPlaced = true;
+        PlayerHand.Instance.RemoveCard(this);
         Game.Instance.Round.ChooseCard(id);
+        FactionMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;
     }
 
     public Vector3 OriginalPosition => originalPosition;
