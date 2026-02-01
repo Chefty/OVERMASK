@@ -77,8 +77,7 @@ namespace Engine
 
         private byte GetScoreForFaction(EndRoundDto endRoundDto, PlayerFaction playerFaction)
         {
-            var userIdForFaction = Game.Instance.Round.GetPlayerBy(playerFaction).PlayerId;
-            if(endRoundDto.Player1EndRound.PlayerId == userIdForFaction)
+            if (endRoundDto.Player1EndRound.Faction == playerFaction)
                 return endRoundDto.Player1EndRound.PlayerScore;
             return endRoundDto.Player2EndRound.PlayerScore;
         }

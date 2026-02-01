@@ -3,6 +3,7 @@
     public class PlayerEndRoundDto : IDto
     {
         public string PlayerId { get; private set; }
+        public PlayerFaction Faction { get; private set; } 
         public byte PlayerCardId { get; private set; }
         public byte PlayerScore { get; private set; }
         public byte NewCardId { get; private set; }
@@ -19,6 +20,7 @@
         public void ReadFromStream(CustomMemoryStream ms)
         {
             PlayerId = ms.ReadString();
+            Faction = (PlayerFaction)ms.ReadByte();
             PlayerCardId = ms.ReadByte();
             PlayerScore = ms.ReadByte();
             NewCardId = ms.ReadByte();

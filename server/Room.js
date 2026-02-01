@@ -84,10 +84,10 @@ export class Room
 
         var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
         var newCard = this.dealer.DrawPlayerCard();
-        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayerCard(this.players[0]), this.dealer.GetPlayerScore(this.players[0]), newCard);
+        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.players[0].color, this.dealer.GetPlayerCard(this.players[0]), this.dealer.GetPlayerScore(this.players[0]), newCard);
 
         newCard = this.dealer.DrawPlayerCard();
-        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayerCard(this.players[1]), this.dealer.GetPlayerScore(this.players[1]), newCard);
+        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.players[1].color, this.dealer.GetPlayerCard(this.players[1]), this.dealer.GetPlayerScore(this.players[1]), newCard);
 
         var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound, playerOnBottom);
         this.BroadcastDto("EndRound", endRoundDto);

@@ -9,7 +9,6 @@ namespace Engine
         public bool IsLocalPlayer { get; }
         public string Name { get; }
         public string PlayerId { get; }
-        public int Score { get; private set; }
         public PlayerFaction Faction { get; private set; }
         public List<byte> AvailableCards { get; private set; } = new();
         
@@ -27,7 +26,6 @@ namespace Engine
 
         public void OnRoundEnded(PlayerEndRoundDto playerEndRound)
         {
-            Score = playerEndRound.PlayerScore;
             AddCard(playerEndRound.NewCardId);
         }
 
