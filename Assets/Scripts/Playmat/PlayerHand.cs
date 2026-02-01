@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Engine;
@@ -18,10 +19,10 @@ public class PlayerHand : MonoBehaviour
         Game.Instance.Round.LocalPlayer.OnGetNewCard.AddListener(OnGetNewCard);
     }
 
-    private void OnDrawInitialHand(List<byte> cards)
+    private void OnDrawInitialHand(List<byte> cardIds)
     {
         var slot = 0;
-        foreach (var card in cards)
+        foreach (var card in cardIds)
         {
             var cardData = CardsService.Instance.GetPlayerCardWithId(card) as ICardData;
             AddCard(cardData, false);
@@ -30,9 +31,9 @@ public class PlayerHand : MonoBehaviour
         UpdateCardsPosition();
     }
     
-    private void OnGetNewCard(byte card)
+    private void OnGetNewCard(byte cardId)
     {
-        var cardData = CardsService.Instance.GetPlayerCardWithId(card) as ICardData;
+        var cardData = CardsService.Instance.GetPlayerCardWithId(cardId) as ICardData;
         AddCard(cardData);
     }
 
