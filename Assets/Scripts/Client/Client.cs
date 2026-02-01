@@ -34,6 +34,7 @@ namespace client
 
             ws.OnOpen += () =>
             {
+                Debug.Log("WebSocket OnOpen triggered");
                 SendMessage(new MessageDto("Connection", playerDto));
                 _ = StartServerPingRoutine(); // Fire-and-forget task
                 Debug.Log("Connected to WebSocket server");
@@ -42,13 +43,26 @@ namespace client
 
             ws.OnMessage += (bytes) => ReadMessage(bytes);
 
+            ws.OnError += (errorMsg) =>
+            {
+                Debug.LogError($"WebSocket Error: {errorMsg}");
+            };
+
             ws.OnClose += (e) =>
             {
-                Debug.Log($"Disconnected from WebSocket server: {e}");
+                Debug.LogWarning($"Disconnected from WebSocket server. Code: {e}");
                 pingCancellationTokenSource?.Cancel();
             };
 
-            await ws.Connect();
+            try
+            {
+                await ws.Connect();
+                Debug.Log("Connect() completed");
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to connect: {ex.Message}");
+            }
         }
         
         // Add Update method to dispatch messages

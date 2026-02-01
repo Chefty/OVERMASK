@@ -11,7 +11,7 @@ namespace PimDeWitte.UnityMainThreadDispatcher
 {
     public class LobbyManager : MonoBehaviour
     {
-        private const string IP_TO_CONNECT = "wss://ggj-2026-production-8567.up.railway.app";
+        private const string IpToConnect = "wss://ggj-2026-production-8567.up.railway.app";
 
         [SerializeField] private TMP_InputField username;
         [SerializeField] private TMP_InputField ip;
@@ -32,7 +32,7 @@ namespace PimDeWitte.UnityMainThreadDispatcher
         {
             loadingPanel.SetActive(true);
             var connectDto = new PlayerDto(username.text);
-            var address = string.IsNullOrEmpty(ip.text) ? IP_TO_CONNECT : ip.text;
+            var address = string.IsNullOrEmpty(ip.text) ? IpToConnect : ip.text;
             Client.Instance.ConnectToServer(address, connectDto, OnClientConnected);
         }
 
