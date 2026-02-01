@@ -32,7 +32,9 @@ export class Dealer {
         this.#player1Score = 0;
         this.#player2Score = 0;
         this.#playerLeading = 1;
-        this.#currentStack = null;
+        // Initialize with a grey card (16 cells with value 3)
+        var cadSize = this.#originalPlayerDeck[0].grid.length;
+        this.#currentStack = new Uint8Array(cadSize).fill(CardDto.GREY);
         this.#currentPlayer1CardId = -1;
         this.#currentPlayer2CardId = -1;
         this.#maskCardId = null;
@@ -52,13 +54,12 @@ export class Dealer {
         }
         return null;
     }
-    
-    EndOfRound()
-    {
+
+    EndOfRound() {
         const player1Card = this.#originalPlayerDeck[this.#currentPlayer1CardId];
         const player2Card = this.#originalPlayerDeck[this.#currentPlayer2CardId];
         const maskCard = this.#originalMaskDeck[this.#maskCardId];
-        
+
         let bottomCard, middleCard;
         if (this.#playerLeading === 1) {
             bottomCard = player1Card;
@@ -67,23 +68,29 @@ export class Dealer {
             bottomCard = player2Card;
             middleCard = player1Card;
         }
-        
-        let cardSize = bottomCard.grid.length;
-        const stackedGrid = new Array(cardSize);
+
+        const cardSize = bottomCard.grid.length;
+        const stackedGrid = new Uint8Array(cardSize);
+
+        // Start with the previous stack
         for (let i = 0; i < cardSize; i++) {
-            stackedGrid[i] = bottomCard.grid[i];
-            
+            stackedGrid[i] = this.#currentStack[i];
+
+            if (bottomCard.grid[i] !== CardDto.EMPTY) {
+                stackedGrid[i] = bottomCard.grid[i];
+            }
+
             if (middleCard.grid[i] !== CardDto.EMPTY) {
                 stackedGrid[i] = middleCard.grid[i];
             }
-            
+
             if (maskCard.grid[i] !== CardDto.EMPTY) {
                 stackedGrid[i] = maskCard.grid[i];
             }
         }
-        
+
         this.#currentStack = stackedGrid;
-        
+
         let redCount = 0;
         let blueCount = 0;
         for (let i = 0; i < cardSize; i++) {
@@ -93,7 +100,7 @@ export class Dealer {
                 blueCount++;
             }
         }
-        
+
         this.#player1Score += redCount;
         this.#player2Score += blueCount;
 

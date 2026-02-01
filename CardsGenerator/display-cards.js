@@ -1,8 +1,8 @@
 import { CardDto } from '../server/dto/CardDto.js';
 import * as fs from 'fs';
 
-const MASK_DECK_FILE = './CardsData/mask-deck.json';
-const PLAYER_DECK_FILE = './CardsData/player-deck.json';
+const MASK_DECK_FILE = '../Server/CardsData/mask-deck.json';
+const PLAYER_DECK_FILE = '../Server/CardsData/player-deck.json';
 
 /**
  * Helper function to format and print a single card grid.
