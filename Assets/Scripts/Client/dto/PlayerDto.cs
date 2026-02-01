@@ -7,6 +7,7 @@ namespace client.dto
     {
         public string PlayerId { get; private set; }
         public string UserName { get; private set; }
+        public byte Faction { get; private set; }
         public byte[] AvailableCards { get; private set; } = Array.Empty<byte>();
         
         public PlayerDto(CustomMemoryStream ms)
@@ -24,6 +25,7 @@ namespace client.dto
         {
             ms.WriteString(PlayerId);
             ms.WriteString(UserName);
+            ms.WriteByte(Faction);
             ms.WriteByte(byte.Parse(AvailableCards.Length.ToString()));
             for (var i = 0; i < AvailableCards.Length; i++)
                 ms.WriteByte(AvailableCards[i]);
@@ -33,6 +35,7 @@ namespace client.dto
         {
             PlayerId = ms.ReadString();
             UserName = ms.ReadString();
+            Faction = ms.ReadByte();
             var cardsLenght = ms.ReadByte();
             AvailableCards = new byte[cardsLenght];
             for (var i = 0; i < cardsLenght; i++)

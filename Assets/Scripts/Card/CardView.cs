@@ -45,10 +45,10 @@ public class CardView : MonoBehaviour
             case PlayerFaction.House:
                 color = HouseColor;
                 break;
-            case PlayerFaction.Opponent:
+            case PlayerFaction.Blue:
                 color = OpponentColor;
                 break;
-            case PlayerFaction.Player:
+            case PlayerFaction.Red:
                 color = PlayerColor;
                 break;
         }

@@ -1,9 +1,13 @@
 export class Player
 {
+    static RED_COLOR = 1;
+    static BLUE_COLOR = 2;
+
     playerId;
     userName;
     availableCards = [];
     ws;
+    color;
     
     constructor(buffer)
     {
@@ -12,6 +16,8 @@ export class Player
 
         leng = buffer.readUInt8();
         this.userName = buffer.readString(leng);
+
+        color = buffer.readUInt8();
 
         leng = buffer.readUInt8();
         this.availableCards = [];
@@ -33,6 +39,8 @@ export class Player
         length = this.userName.length;
         buffer.writeUInt8(length);
         buffer.writeString(this.userName);
+
+        buffer.writeUInt8(color);
 
         length = this.availableCards.length;
         buffer.writeUInt8(length);

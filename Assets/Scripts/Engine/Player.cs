@@ -10,6 +10,7 @@ namespace Engine
         public string Name { get; }
         public string ConnectionId { get; }
         public int Score { get; private set; }
+        public PlayerFaction Faction { get; private set; }
         public List<byte> AvailableCards { get; private set; } = new();
         
         public readonly UnityEvent<List<byte>> OnDrawInitialHand = new UnityEvent<List<byte>>();
@@ -20,6 +21,7 @@ namespace Engine
             IsLocalPlayer = isLocalPlayer;
             Name = player.UserName;
             ConnectionId = player.PlayerId;
+            Faction = (PlayerFaction)player.Faction;
             AvailableCards = new List<byte>(player.AvailableCards);
         }
 

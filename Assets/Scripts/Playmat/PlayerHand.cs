@@ -48,7 +48,7 @@ public class PlayerHand : MonoBehaviour
         {
             Data = card,
             Parent = parent,
-            Faction = PlayerFaction.Player
+            Faction = PlayerFaction.Red
         };
         var cardView = CardGenService.Instance.GenCard(context);
         cards.Add(cardView);

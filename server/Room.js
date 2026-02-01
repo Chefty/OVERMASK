@@ -4,6 +4,7 @@ import {PlayerEndRoundDto} from "./dto/PlayerEndRoundDto.js";
 import {RequestCardDto} from "./dto/RequestCardDto.js";
 import {Dealer} from "./Dealer.js";
 import { DealInitialCardsDto } from "./dto/DealInitialCardsDto.js";
+import {Player} from "./Player.js";
 
 export class Room
 {
@@ -81,12 +82,12 @@ export class Room
 
         var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
         var player1NewCard = this.GetRandomPlayerCard();
-        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayer1Card(), this.dealer.GetPlayer1Score(), player1NewCard, playerOnBottom);
+        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayer1Card(), this.dealer.GetPlayer1Score(), player1NewCard);
 
         var player2NewCard = this.GetRandomPlayerCard();
-        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayer2Card(), this.dealer.GetPlayer2Score(), player2NewCard, playerOnBottom);
+        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayer2Card(), this.dealer.GetPlayer2Score(), player2NewCard);
 
-        var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound);
+        var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound, playerOnBottom);
         this.BroadcastDto("EndRound", endRoundDto);
     }
 
@@ -109,6 +110,9 @@ export class Room
         {
             console.log(`[Room ${this.roomId}] Room is full. Starting a new match.`);
             
+            this.players[0].color = Player.RED_COLOR;
+            this.players[1].color = Player.BLUE_COLOR;
+
             this.dtoService.Send("OpponentFound", this.players[0].ws, new GameStartDto(this.players[0], this.players[1], this.cardsService));
             this.dtoService.Send("OpponentFound", this.players[1].ws, new GameStartDto(this.players[1], this.players[0], this.cardsService));
         }

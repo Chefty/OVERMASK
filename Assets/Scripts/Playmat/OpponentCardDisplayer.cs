@@ -9,7 +9,7 @@ public class OpponentCardDisplayer : MonoBehaviour
         CardGenContext context = new CardGenContext();
         context.Data = cardData;
         var root = PlaymatView.Instance.opponentSlot;
-        context.Faction = PlayerFaction.Opponent;
+        context.Faction = PlayerFaction.Blue;
         context.Parent = root.transform;
         CardGenService.Instance.GenCard(context);
     }

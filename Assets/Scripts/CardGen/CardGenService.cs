@@ -41,6 +41,6 @@ public class CardGenContext
 public enum PlayerFaction
 {
     House,
-    Player,
-    Opponent
+    Red,
+    Blue
 }

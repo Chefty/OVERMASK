@@ -105,7 +105,7 @@ public class CardDragManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance))
         {
             var possibleCard = hit.transform.GetComponentInParent<CardView>();
-            if (possibleCard == null || possibleCard.playerFaction != PlayerFaction.Player)
+            if (possibleCard == null || possibleCard.playerFaction != PlayerFaction.Red)
             {
                 return;
             }
