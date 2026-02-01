@@ -6,7 +6,7 @@ using Engine;
 using PimDeWitte.UnityMainThreadDispatcher;
 using UnityEngine;
 using UnityEngine.Events;
-using WebSocketSharp;
+using NativeWebSocket;
 
 namespace client
 {
@@ -27,47 +27,57 @@ namespace client
 
         public GameStartDto GameDto { get; set; }
 
-        public void ConnectToServer(string url, PlayerDto playerDto, Action onConnected)
+        public async void ConnectToServer(string url, PlayerDto playerDto, Action onConnected)
         {
             Debug.Log($"Trying to connect to {url}");
             ws = new WebSocket(url);
 
-            ws.OnOpen += (sender, e) =>
+            ws.OnOpen += () =>
             {
                 SendMessage(new MessageDto("Connection", playerDto));
-                StartServerPingRoutine();
-
+                _ = StartServerPingRoutine(); // Fire-and-forget task
                 Debug.Log("Connected to WebSocket server");
                 onConnected.Invoke();
             };
 
-            ws.OnMessage += ReadMessage;
+            ws.OnMessage += (bytes) => ReadMessage(bytes);
 
-            ws.OnClose += (sender, e) =>
+            ws.OnClose += (e) =>
             {
-                Debug.Log("Disconnected from WebSocket server");
+                Debug.Log($"Disconnected from WebSocket server: {e}");
                 pingCancellationTokenSource?.Cancel();
-                pingCancellationTokenSource?.Dispose();
             };
 
-            // var sslProtocolHack = (SslProtocols)(SslProtocolsHack.Tls12 | SslProtocolsHack.Tls11 | SslProtocolsHack.Tls);
-            // ws.SslConfiguration.EnabledSslProtocols = sslProtocolHack;
-            ws.Connect();
+            await ws.Connect();
+        }
+        
+        // Add Update method to dispatch messages
+        public void Update()
+        {
+#if !UNITY_WEBGL || UNITY_EDITOR
+            ws?.DispatchMessageQueue();
+#endif
         }
 
         private async Task StartServerPingRoutine()
         {
+            // NativeWebSocket doesn't support manual ping, but the connection stays alive
+            // Keep the routine for future custom ping implementation if needed
             pingCancellationTokenSource = new CancellationTokenSource();
             while (!pingCancellationTokenSource.IsCancellationRequested)
             {
                 await Task.Delay(pingTimeSpan, pingCancellationTokenSource.Token);
-                ws?.Ping();
+                // Send a keep-alive message instead
+                if (ws.State == WebSocketState.Open)
+                {
+                    SendMessage(new MessageDto("Ping"));
+                }
             }
         }
 
-        private void ReadMessage(object sender, MessageEventArgs message)
+        private void ReadMessage(byte[] data)
         {
-            using (var ms = new CustomMemoryStream(message.RawData))
+            using (var ms = new CustomMemoryStream(data))
             {
                 var type = ms.ReadString();
 
@@ -116,22 +126,17 @@ namespace client
             }
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
-            ws.Close();
+            if (ws != null && ws.State == WebSocketState.Open)
+            {
+                await ws.Close();
+            }
         }
 
         public void CreateOrJoinRoom()
         {
             SendMessage(new MessageDto("CreateOrJoinRoom"));
-        }
-
-        [Flags]
-        private enum SslProtocolsHack
-        {
-            Tls = 192,
-            Tls11 = 768,
-            Tls12 = 3072
         }
     }
 }

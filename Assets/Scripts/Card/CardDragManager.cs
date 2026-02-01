@@ -81,6 +81,7 @@ public class CardDragManager : MonoBehaviour
                         cardTransform.DOScale(Vector3.one * slot.CardScale, snapDuration)
                             .SetEase(snapEase)
                             .SetTarget(cardTransform);
+                        activeCard.OnPlaced();
                     }
                 }
             }
@@ -96,6 +97,12 @@ public class CardDragManager : MonoBehaviour
             activeCard = hit.transform.GetComponentInParent<CardView>();
             if (activeCard != null)
             {
+                if (activeCard.IsPlaced)
+                {
+                    activeCard = null;
+                    return;
+                }
+
                 activeCard.CacheOriginalTransform();
             }
         }
