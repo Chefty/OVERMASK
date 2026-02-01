@@ -16,7 +16,6 @@ public class CardView : MonoBehaviour
     [SerializeField] Color PlayerColor;
     [SerializeField] Color OpponentColor;
     [SerializeField] Color HouseColor;
-    
 
     private void Start()
     {

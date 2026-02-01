@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using client;
 using client.dto;
 using TMPro;
@@ -39,20 +37,7 @@ namespace PimDeWitte.UnityMainThreadDispatcher
         private void OnClientConnected()
         {
             Client.Instance.OnOpponentFound.AddListener(OnMatchStart);
-            Client.Instance.OnCardRequested.AddListener(_ =>
-            {
-                StartCoroutine(WaitAndCall(() =>
-                {
-                    Client.Instance.SendMessage(new MessageDto("ChooseCard", new ChooseCardDto(1)));
-                }));
-            });
             Client.Instance.CreateOrJoinRoom();
-        }
-
-        private IEnumerator WaitAndCall(Action action)
-        {
-            yield return new WaitForSecondsRealtime(1f);
-            action();
         }
 
         public void OnMatchStart(GameStartDto dto)
