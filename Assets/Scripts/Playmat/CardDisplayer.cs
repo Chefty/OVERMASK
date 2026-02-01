@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CardDisplayer : MonoBehaviour
 {
-    private const float TIME_TO_SHOW = 0.5f;
+    public static readonly float TIME_TO_SHOW = 0.5f;
     
     public CardView CardView { get; private set; }
 
