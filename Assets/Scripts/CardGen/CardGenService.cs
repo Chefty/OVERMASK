@@ -1,8 +1,15 @@
+using System;
 using UnityEngine;
 
 public class CardGenService : MonoBehaviour, ICardGenService
 {
     [SerializeField] private CardView CardPrefab;
+    public  static CardGenService Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     public CardView GenCard(CardGenContext context)
     {
@@ -23,6 +30,7 @@ public interface ICardGenService
 public class CardGenContext
 {
     public int CardId;
+    public ICardData Data;
     public PlayerFaction Faction;
     public Transform Parent = null;
     public Vector3 Position;
