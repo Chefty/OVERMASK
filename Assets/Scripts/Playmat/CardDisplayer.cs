@@ -1,0 +1,30 @@
+using DG.Tweening;
+using Engine;
+using UnityEngine;
+
+public class CardDisplayer : MonoBehaviour
+{
+    private const float TIME_TO_SHOW = 0.5f;
+    
+    public CardView CardView { get; private set; }
+
+    public void DisplayCard(byte cardId)
+    {
+        var cardData = CardsService.Instance.GetMaskCardWithId(cardId) as ICardData;
+        var root = transform;
+        var context = new CardGenContext
+        {
+            Data = cardData,
+            Faction = PlayerFaction.House,
+            Parent = root.transform
+        };
+        CardView = CardGenService.Instance.GenCard(context);
+        CardView.transform.localScale = Vector3.zero;
+        CardView.transform.DOScale(1f, TIME_TO_SHOW).SetEase(Ease.OutQuart);
+    }
+
+    public void ForceCardView(CardView cardView)
+    {
+        CardView = cardView;
+    }
+}

@@ -22,8 +22,8 @@ namespace Engine
         {
             connectionIdToPlayer = new Dictionary<string, Player>()
             {
-                { playerOne.ConnectionId, playerOne },
-                { playerTwo.ConnectionId, playerTwo }
+                { playerOne.PlayerId, playerOne },
+                { playerTwo.PlayerId, playerTwo }
             };
 
             LocalPlayer = playerOne.IsLocalPlayer ? playerOne : playerTwo;
@@ -50,8 +50,17 @@ namespace Engine
         {
             GetPlayerBy(endRoundDto.Player1EndRound.PlayerId).OnRoundEnded(endRoundDto.Player1EndRound);
             GetPlayerBy(endRoundDto.Player2EndRound.PlayerId).OnRoundEnded(endRoundDto.Player2EndRound);
-            PlaymatView.Instance.UpdateScores(endRoundDto.Player1EndRound.PlayerScore, endRoundDto.Player2EndRound.PlayerScore);
+            PlaymatView.Instance.UpdateScores(GetScoreForFaction(endRoundDto, PlayerFaction.Blue),
+                GetScoreForFaction(endRoundDto, PlayerFaction.Red));
             OnRoundEnded.Invoke(endRoundDto);
+        }
+
+        private byte GetScoreForFaction(EndRoundDto endRoundDto, PlayerFaction playerFaction)
+        {
+            var userIdForFaction = Game.Instance.Round.GetPlayerBy(playerFaction).PlayerId;
+            if(endRoundDto.Player1EndRound.PlayerId == userIdForFaction)
+                return endRoundDto.Player1EndRound.PlayerScore;
+            return endRoundDto.Player2EndRound.PlayerScore;
         }
 
         public void ChooseCard(byte cardId)
@@ -63,6 +72,13 @@ namespace Engine
         public Player GetPlayerBy(string connectionId)
         {
             return connectionIdToPlayer[connectionId];
+        }
+        
+        public Player GetPlayerBy(PlayerFaction faction)
+        {
+            if (LocalPlayer.Faction == faction)
+                return LocalPlayer;
+            return OpponentPlayer;
         }
     }
 }

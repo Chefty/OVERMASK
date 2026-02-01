@@ -8,7 +8,7 @@ namespace Engine
     {
         public bool IsLocalPlayer { get; }
         public string Name { get; }
-        public string ConnectionId { get; }
+        public string PlayerId { get; }
         public int Score { get; private set; }
         public PlayerFaction Faction { get; private set; }
         public List<byte> AvailableCards { get; private set; } = new();
@@ -20,7 +20,7 @@ namespace Engine
         {
             IsLocalPlayer = isLocalPlayer;
             Name = player.UserName;
-            ConnectionId = player.PlayerId;
+            PlayerId = player.PlayerId;
             Faction = (PlayerFaction)player.Faction;
             AvailableCards = new List<byte>(player.AvailableCards);
         }

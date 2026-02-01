@@ -106,7 +106,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OpponentName
+  m_text: Red
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f195881b244ee43018fd20e5fe7f63c0, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c5d0b9c1132d64a83b0ec6b68f6c134b, type: 2}
@@ -191,6 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5580401326033464269}
   - component: {fileID: 7080190594399794771}
+  - component: {fileID: 4051297231481798698}
   m_Layer: 0
   m_Name: RedSlot
   m_TagString: Untagged
@@ -226,6 +227,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22265f3712634af289a962e8e93562e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OpponentSlot
+--- !u!114 &4051297231481798698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036529361028061324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629b4f330fac44c2f9c9179bb7c74483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardDisplayer
 --- !u!1 &5217105491192025841
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +295,7 @@ GameObject:
   - component: {fileID: 1537547550473920721}
   - component: {fileID: 6406422373752818961}
   m_Layer: 0
-  m_Name: HouseSlot
+  m_Name: MaskSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -376,7 +389,9 @@ MonoBehaviour:
   blueSlot: {fileID: 2241540777476731378}
   redSlot: {fileID: 7080190594399794771}
   combatSlot: {fileID: 3124199969117743064}
-  houseCardDisplayer: {fileID: 6406422373752818961}
+  maskCardDisplayer: {fileID: 6406422373752818961}
+  blueCardDisplayer: {fileID: 3028956230956690439}
+  redCardDisplayer: {fileID: 4051297231481798698}
 --- !u!1 &7946541568240784884
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +498,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerName
+  m_text: Blue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f195881b244ee43018fd20e5fe7f63c0, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: c5d0b9c1132d64a83b0ec6b68f6c134b, type: 2}
@@ -568,6 +583,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2236806069334894411}
   - component: {fileID: 2241540777476731378}
+  - component: {fileID: 3028956230956690439}
   m_Layer: 0
   m_Name: BlueSlot
   m_TagString: Untagged
@@ -604,6 +620,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSlot
   CardScale: 1
+--- !u!114 &3028956230956690439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123585695318878890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629b4f330fac44c2f9c9179bb7c74483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CardDisplayer
 --- !u!1001 &66513343428656616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -678,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: aa991c08bc0fb4474aa3106b72a4c686, type: 2}
     - target: {fileID: 919132149155446097, guid: f91bc84391eac4997bad2a609ad36158, type: 3}
       propertyPath: m_Name
-      value: HouseSlot
+      value: MaskSlot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

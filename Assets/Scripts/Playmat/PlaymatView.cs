@@ -1,10 +1,13 @@
+using client.dto;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class PlaymatView : MonoBehaviour
 {
     public static PlaymatView Instance;
+    
     [SerializeField] private TMP_Text blueName;
     [SerializeField] private TMP_Text redName;
     [SerializeField] private TMP_Text blueScore;
@@ -14,7 +17,9 @@ public class PlaymatView : MonoBehaviour
     public PlayerSlot blueSlot;
     public OpponentSlot redSlot;
     public CombatSlot combatSlot;
-    public HouseCardDisplayer houseCardDisplayer;
+    public CardDisplayer maskCardDisplayer;
+    public CardDisplayer blueCardDisplayer;
+    public CardDisplayer redCardDisplayer;
 
     private int roundNumber = 0;
     
@@ -25,14 +30,45 @@ public class PlaymatView : MonoBehaviour
 
     private void Start()
     {
-        blueName.text = Game.Instance.Round.LocalPlayer.Name;
-        redName.text = Game.Instance.Round.OpponentPlayer.Name;
+        blueName.text = Game.Instance.Round.GetPlayerBy(PlayerFaction.Blue).Name;
+        redName.text = Game.Instance.Round.GetPlayerBy(PlayerFaction.Red).Name;
+        
+        Game.Instance.Round.OnRoundEnded.AddListener(OnRoundEnded);
+        Game.Instance.Round.OnDrawMaskCard.AddListener(OnDrawMaskCard);
+    }
+
+    private void OnDrawMaskCard(byte cardId)
+    {
+        maskCardDisplayer.DisplayCard(cardId);
+    }
+
+    private void OnRoundEnded(EndRoundDto endRoundDto)
+    {
+        var cardDisplayer = GetCardDisplayerForOpponent();
+        if (endRoundDto.Player1EndRound.PlayerId == Game.Instance.Round.LocalPlayer.PlayerId)
+            cardDisplayer.DisplayCard(endRoundDto.Player2EndRound.PlayerCardId);
+        else
+            cardDisplayer.DisplayCard(endRoundDto.Player1EndRound.PlayerCardId);
+    }
+
+    public CardDisplayer GetCardDisplayerForFaction(PlayerFaction faction)
+    {
+        if (faction == PlayerFaction.Blue)
+            return blueCardDisplayer;
+        return redCardDisplayer;
     }
     
-    public void UpdateScores(int playerScoreValue, int opponentScoreValue)
+    private CardDisplayer GetCardDisplayerForOpponent()
     {
-        blueScore.text = playerScoreValue.ToString();
-        redScore.text = opponentScoreValue.ToString();
+        if (Game.Instance.Round.LocalPlayer.Faction == PlayerFaction.Blue)
+            return GetCardDisplayerForFaction(PlayerFaction.Red);
+        return GetCardDisplayerForFaction(PlayerFaction.Blue);
+    }
+
+    public void UpdateScores(int blueScoreValue, int redScoreValue)
+    {
+        blueScore.text = blueScoreValue.ToString();
+        redScore.text = redScoreValue.ToString();
     }
     
     public void UpdateRoundText()

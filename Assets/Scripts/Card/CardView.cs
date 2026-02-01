@@ -91,6 +91,7 @@ public class CardView : MonoBehaviour
     public void OnPlaced()
     {
         IsPlaced = true;
+        PlaymatView.Instance.GetCardDisplayerForFaction(Game.Instance.Round.LocalPlayer.Faction).ForceCardView(this);
         PlayerHand.Instance.RemoveCard(this);
         Game.Instance.Round.ChooseCard(id);
         FactionMeshRenderer.shadowCastingMode = ShadowCastingMode.Off;

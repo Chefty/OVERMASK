@@ -21,7 +21,6 @@ namespace PimDeWitte.UnityMainThreadDispatcher
             playButton.onClick.AddListener(ConnectToServer);
         }
 
-
         private void ConnectToServer()
         {
             loadingPanel.SetActive(true);
