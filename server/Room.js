@@ -40,7 +40,7 @@ export class Room
     
     ChangeRound()
     {
-        if(++this.currentRound > ROUNDS_AMOUNT)
+        if(++this.currentRound > this.ROUNDS_AMOUNT)
         {
             this.BroadcastDto("GameOver", new GameOverDto(this.dealer.GetPlayerScore(Player.RED), this.dealer.GetPlayerScore(Player.BLUE)));
             return;
