@@ -10,6 +10,7 @@ public class CardView : MonoBehaviour
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Vector3 originalScale;
+    public bool IsPlaced { get; private set; }
     public int id;
     [SerializeField] private PlayerFaction  playerFaction;
     [SerializeField] Color PlayerColor;
@@ -84,6 +85,11 @@ public class CardView : MonoBehaviour
         transform.position = originalPosition;
         transform.rotation = originalRotation;
         transform.localScale = originalScale;
+    }
+
+    public void OnPlaced()
+    {
+        IsPlaced = true;
     }
 
     public Vector3 OriginalPosition => originalPosition;
