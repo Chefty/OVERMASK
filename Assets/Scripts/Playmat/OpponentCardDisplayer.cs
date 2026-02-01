@@ -7,7 +7,6 @@ public class OpponentCardDisplayer : MonoBehaviour
     {
         var cardData = card as ICardData;
         CardGenContext context = new CardGenContext();
-        context.CardId = cardData.CardId;
         context.Data = cardData;
         var root = PlaymatView.Instance.opponentSlot;
         context.Faction = PlayerFaction.Opponent;

@@ -7,7 +7,6 @@ public class HouseCardDisplayer : MonoBehaviour
     {
         var cardData = card as ICardData;
         CardGenContext context = new CardGenContext();
-        context.CardId = cardData.CardId;
         context.Data = cardData;
         var root = PlaymatView.Instance.houseSlot;
         context.Faction = PlayerFaction.House;

@@ -4211,6 +4211,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardMeshGenService
       objectReference: {fileID: 0}
+    - target: {fileID: 7498029697648070037, guid: df89ebd8a3ef04310a005dc4a1119bfa, type: 3}
+      propertyPath: cellMesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: 8e7d81459ae5343c0b9f62f6287b0158, type: 3}
+    - target: {fileID: 7498029697648070037, guid: df89ebd8a3ef04310a005dc4a1119bfa, type: 3}
+      propertyPath: emptyCellMesh
+      value: 
+      objectReference: {fileID: -5495902117074765545, guid: a5883f7b9124a4aafb2a75a1eb81a21b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
