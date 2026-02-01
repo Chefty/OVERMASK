@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using client;
 
 public class PlaymatView : MonoBehaviour
 {
@@ -19,5 +20,10 @@ public class PlaymatView : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        Client.Instance.Update();
     }
 }
