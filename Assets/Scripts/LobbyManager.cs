@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 namespace PimDeWitte.UnityMainThreadDispatcher
 {
@@ -27,7 +28,8 @@ namespace PimDeWitte.UnityMainThreadDispatcher
         {
             loadingPanel.SetActive(true);
             var connectDto = new PlayerDto(username.text);
-            Client.Instance.ConnectToServer(ip.text ?? IP_TO_CONNECT, connectDto, OnClientConnected);
+            var address = ip.text.IsNullOrEmpty() ? IP_TO_CONNECT : ip.text;
+            Client.Instance.ConnectToServer(address, connectDto, OnClientConnected);
         }
 
         private void OnClientConnected()
