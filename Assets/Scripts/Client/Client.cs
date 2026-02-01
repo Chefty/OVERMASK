@@ -17,6 +17,7 @@ namespace client
         public readonly UnityEvent<GameStartDto> OnOpponentFound = new();
         public readonly UnityEvent<RequestCardDto> OnCardRequested = new();
         public readonly UnityEvent<EndRoundDto> OnRoundEnded = new();
+        public readonly UnityEvent<GameOverDto> OnGameOver = new();
         public readonly UnityEvent<DealInitialCardsDto> OnDealInitialCardsDto = new();
         
         private readonly TimeSpan pingTimeSpan = new(0, 0, 15);
@@ -132,6 +133,10 @@ namespace client
                         var erdto = new EndRoundDto();
                         erdto.ReadFromStream(ms);
                         Callback(() => { OnRoundEnded.Invoke(erdto);});
+                        break;
+                    case "GameOver":
+                        var godto = new GameOverDto(ms);
+                        Callback(() => { OnGameOver.Invoke(godto);});
                         break;
                 }
             }

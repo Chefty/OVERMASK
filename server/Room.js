@@ -5,16 +5,19 @@ import {RequestCardDto} from "./dto/RequestCardDto.js";
 import {Dealer} from "./Dealer.js";
 import { DealInitialCardsDto } from "./dto/DealInitialCardsDto.js";
 import {Player} from "./Player.js";
+import { GameOverDto } from "./dto/GameOverDto.js";
 
 export class Room
 {
     INITIAL_CARD_AMOUNT = 3;
+    ROUNDS_AMOUNT = 2;
 
     players = [];
     roomId;
     dtoService;
     cardsService;
     dealer;
+    currentRound;
 
     dealtInitialCards = false;
 
@@ -37,6 +40,12 @@ export class Room
     
     ChangeRound()
     {
+        if(++this.currentRound > ROUNDS_AMOUNT)
+        {
+            this.BroadcastDto("GameOver", new GameOverDto(this.dealer.GetPlayerScore(Player.RED), this.dealer.GetPlayerScore(Player.BLUE)));
+            return;
+        }
+
         if(!this.dealtInitialCards)
             this.DealInitialCards();
 
@@ -81,11 +90,11 @@ export class Room
         this.dealer.EndOfRound();
 
         var playerOnBottom = this.players[this.dealer.GetLeadingPlayer()].playerId;
-        var player1NewCard = this.GetRandomPlayerCard();
-        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayer1Card(), this.dealer.GetPlayer1Score(), player1NewCard);
+        var newCard = this.GetRandomPlayerCard();
+        var player1EndRound = new PlayerEndRoundDto(this.players[0].playerId, this.dealer.GetPlayerCard(this.players[0]), this.dealer.GetPlayerScore(this.players[0]), newCard);
 
-        var player2NewCard = this.GetRandomPlayerCard();
-        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayer2Card(), this.dealer.GetPlayer2Score(), player2NewCard);
+        newCard = this.GetRandomPlayerCard();
+        var player2EndRound = new PlayerEndRoundDto(this.players[1].playerId, this.dealer.GetPlayerCard(this.players[1]), this.dealer.GetPlayerScore(this.players[1]), newCard);
 
         var endRoundDto = new EndRoundDto(player1EndRound, player2EndRound, playerOnBottom);
         this.BroadcastDto("EndRound", endRoundDto);
