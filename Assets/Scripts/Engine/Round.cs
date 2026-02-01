@@ -50,6 +50,8 @@ namespace Engine
         {
             GetPlayerBy(endRoundDto.Player1EndRound.PlayerId).OnRoundEnded(endRoundDto.Player1EndRound);
             GetPlayerBy(endRoundDto.Player2EndRound.PlayerId).OnRoundEnded(endRoundDto.Player2EndRound);
+            PlaymatView.Instance.UpdateScores(endRoundDto.Player1EndRound.PlayerScore, endRoundDto.Player2EndRound.PlayerScore);
+            Game.Instance.StartNewRound();
             OnRoundEnded.Invoke();
         }
 
