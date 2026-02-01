@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!65 &44162334 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 8892260942881006254, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
+  m_PrefabInstance: {fileID: 4823212076893327726}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &63758272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,6 +1377,7 @@ GameObject:
   - component: {fileID: 489823027}
   - component: {fileID: 489823026}
   - component: {fileID: 489823029}
+  - component: {fileID: 489823030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1497,6 +1503,24 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &489823030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489823025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c45247c839a4ae3b2d9c1141abcdff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AdaptiveFOV
+  adaptiveFOVArea: {fileID: 44162334}
+  targetFov: 15
+  minFov: 20
+  maxFov: 40
+  minDistance: 1
+  maxDistance: 50
 --- !u!43 &501454976
 Mesh:
   m_ObjectHideFlags: 0
@@ -4690,6 +4714,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 171822849}
+    - target: {fileID: 6519116576861295810, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 128.3521
+      objectReference: {fileID: 0}
     - target: {fileID: 6634611843221692422, guid: 713dd2ce908e244b4baf9e34878efc8d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4818,14 +4846,6 @@ PrefabInstance:
       propertyPath: roundText
       value: 
       objectReference: {fileID: 709197968}
-    - target: {fileID: 5618967718383083423, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
-      propertyPath: playerScore
-      value: 
-      objectReference: {fileID: 390037066}
-    - target: {fileID: 5618967718383083423, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
-      propertyPath: opponentScore
-      value: 
-      objectReference: {fileID: 1288826194}
     - target: {fileID: 7528264852892123676, guid: 3b2fb9b6d850445d7ac535b544d317b2, type: 3}
       propertyPath: m_Name
       value: PlaymatView
