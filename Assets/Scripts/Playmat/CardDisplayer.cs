@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Engine;
 using UnityEngine;
@@ -8,9 +9,9 @@ public class CardDisplayer : MonoBehaviour
     
     public CardView CardView { get; private set; }
 
-    public void DisplayCard(byte cardId)
+    public void DisplayCard(Card card)
     {
-        var cardData = CardsService.Instance.GetMaskCardWithId(cardId) as ICardData;
+        var cardData = card as ICardData;
         var root = transform;
         var context = new CardGenContext
         {

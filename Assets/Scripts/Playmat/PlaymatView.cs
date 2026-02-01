@@ -2,6 +2,7 @@ using client.dto;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using Engine;
 using UnityEngine.Serialization;
 
 public class PlaymatView : MonoBehaviour
@@ -39,16 +40,16 @@ public class PlaymatView : MonoBehaviour
 
     private void OnDrawMaskCard(byte cardId)
     {
-        maskCardDisplayer.DisplayCard(cardId);
+        maskCardDisplayer.DisplayCard(CardsService.Instance.GetMaskCardWithId(cardId));
     }
 
     private void OnRoundEnded(EndRoundDto endRoundDto)
     {
         var cardDisplayer = GetCardDisplayerForOpponent();
         if (endRoundDto.Player1EndRound.PlayerId == Game.Instance.Round.LocalPlayer.PlayerId)
-            cardDisplayer.DisplayCard(endRoundDto.Player2EndRound.PlayerCardId);
+            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player2EndRound.PlayerCardId));
         else
-            cardDisplayer.DisplayCard(endRoundDto.Player1EndRound.PlayerCardId);
+            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player1EndRound.PlayerCardId));
     }
 
     public CardDisplayer GetCardDisplayerForFaction(PlayerFaction faction)
