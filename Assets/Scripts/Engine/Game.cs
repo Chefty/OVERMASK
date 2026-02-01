@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
 {
     public static Game Instance { get; private set; }
     public Round Round { get; private set; }
+    public int CurrentRoundNumber { get; set; } = 1;
 
     private void Awake()
     {
@@ -25,13 +26,14 @@ public class Game : MonoBehaviour
 
     private IEnumerator Start()
     {
+        CurrentRoundNumber = 1;
         yield return new WaitForSeconds(0.5f);
         Client.Instance.SendMessage(new MessageDto("ReadyToPlay"));
     }
     
     public void StartNewRound()
     {
-        StartCoroutine(Start());
+        Client.Instance.SendMessage(new MessageDto("ReadyToPlay"));
         PlaymatView.Instance.UpdateRoundText();
     }
     

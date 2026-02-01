@@ -1,4 +1,4 @@
-﻿namespace client.dto
+﻿﻿namespace client.dto
 {
     public class EndRoundDto : IDto
     {
