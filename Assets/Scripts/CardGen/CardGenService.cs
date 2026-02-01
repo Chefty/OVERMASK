@@ -13,7 +13,6 @@ public class CardGenService : MonoBehaviour, ICardGenService
 
     public CardView GenCard(CardGenContext context)
     {
-        Debug.LogWarning("AAAA CREATE CARD");
         var go = Instantiate(CardPrefab, context.Parent);
         var cardView = go.GetComponent<CardView>();
         cardView.SetupCard(context);
