@@ -499,7 +499,7 @@ MonoBehaviour:
   redScore: {fileID: 0}
   roundText: {fileID: 0}
   readyText: {fileID: 0}
-  blueSlot: {fileID: 2241540777476731378}
+  blueSlot: {fileID: 0}
   redSlot: {fileID: 7080190594399794771}
   combatSlot: {fileID: 3124199969117743064}
   maskCardDisplayer: {fileID: 6406422373752818961}
@@ -695,7 +695,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2236806069334894411}
-  - component: {fileID: 2241540777476731378}
   - component: {fileID: 3028956230956690439}
   m_Layer: 0
   m_Name: BlueSlot
@@ -720,19 +719,6 @@ Transform:
   - {fileID: 2415572625127048029}
   m_Father: {fileID: 8217195079631305453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2241540777476731378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9123585695318878890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35ff3ff05da784575b2252cd9cd647db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerSlot
-  CardScale: 1
 --- !u!114 &3028956230956690439
 MonoBehaviour:
   m_ObjectHideFlags: 0

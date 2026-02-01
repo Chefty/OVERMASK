@@ -21,7 +21,11 @@ namespace PimDeWitte.UnityMainThreadDispatcher
         private void Awake()
         {
             if (Instance != null)
+            {
+                if(Instance != this)
+                    Destroy(gameObject);
                 return;
+            }
 
             Instance = this;
             DontDestroyOnLoad(this.gameObject);

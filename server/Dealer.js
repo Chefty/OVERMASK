@@ -1,5 +1,6 @@
 import { shuffleArray } from '../CardsGenerator/utils.js';
 import {CardDto} from "./dto/CardDto.js";
+import { Player } from './Player.js';
 
 export class Dealer {
     #playerDeckIndices;
@@ -8,15 +9,14 @@ export class Dealer {
     #originalMaskDeck;
     
     #currentStack;
-    #currentPlayer1CardId;
-    #currentPlayer2CardId;
+    #currentRedCardId;
+    #currentBlueCardId;
     #maskCardId;
     
-    #player1Score = 0;
-    #player2Score = 0;
+    #redScore = 0;
+    #blueScore = 0;
     #playerLeading;
     
-
     constructor(cardsDto) {
         this.#originalPlayerDeck = [...cardsDto.playerDeck];
         this.#originalMaskDeck = [...cardsDto.maskDeck];
@@ -29,14 +29,14 @@ export class Dealer {
     Reset() {
         this.#playerDeckIndices = shuffleArray([...Array(this.#originalPlayerDeck.length).keys()]);
         this.#maskDeckIndices = shuffleArray([...Array(this.#originalMaskDeck.length).keys()]);
-        this.#player1Score = 0;
-        this.#player2Score = 0;
+        this.#redScore = 0;
+        this.#blueScore = 0;
         this.#playerLeading = 1;
         // Initialize with a grey card (16 cells with value 3)
         var cadSize = this.#originalPlayerDeck[0].grid.length;
         this.#currentStack = new Uint8Array(cadSize).fill(CardDto.GREY);
-        this.#currentPlayer1CardId = -1;
-        this.#currentPlayer2CardId = -1;
+        this.#currentRedCardId = -1;
+        this.#currentBlueCardId = -1;
         this.#maskCardId = null;
     }
 
@@ -56,17 +56,17 @@ export class Dealer {
     }
 
     EndOfRound() {
-        const player1Card = this.#originalPlayerDeck[this.#currentPlayer1CardId];
-        const player2Card = this.#originalPlayerDeck[this.#currentPlayer2CardId];
+        const redCard = this.#originalPlayerDeck[this.#currentRedCardId];
+        const blueCard = this.#originalPlayerDeck[this.#currentBlueCardId];
         const maskCard = this.#originalMaskDeck[this.#maskCardId];
 
         let bottomCard, middleCard;
-        if (this.#playerLeading === 1) {
-            bottomCard = player1Card;
-            middleCard = player2Card;
+        if (this.#playerLeading === Player.RED) {
+            bottomCard = redCard;
+            middleCard = blueCard;
         } else {
-            bottomCard = player2Card;
-            middleCard = player1Card;
+            bottomCard = blueCard;
+            middleCard = redCard;
         }
 
         const cardSize = bottomCard.grid.length;
@@ -101,21 +101,21 @@ export class Dealer {
             }
         }
 
-        this.#player1Score += redCount;
-        this.#player2Score += blueCount;
+        this.#redScore += redCount;
+        this.#blueScore += blueCount;
 
         this.#playerLeading = this.GetLeadingPlayer();
     }
 
     GetLeadingPlayer()
     {
-        if (this.#player1Score > this.#player2Score) {
-            return 0;
-        } else if (this.#player2Score > this.#player1Score) {
-            return 1;
+        if (this.#redScore > this.#blueScore) {
+            return Player.RED;
+        } else if (this.#blueScore > this.#redScore) {
+            return Player.BLUE;
         }
         else {
-            return Math.random() < 0.5 ? 0 : 1;
+            return Math.random() < 0.5 ? Player.RED : Player.BLUE;
         }
     }
     
@@ -124,27 +124,31 @@ export class Dealer {
     }
     
     SetPlayerCard(player, cardId) {
-        if (player === 0) {
-            this.#currentPlayer1CardId = cardId;
-        } else if (player === 1) {
-            this.#currentPlayer2CardId = cardId;
-        }
+        if (player.color === Player.RED)
+            this.#currentRedCardId = cardId;
+        else
+            this.#currentBlueCardId = cardId;
     }
 
-    GetPlayer1Card() {
-        return this.#currentPlayer1CardId;
+    GetPlayerScore(player)
+    {
+        if(player.color == Player.BLUE)
+            return this.#blueScore;
+        return this.#redScore;
     }
-    
-    GetPlayer2Card() {
-        return this.#currentPlayer2CardId;
+
+    GetColorScore(color)
+    {
+        if(color === Player.BLUE)
+            return this.#blueScore;
+        return this.#redScore;     
     }
-    
-    GetPlayer1Score() {
-        return this.#player1Score;
-    }
-    
-    GetPlayer2Score() {
-        return this.#player2Score;
+
+    GetPlayerCard(player)
+    {
+        if(player.color == Player.BLUE)
+            return this.#currentBlueCardId;
+        return this.#currentRedCardId;
     }
     
     GetLeadingPlayer() {
