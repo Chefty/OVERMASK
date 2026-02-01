@@ -226,50 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22265f3712634af289a962e8e93562e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OpponentSlot
---- !u!1 &3632067244662712420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7357921828617698428}
-  - component: {fileID: 4665373573505834039}
-  m_Layer: 0
-  m_Name: HouseCardDisplayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7357921828617698428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3632067244662712420}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5839891, y: -0.62772894, z: 0.37519926}
-  m_LocalScale: {x: 0.680967, y: 0.680967, z: 0.680967}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8217195079631305453}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4665373573505834039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3632067244662712420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 629b4f330fac44c2f9c9179bb7c74483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HouseCardDisplayer
 --- !u!1 &5217105491192025841
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537547550473920721}
-  - component: {fileID: 7146650675875286955}
+  - component: {fileID: 6406422373752818961}
   m_Layer: 0
   m_Name: HouseSlot
   m_TagString: Untagged
@@ -348,7 +304,7 @@ Transform:
   - {fileID: 533382943043623427}
   m_Father: {fileID: 8217195079631305453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7146650675875286955
+--- !u!114 &6406422373752818961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -357,9 +313,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7153230624793162783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faad3df3bbaf14fb68daf933a8b5c98b, type: 3}
+  m_Script: {fileID: 11500000, guid: 629b4f330fac44c2f9c9179bb7c74483, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HouseSlot
+  m_EditorClassIdentifier: Assembly-CSharp::HouseCardDisplayer
 --- !u!1 &7423561555829675523
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +398,6 @@ Transform:
   - {fileID: 1123529301843343140}
   - {fileID: 8003789501019793219}
   - {fileID: 522333791826681717}
-  - {fileID: 7357921828617698428}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5618967718383083423
@@ -465,10 +420,9 @@ MonoBehaviour:
   readyText: {fileID: 0}
   playerSlot: {fileID: 2241540777476731378}
   opponentSlot: {fileID: 7080190594399794771}
-  houseSlot: {fileID: 7146650675875286955}
   combatSlot: {fileID: 3124199969117743064}
   opponentCardDisplayer: {fileID: 4395718721645849102}
-  houseCardDisplayer: {fileID: 4665373573505834039}
+  houseCardDisplayer: {fileID: 6406422373752818961}
 --- !u!1 &7946541568240784884
 GameObject:
   m_ObjectHideFlags: 0
