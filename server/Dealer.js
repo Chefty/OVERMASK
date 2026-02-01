@@ -76,16 +76,14 @@ export class Dealer {
         for (let i = 0; i < cardSize; i++) {
             stackedGrid[i] = this.#currentStack[i];
 
-            if (bottomCard.grid[i] !== CardDto.EMPTY) {
-                stackedGrid[i] = bottomCard.grid[i];
-            }
-
-            if (middleCard.grid[i] !== CardDto.EMPTY) {
-                stackedGrid[i] = middleCard.grid[i];
-            }
-
             if (maskCard.grid[i] !== CardDto.EMPTY) {
                 stackedGrid[i] = maskCard.grid[i];
+            }
+            else if (middleCard.grid[i] !== CardDto.EMPTY) {
+                stackedGrid[i] = middleCard.grid[i];
+            }
+            else if (bottomCard.grid[i] !== CardDto.EMPTY) {
+                stackedGrid[i] = bottomCard.grid[i];
             }
         }
 
