@@ -42,7 +42,7 @@ export class Room
     {
         if(++this.currentRound > this.ROUNDS_AMOUNT)
         {
-            this.BroadcastDto("GameOver", new GameOverDto(this.dealer.GetPlayerScore(Player.RED), this.dealer.GetPlayerScore(Player.BLUE)));
+            this.BroadcastDto("GameOver", new GameOverDto(this.dealer.GetColorScore(Player.RED), this.dealer.GetColorScore(Player.BLUE)));
             return;
         }
 

@@ -8,7 +8,7 @@ public class Game : MonoBehaviour
 {
     public static Game Instance { get; private set; }
     public Round Round { get; private set; }
-    public int CurrentRoundNumber { get; set; } = 1;
+    public int CurrentRoundNumber { get; set; } = 2;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class Game : MonoBehaviour
 
     private IEnumerator Start()
     {
-        CurrentRoundNumber = 1;
+        CurrentRoundNumber = 2;
         yield return new WaitForSeconds(0.5f);
         Client.Instance.SendMessage(new MessageDto("ReadyToPlay"));
     }
