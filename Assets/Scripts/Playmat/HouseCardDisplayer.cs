@@ -1,16 +1,30 @@
+using DG.Tweening;
 using Engine;
 using UnityEngine;
 
 public class HouseCardDisplayer : MonoBehaviour
 {
-    public void OnShowHouseCard(Card card)
+    private const float TIME_TO_SHOW = 0.5f;
+    
+    public CardView MaskCardView { get; private set; }
+    
+    private void Start()
     {
-        var cardData = card as ICardData;
-        CardGenContext context = new CardGenContext();
-        context.Data = cardData;
+        Game.Instance.Round.OnDrawMaskCard.AddListener(OnDrawMaskCard);
+    }
+
+    private void OnDrawMaskCard(byte cardId)
+    {
+        var cardData = CardsService.Instance.GetMaskCardWithId(cardId) as ICardData;
         var root = PlaymatView.Instance.houseSlot;
-        context.Faction = PlayerFaction.House;
-        context.Parent = root.transform;
-        CardGenService.Instance.GenCard(context);
+        var context = new CardGenContext
+        {
+            Data = cardData,
+            Faction = PlayerFaction.House,
+            Parent = root.transform
+        };
+        MaskCardView = CardGenService.Instance.GenCard(context);
+        MaskCardView.transform.localScale = Vector3.zero;
+        MaskCardView.transform.DOScale(1, TIME_TO_SHOW).SetEase(Ease.OutQuart);
     }
 }

@@ -20,4 +20,10 @@ public class PlaymatView : MonoBehaviour
     {
         Instance = this;
     }
+
+    private void Start()
+    {
+        playerName.text = Game.Instance.Round.LocalPlayer.Name;
+        opponentName.text = Game.Instance.Round.OpponentPlayer.Name;
+    }
 }
