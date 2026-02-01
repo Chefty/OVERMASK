@@ -29,6 +29,9 @@ namespace PimDeWitte.UnityMainThreadDispatcher
 
         private void Update()
         {
+            // Dispatch WebSocket messages from NativeWebSocket queue
+            Client.Instance.Update();
+            
             lock (_executionQueue)
             {
                 while (_executionQueue.Count > 0)
