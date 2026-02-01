@@ -29,6 +29,12 @@ public class Game : MonoBehaviour
         Client.Instance.SendMessage(new MessageDto("ReadyToPlay"));
     }
     
+    public void StartNewRound()
+    {
+        StartCoroutine(Start());
+        PlaymatView.Instance.UpdateRoundText();
+    }
+    
     private void OnOpponentDisconnected()
     {
         //Show panel
