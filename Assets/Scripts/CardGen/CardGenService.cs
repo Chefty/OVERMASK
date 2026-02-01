@@ -40,7 +40,7 @@ public class CardGenContext
 
 public enum PlayerFaction
 {
-    House,
+    Mask,
     Red,
     Blue
 }

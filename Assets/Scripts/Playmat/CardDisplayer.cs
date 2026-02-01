@@ -9,14 +9,14 @@ public class CardDisplayer : MonoBehaviour
     
     public CardView CardView { get; private set; }
 
-    public void DisplayCard(Card card)
+    public void DisplayCard(Card card, PlayerFaction faction)
     {
         var cardData = card as ICardData;
         var root = transform;
         var context = new CardGenContext
         {
             Data = cardData,
-            Faction = PlayerFaction.House,
+            Faction = faction,
             Parent = root.transform
         };
         CardView = CardGenService.Instance.GenCard(context);

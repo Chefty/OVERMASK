@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 
 public class CardView : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class CardView : MonoBehaviour
     public bool IsPlaced { get; private set; }
     public byte id;
     public PlayerFaction  playerFaction;
-    [SerializeField] Color PlayerColor;
-    [SerializeField] Color OpponentColor;
+    [FormerlySerializedAs("PlayerColor")] [SerializeField] Color BlueColor;
+    [FormerlySerializedAs("OpponentColor")] [SerializeField] Color RedColor;
     [SerializeField] Color HouseColor;
 
     private void Start()
@@ -42,14 +43,14 @@ public class CardView : MonoBehaviour
         var color = new Color();
         switch (playerFaction)
         {
-            case PlayerFaction.House:
+            case PlayerFaction.Mask:
                 color = HouseColor;
                 break;
             case PlayerFaction.Blue:
-                color = OpponentColor;
+                color = BlueColor;
                 break;
             case PlayerFaction.Red:
-                color = PlayerColor;
+                color = RedColor;
                 break;
         }
         mpb.SetColor(ColorId, color);

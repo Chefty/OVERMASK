@@ -38,16 +38,16 @@ public class PlaymatView : MonoBehaviour
 
     private void OnDrawMaskCard(byte cardId)
     {
-        maskCardDisplayer.DisplayCard(CardsService.Instance.GetMaskCardWithId(cardId));
+        maskCardDisplayer.DisplayCard(CardsService.Instance.GetMaskCardWithId(cardId), PlayerFaction.Mask);
     }
 
     private void OnRoundEnded(EndRoundDto endRoundDto)
     {
         var cardDisplayer = GetCardDisplayerForOpponent();
         if (endRoundDto.Player1EndRound.PlayerId == Game.Instance.Round.LocalPlayer.PlayerId)
-            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player2EndRound.PlayerCardId));
+            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player2EndRound.PlayerCardId), Game.Instance.Round.OpponentPlayer.Faction);
         else
-            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player1EndRound.PlayerCardId));
+            cardDisplayer.DisplayCard(CardsService.Instance.GetPlayerCardWithId(endRoundDto.Player1EndRound.PlayerCardId), Game.Instance.Round.LocalPlayer.Faction);
     }
 
     public CardDisplayer GetCardDisplayerForFaction(PlayerFaction faction)

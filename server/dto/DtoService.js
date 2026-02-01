@@ -48,7 +48,8 @@ export class DtoService {
     ReadyToPlay(ws) {
         let player = this.playerService.GetPlayer(ws);
         let room = this.roomService.GetRoom(player);
-        room.SetPlayerReady(player);
+        if(player != null)
+            room.SetPlayerReady(player);
     }
 
     ChooseCard(ws, dto) {
