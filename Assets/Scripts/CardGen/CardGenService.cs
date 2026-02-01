@@ -13,6 +13,7 @@ public class CardGenService : MonoBehaviour, ICardGenService
 
     public CardView GenCard(CardGenContext context)
     {
+        Debug.LogWarning("AAAA CREATE CARD");
         var go = Instantiate(CardPrefab, context.Parent);
         var cardView = go.GetComponent<CardView>();
         cardView.SetupCard(context);
@@ -29,7 +30,6 @@ public interface ICardGenService
 
 public class CardGenContext
 {
-    public int CardId;
     public ICardData Data;
     public PlayerFaction Faction;
     public Transform Parent = null;

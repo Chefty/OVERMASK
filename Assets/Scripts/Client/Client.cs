@@ -77,11 +77,7 @@ namespace client
                         GameDto = new GameStartDto();
                         GameDto.ReadFromStream(ms);
                         CardsService.Instance.InjectCardsData(GameDto.CardsData);
-                        Callback(() =>
-                        {
-                            OnOpponentFound.Invoke(GameDto);
-                            SendMessage(new MessageDto("ReadyToPlay"));
-                        });
+                        Callback(() => { OnOpponentFound.Invoke(GameDto); });
                         break;
                     case "OpponentDisconnected":
                         Callback(() => { OnOpponentDisconnected.Invoke(); });
