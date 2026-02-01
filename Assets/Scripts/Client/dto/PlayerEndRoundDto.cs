@@ -6,7 +6,6 @@
         public byte PlayerCardId { get; private set; }
         public byte PlayerScore { get; private set; }
         public byte NewCardId { get; private set; }
-        public string PlayerIdOnBottom { get; private set; }
         
         public PlayerEndRoundDto(CustomMemoryStream ms)
         {
@@ -23,7 +22,6 @@
             PlayerCardId = ms.ReadByte();
             PlayerScore = ms.ReadByte();
             NewCardId = ms.ReadByte();
-            PlayerIdOnBottom = ms.ReadString();
         }
     }
 }
