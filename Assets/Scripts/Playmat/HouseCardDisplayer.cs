@@ -16,7 +16,7 @@ public class HouseCardDisplayer : MonoBehaviour
     private void OnDrawMaskCard(byte cardId)
     {
         var cardData = CardsService.Instance.GetMaskCardWithId(cardId) as ICardData;
-        var root = PlaymatView.Instance.houseSlot;
+        var root = transform;
         var context = new CardGenContext
         {
             Data = cardData,

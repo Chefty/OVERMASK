@@ -11,7 +11,6 @@ public class PlaymatView : MonoBehaviour
     [SerializeField] private TMP_Text roundText;
     public PlayerSlot playerSlot;
     public OpponentSlot opponentSlot;
-    public HouseSlot houseSlot;
     public CombatSlot combatSlot;
     public OpponentCardDisplayer opponentCardDisplayer;
     public HouseCardDisplayer houseCardDisplayer;
