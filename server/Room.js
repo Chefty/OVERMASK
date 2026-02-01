@@ -10,14 +10,14 @@ import { GameOverDto } from "./dto/GameOverDto.js";
 export class Room
 {
     INITIAL_CARD_AMOUNT = 3;
-    ROUNDS_AMOUNT = 2;
+    ROUNDS_AMOUNT = 5;
 
     players = [];
     roomId;
     dtoService;
     cardsService;
     dealer;
-    currentRound;
+    currentRound = 0;
 
     dealtInitialCards = false;
 

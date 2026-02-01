@@ -10,6 +10,8 @@ namespace PimDeWitte.UnityMainThreadDispatcher
     public class LobbyManager : MonoBehaviour
     {
         private const string IpToConnect = "wss://ggj-2026-production-8567.up.railway.app";
+        //private const string IpToConnect = "ws://localhost:8080";
+        private const string LOCAL_USERNAME_KEY = "USERNAME";
 
         [SerializeField] private TMP_InputField username;
         [SerializeField] private TMP_InputField ip;
@@ -19,12 +21,15 @@ namespace PimDeWitte.UnityMainThreadDispatcher
         private void Start()
         {
             playButton.onClick.AddListener(ConnectToServer);
+            username.text = PlayerPrefs.GetString(LOCAL_USERNAME_KEY, string.Empty);
+            Client.Instance.Reset();
         }
 
         private void ConnectToServer()
         {
             loadingPanel.SetActive(true);
             var connectDto = new PlayerDto(username.text);
+            PlayerPrefs.SetString(LOCAL_USERNAME_KEY, username.text);
             var address = string.IsNullOrEmpty(ip.text) ? IpToConnect : ip.text;
             Client.Instance.ConnectToServer(address, connectDto, OnClientConnected);
         }

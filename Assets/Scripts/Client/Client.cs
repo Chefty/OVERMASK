@@ -175,5 +175,15 @@ namespace client
         {
             SendMessage(new MessageDto("CreateOrJoinRoom"));
         }
+
+        public void Reset()
+        {
+            OnOpponentDisconnected.RemoveAllListeners();
+            OnOpponentFound.RemoveAllListeners();
+            OnCardRequested.RemoveAllListeners();
+            OnRoundEnded.RemoveAllListeners();
+            OnGameOver.RemoveAllListeners();
+            OnDealInitialCardsDto.RemoveAllListeners();
+        }
     }
 }
