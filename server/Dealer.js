@@ -68,8 +68,9 @@ export class Dealer {
             middleCard = player1Card;
         }
         
-        const stackedGrid = new Array(16);
-        for (let i = 0; i < 16; i++) {
+        let cardSize = bottomCard.grid.length;
+        const stackedGrid = new Array(cardSize);
+        for (let i = 0; i < cardSize; i++) {
             stackedGrid[i] = bottomCard.grid[i];
             
             if (middleCard.grid[i] !== CardDto.EMPTY) {
@@ -85,7 +86,7 @@ export class Dealer {
         
         let redCount = 0;
         let blueCount = 0;
-        for (let i = 0; i < 16; i++) {
+        for (let i = 0; i < cardSize; i++) {
             if (stackedGrid[i] === CardDto.RED) {
                 redCount++;
             } else if (stackedGrid[i] === CardDto.BLUE) {
