@@ -75,10 +75,10 @@ public class CardDragManager : MonoBehaviour
                 }
                 else
                 {
-                    PlayerSlot slot = FindFirstObjectByType<PlayerSlot>();
+                    var slot = PlaymatView.Instance.GetCardDisplayerForFaction(Game.Instance.Round.LocalPlayer.Faction);
                     if (slot != null)
                     {
-                        Transform cardTransform = activeCard.transform;
+                        var cardTransform = activeCard.transform;
                         DOTween.Kill(cardTransform);
                         cardTransform.SetParent(slot.transform, true);
                         cardTransform.DOMove(slot.transform.position, snapDuration)
@@ -87,7 +87,7 @@ public class CardDragManager : MonoBehaviour
                         cardTransform.DORotateQuaternion(Quaternion.identity, snapDuration)
                             .SetEase(snapEase)
                             .SetTarget(cardTransform);
-                        cardTransform.DOScale(Vector3.one * slot.CardScale, snapDuration)
+                        cardTransform.DOScale(Vector3.one, snapDuration)
                             .SetEase(snapEase)
                             .SetTarget(cardTransform);
                         activeCard.OnPlaced();

@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using Engine;
-using UnityEngine.Serialization;
 
 public class PlaymatView : MonoBehaviour
 {
@@ -15,8 +14,6 @@ public class PlaymatView : MonoBehaviour
     [SerializeField] private TMP_Text redScore;
     [SerializeField] private TMP_Text roundText;
     [SerializeField] private TMP_Text readyText;
-    public PlayerSlot blueSlot;
-    public OpponentSlot redSlot;
     public CombatSlot combatSlot;
     public CardDisplayer maskCardDisplayer;
     public CardDisplayer blueCardDisplayer;
