@@ -1,9 +1,20 @@
 import { shuffleArray, isValid } from './utils.js';
 import { CardDto } from '../server/dto/CardDto.js';
 import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 
-const MASK_DECK_FILE = '../server/CardsData/mask-deck.json';
-const PLAYER_DECK_FILE = '../server/CardsData/player-deck.json';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const CARDS_DATA_DIR = path.join(__dirname, '..', 'server', 'CardsData');
+const MASK_DECK_FILE = path.join(CARDS_DATA_DIR, 'mask-deck.json');
+const PLAYER_DECK_FILE = path.join(CARDS_DATA_DIR, 'player-deck.json');
+
+// Ensure the CardsData directory exists
+if (!fs.existsSync(CARDS_DATA_DIR)) {
+    fs.mkdirSync(CARDS_DATA_DIR, { recursive: true });
+}
 const PLAYER_CARDS_COUNT = 24;
 const MASK_CARDS_COUNT = 10;
 const PLAYER_PERCENTAGE_RED = 0.25;

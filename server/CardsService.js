@@ -1,8 +1,13 @@
 import * as fs from 'fs';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 import { CardDto } from './dto/CardDto.js';
 
-const MASK_DECK_FILE = './CardsData/mask-deck.json';
-const PLAYER_DECK_FILE = './CardsData/player-deck.json';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const MASK_DECK_FILE = path.join(__dirname, 'CardsData', 'mask-deck.json');
+const PLAYER_DECK_FILE = path.join(__dirname, 'CardsData', 'player-deck.json');
 
 export class CardsService {
     maskDeck = [];
