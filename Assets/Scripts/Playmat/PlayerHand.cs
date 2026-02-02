@@ -26,7 +26,6 @@ public class PlayerHand : MonoBehaviour
 
     private void OnDrawInitialHand(List<byte> cardIds)
     {
-        var slot = 0;
         foreach (var card in cardIds)
         {
             var cardData = CardsService.Instance.GetPlayerCardWithId(card) as ICardData;
