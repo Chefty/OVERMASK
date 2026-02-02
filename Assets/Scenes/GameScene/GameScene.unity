@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce06dd9600ef4dc58f93de160e507c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardGenService
-  CardPrefab: {fileID: 4142467512621309574, guid: 4c6d7b45b2b5d4c86b4284ce28e19d06, type: 3}
+  CardPrefab: {fileID: 4142467512621309574, guid: 191f47e10a634b947bd82254d67ec4e6, type: 3}
 --- !u!43 &677703799
 Mesh:
   m_ObjectHideFlags: 0

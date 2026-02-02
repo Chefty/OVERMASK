@@ -5,7 +5,6 @@ using UnityEngine.Rendering;
 public class CardMeshGenService : MonoBehaviour
 {
     [SerializeField] private Mesh cellMesh;
-    [SerializeField] private Mesh emptyCellMesh;
     [SerializeField] private Material redMaterial;
     [SerializeField] private Material blueMaterial;
     [SerializeField] private Material grayMaterial;
@@ -84,16 +83,6 @@ public class CardMeshGenService : MonoBehaviour
 
                 if (cell == CardCellDefinition.Empty)
                 {
-                    emptyCombines.Add(instance);
-                    if (emptyCellMesh != null)
-                    {
-                        CombineInstance emptyCellInstance = new CombineInstance
-                        {
-                            mesh = emptyCellMesh,
-                            transform = Matrix4x4.TRS(cellPosition, Quaternion.identity, cellScale)
-                        };
-                        emptyCellCombines.Add(emptyCellInstance);
-                    }
                     continue;
                 }
 
@@ -115,7 +104,6 @@ public class CardMeshGenService : MonoBehaviour
         Mesh redMesh = BuildSubmesh(redCombines);
         Mesh blueMesh = BuildSubmesh(blueCombines);
         Mesh grayMesh = BuildSubmesh(grayCombines);
-        Mesh maskMesh = BuildSubmesh(emptyCombines);
         Mesh emptyCellMeshCombined = BuildSubmesh(emptyCellCombines);
 
         Mesh combined = new Mesh();
@@ -169,9 +157,6 @@ public class CardMeshGenService : MonoBehaviour
 
         filter.sharedMesh = combined;
         renderer.sharedMaterials = materials.ToArray();
-
-        SetupMaskMesh(target.transform, maskMesh);
-        SetupEmptyCellMesh(target.transform, emptyCellMeshCombined);
     }
 
     private static Mesh BuildSubmesh(List<CombineInstance> combines)
