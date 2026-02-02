@@ -86,7 +86,7 @@ GGJ-2026/
 ## 🏆 Made with ❤️ for Global Game Jam 2026
 
 **Theme:** Mask  
-**Duration:** 48 hours
+**Duration:** 24 hours
 
 ### 👥 Contributors
 
