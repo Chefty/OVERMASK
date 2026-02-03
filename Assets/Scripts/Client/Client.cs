@@ -19,6 +19,8 @@ namespace client
         public readonly UnityEvent<EndRoundDto> OnRoundEnded = new();
         public readonly UnityEvent<GameOverDto> OnGameOver = new();
         public readonly UnityEvent<DealInitialCardsDto> OnDealInitialCardsDto = new();
+        public readonly UnityEvent<ConnectToRoomWithCodeDto> OnFailedToJoinRoomWithCode = new();
+        public readonly UnityEvent<ConnectToRoomWithCodeDto> OnSuccessCreatingRoomWithCode = new();
         
         private readonly TimeSpan pingTimeSpan = new(0, 0, 15);
         private CancellationTokenSource pingCancellationTokenSource;
@@ -47,7 +49,7 @@ namespace client
                 SendMessage(new MessageDto("Connection", playerDto));
                 _ = StartServerPingRoutine(); // Fire-and-forget task
                 Debug.Log("Connected to WebSocket server");
-                onConnected.Invoke();
+                Callback(onConnected);
             };
 
             ws.OnMessage += (bytes) =>
@@ -116,6 +118,14 @@ namespace client
                         CardsService.Instance.InjectCardsData(GameDto.CardsData);
                         Callback(() => { OnOpponentFound.Invoke(GameDto); });
                         break;
+                    case "CreatedRoomWithCode":
+                        var crwddto = new ConnectToRoomWithCodeDto(ms);
+                        Callback(() => { OnSuccessCreatingRoomWithCode.Invoke(crwddto); });
+                        break;
+                    case "FailedToJoinRoomWithCode":
+                        var ftjrwcDto = new ConnectToRoomWithCodeDto(ms);
+                        Callback(() => { OnFailedToJoinRoomWithCode.Invoke(ftjrwcDto); });
+                        break;
                     case "OpponentDisconnected":
                         Callback(() => { OnOpponentDisconnected.Invoke(); });
                         break;
@@ -174,6 +184,16 @@ namespace client
         public void CreateOrJoinRoom()
         {
             SendMessage(new MessageDto("CreateOrJoinRoom"));
+        }
+        
+        public void CreateRoomWithCode()
+        {
+            SendMessage(new MessageDto("CreateRoomCode"));
+        }
+        
+        public void JoinRoomWithCode(int code)
+        {
+            SendMessage(new MessageDto("JoinRoomCode", new JoinRoomWithCodeDto(code)));
         }
 
         public void Reset()

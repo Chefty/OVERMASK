@@ -33,6 +33,14 @@ namespace client
             memoryStream.Write(bytes, 0, bytes.Length);
         }
 
+        public string ReadString()
+        {
+            var len = ReadByte();
+            var buffer = new byte[len];
+            memoryStream.Read(buffer, 0, len);
+            return LocalEncoding.GetString(buffer);
+        }
+
         public void WriteStream(CustomMemoryStream ms)
         {
             var data = ms.ToArray();
@@ -52,12 +60,22 @@ namespace client
             return (byte)memoryStream.ReadByte();
         }
 
-        public string ReadString()
+        public void WriteInt(int value)
         {
-            var len = ReadByte();
-            var buffer = new byte[len];
-            memoryStream.Read(buffer, 0, len);
-            return LocalEncoding.GetString(buffer);
+            memoryStream.WriteByte((byte)(value >> 24));
+            memoryStream.WriteByte((byte)(value >> 16));
+            memoryStream.WriteByte((byte)(value >> 8));
+            memoryStream.WriteByte((byte)value);
+        }
+        
+        public int ReadInt()
+        {
+            int b1 = ReadByte();
+            int b2 = ReadByte();
+            int b3 = ReadByte();
+            int b4 = ReadByte();
+
+            return (b1 << 24) | (b2 << 16) | (b3 << 8) | b4;
         }
 
         public byte[] ToArray()

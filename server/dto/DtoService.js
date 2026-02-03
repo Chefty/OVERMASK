@@ -2,6 +2,8 @@ import {ConnectDto} from "./ConnectDto.js";
 import {ChooseCardDto} from "./ChooseCardDto.js";
 import StreamBuffer from 'streambuf';
 import { Player } from "../Player.js";
+import { ConnectToRoomWithCodeDto } from "./ConnectToRoomWithCodeDto.js";
+import { JoinRoomWithCodeDto } from "./JoinRoomWithCodeDto.js";
 
 export class DtoService {
     constructor(playerService, roomService, cardsService) {
@@ -23,6 +25,12 @@ export class DtoService {
             case "CreateOrJoinRoom":
                 this.CreateOrJoinRoom(ws);
                 break;
+            case "CreateRoomCode":
+                this.CreateRoomWithCode(ws);
+                break;
+            case "JoinRoomCode":
+                this.JoinRoomWithCode(ws, new JoinRoomWithCodeDto(buffer));
+                break;
             case "ReadyToPlay":
                 this.ReadyToPlay(ws);
                 break;
@@ -42,7 +50,23 @@ export class DtoService {
 
     CreateOrJoinRoom(ws) {
         let player = this.playerService.GetPlayer(ws);
-        this.roomService.AddPlayer(player);
+        this.roomService.AddPlayer(player, 0);
+    }
+
+    CreateRoomWithCode(ws)
+    {
+        let player = this.playerService.GetPlayer(ws);
+        var randomCode = this.roomService.GetRandomRoomCode();
+        this.roomService.AddPlayer(player, randomCode);
+        this.Send("CreatedRoomWithCode", ws, new ConnectToRoomWithCodeDto(randomCode, "Success"));
+    }
+
+    JoinRoomWithCode(ws, joinRoomDto)
+    {
+        let player = this.playerService.GetPlayer(ws);
+        let connectionResult = this.roomService.TryJoinRoomCode(player, joinRoomDto.roomCode);
+        if(!connectionResult.result)
+            this.Send("FailedToJoinRoomWithCode", ws, connectionResult.failedDto);
     }
 
     ReadyToPlay(ws) {

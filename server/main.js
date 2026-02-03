@@ -24,7 +24,6 @@ ws.on("connection", (ws, req) => {
 
   ws.on("message", (message) => {
     try {
-      console.log(`Received message, length: ${message.length}`);
       let buffer = StreamBuffer.from(message);
       dtoService.Parse(ws, buffer);
     } catch (error) {

@@ -14,6 +14,7 @@ export class Room
 
     players = [];
     roomId;
+    roomCode;
     dtoService;
     cardsService;
     dealer;
@@ -23,9 +24,10 @@ export class Room
 
     ready = 0;
 
-    constructor(roomId, dtoService, cardsService)
+    constructor(roomId, roomCode, dtoService, cardsService)
     {
         this.roomId = roomId;
+        this.roomCode = roomCode;
         this.dtoService = dtoService;
         this.cardsService = cardsService;
         this.dealer = new Dealer(cardsService);
