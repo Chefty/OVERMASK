@@ -1,0 +1,173 @@
+PRIVACY POLICY
+
+OVERMASK
+
+Last Updated: 15/02/2026
+
+1. Controller (Data Verantwortlicher)
+
+This Privacy Policy applies to the game OVERMASK ("Game").
+
+The controller within the meaning of the General Data Protection Regulation (GDPR) is:
+
+Murillo Pugliesi
+Individual
+Berlin, Germany
+Email: mukarillo@gmail.com
+
+2. General Information
+
+Protecting your personal data is important.
+
+OVERMASK:
+
+Does not require user registration
+
+Does not allow account creation
+
+Does not allow users to upload or publish content
+
+Does not offer subscriptions
+
+Does not offer paid content
+
+The Game is designed to minimize or completely avoid the collection of personal data.
+
+3. Data Processing Within the Game
+3.1 No Account Data
+
+The Game does not collect:
+
+Names
+
+Email addresses
+
+Usernames
+
+Passwords
+
+3.2 No User-Generated Content
+
+The Game does not allow users to upload or create content.
+Therefore, no personal data is processed in that context.
+
+3.3 No Payment Data
+
+The Game does not process:
+
+Payment information
+
+Billing information
+
+Financial data
+
+4. Automatically Processed Technical Data
+
+When you download or use the Game via an app store or platform (e.g., Apple App Store, Google Play Store), certain technical data may be processed by the respective platform provider.
+
+This may include:
+
+IP address
+
+Device type
+
+Operating system
+
+Download statistics
+
+Crash reports
+
+This data is processed by the respective platform provider under their own privacy policies. The operator of OVERMASK does not control such processing.
+
+Please refer to the privacy policies of the respective platform providers for further information.
+
+5. Local Device Storage
+
+The Game may store gameplay-related data locally on your device (e.g., settings, progress).
+
+This data:
+
+Is stored only on your device
+
+Is not transmitted to the operator
+
+Is not shared with third parties
+
+You may delete such data by uninstalling the Game.
+
+6. Analytics and Tracking
+
+OVERMASK does not use:
+
+Analytics tools
+
+Tracking technologies
+
+Advertising SDKs
+
+Third-party tracking services
+
+7. Legal Basis for Processing (Art. 6 GDPR)
+
+If any personal data is processed (e.g., via platform providers), the legal basis may include:
+
+Art. 6(1)(b) GDPR – performance of a contract (providing the Game)
+
+Art. 6(1)(f) GDPR – legitimate interests (technical functionality and security)
+
+Where consent is required under applicable law, processing will only occur based on user consent.
+
+8. Data Sharing
+
+The operator of OVERMASK does not:
+
+Sell personal data
+
+Share personal data with third parties
+
+Transfer personal data outside the EU
+
+Any data processed by platform providers is governed solely by their respective policies.
+
+9. Data Retention
+
+Since the operator does not collect or store personal data, no retention period applies.
+
+Locally stored gameplay data remains on your device until deletion or uninstallation.
+
+10. Your Rights Under GDPR
+
+If personal data concerning you is processed, you have the following rights under GDPR:
+
+Right of access (Art. 15 GDPR)
+
+Right to rectification (Art. 16 GDPR)
+
+Right to erasure (Art. 17 GDPR)
+
+Right to restriction of processing (Art. 18 GDPR)
+
+Right to data portability (Art. 20 GDPR)
+
+Right to object (Art. 21 GDPR)
+
+Right to lodge a complaint with a supervisory authority (Art. 77 GDPR)
+
+Competent supervisory authority in Berlin:
+
+Berlin Commissioner for Data Protection and Freedom of Information
+( Berliner Beauftragte für Datenschutz und Informationsfreiheit )
+
+Website: https://www.datenschutz-berlin.de/
+
+11. Data Security
+
+Appropriate technical and organizational measures are taken to protect any potential data processing against unauthorized access, loss, or misuse.
+
+Since no personal data is actively collected, risks are minimized by design.
+
+12. Changes to This Privacy Policy
+
+This Privacy Policy may be updated to reflect legal, technical, or operational changes.
+
+The current version will always be available within the Game or on the relevant distribution platform.
