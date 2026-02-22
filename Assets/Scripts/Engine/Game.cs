@@ -3,6 +3,7 @@ using client;
 using client.dto;
 using Engine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Game : MonoBehaviour
     
     private void OnOpponentDisconnected()
     {
-        //Show panel
+        Client.Instance.Dispose();
+        SceneManager.LoadScene("LobbyScene");
     }
 }
